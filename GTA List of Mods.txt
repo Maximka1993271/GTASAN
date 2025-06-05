@@ -1,0 +1,681 @@
+NOCD
+
+III Gta3.exe v1.0
+SA  gta_sa.exe v1.0
+VC  gta-vc.exe v1.0
+
+
+
+Essentials Pack
+
+Silent’s ASI Loader v1.3
+Ultimate ASI Loader v8.2.0
+CLEO v4.4.4
+CLEO+ v1.2.0
+NewOpcodes.cleo v2.1
+CrashInfo v1.2
+SCRLog v2020.3
+Fastman92 Limit Adjuster v7.6
+Open Limit Adjuster v1.5.9
+FramerateVigilante
+Improved Fastloader
+MixSets v4.3.7
+SA MixSets v4.3.8 Alpha Relase V3
+Mod Loader v0.3.7
+MoonLoader v.026.5-beta
+NoDEP
+PortableGTA
+RepairGTA
+RunDLL32.exe Fix
+SA GInput v1.11
+SilentPatch v1.1
+Widescreen Fix
+Windowed Mode
+
+
+
+Asi Plugins
+
+Asset Autocollector
+AutoID
+Beard Grow Mod
+Black Roads Fix
+Blip Size v1.3
+Blur effect for club
+Blur Effect For Stick
+BodyOutlinesSA v1.0
+Bullethole
+Camera Point Fix
+Camera shaking at high speeds v1.1
+Cheat Menu v3.52
+Cigarette and Antenna
+ClassicHud
+Cold Steam
+Disable Radar On Foot
+Enterable Hidden Interiors v4.3 Update 25.05.25
+Explosions
+Explosionsshake
+Extended Gang Wars
+Fires & flames
+Fires and lights
+First Person Mod
+Fix Damage From Explosions Through Walls v1.0
+Fixed dialogues with gangs
+Fixed Mouse Flight
+FluffyClouds
+Friendly Triads And Los Aztecas Fix
+Full Stream Radar
+Functional Components
+GInput
+Glowing Pickups
+Graffiti Anywhere
+Pager from GTA 3 v1.0
+HeliFix
+Hud Definitive Edition
+III.VC.SA.SaveLoader v2.7
+Improved Lamppost Lights
+ImprovedMove
+Inventory System
+JetPack Hover Mode Fix
+LaserScopeDotVC v1.0.2
+Light on bullet impact
+MapFix
+Mod Shell
+Model Variations
+Money Messages v1.1
+MovingMoon v1.1
+MovingSirenLightsSA v1.1
+Multiplemarkers
+NoMoreDeletedSaves
+Open Door Anim
+Pager
+Quebrar Motor
+Ragdoll Mod for GTA-SAMP
+Rain Extinguish Fire
+Rainbow With All the Colors v1.0
+Real time
+ReverbSA
+Road Reflection Fix
+Roadsign Font HD
+Rubbish
+SA H-Optimize
+SA Rampages
+Save License Plate
+Script Fixes
+Spread Fix
+SprintEverywhere
+Starry Skies v1.3.0
+Story Mode 2.0 Bug Fixes
+StreamMemFix
+The Birds Update
+VC Plane Trails And Banners
+VCBannersAndTrails v1.0.1
+VCBulletTrails v1.2
+VCMarkersSA
+VCParticles v1.0.2
+VCStuffSA
+VHud
+Weapon Icons TXD
+WeaponRecoilRE
+Wheel Cam from VC v1.0
+
+
+
+Beta Map
+
+Beta Definitive & Leftovers Map
+Beta Mexican gangs remaster
+Beta Mulholland Safehouse
+Improved Models
+Parked Binary IPL Fixes
+Traincross Fix
+
+
+
+Cars Plugins
+
+1 Star Motorbike Cop Fix
+007car
+Abs System
+Advanced Nitro System v2.2
+Advanced Track Player
+Air Brake Sound
+Alarm Touching Cars
+Ambient Taxi
+Arrange Cars
+Attach Vehicle
+Attach Vehicles to Packer
+Auto Car Lock
+Autodrive
+Back Fire Low Speed
+Backfire with light
+Bike Customization
+Bike Flip Fix
+Bike Lean
+Bike Shop
+Bike Spin
+Burnout 360 Fix
+Call TowTruck
+CamShake
+Car Air Reaction
+Car Collision Light
+Car Crash Anim
+Car Crash Inertia
+Car Dealer
+Car Dealership
+Car Door Chime-Beep
+Car Explodes In Huge Falls
+Car Get Dirty Slower
+Car Idle
+Car Mechanic Simulator
+Car Wash
+Carcols Fix
+CarCrashCameraEffect
+CarHP
+Cars Driving To The Challenge
+Cars On Dirt Roads
+Cars On Platforms
+Change Gear Anim
+Collision Tweaker
+Cop Cars Unlocked
+CopVehCoronas
+Cruise Control
+Cursing While Honking
+Dead Car
+Death In Car
+Destructive Rhino Mod
+Detach Trailer
+Diesel
+Doherty Garage
+DrIVe Mod
+Dynamic Motorway Traffic
+Emergency Lights Mod
+Engine Off On Vehicle Exit
+Engine On-Off
+Engine Overheat
+Exhaust Tweaker
+Exit from the other side
+Extra Car Functions
+Extra Colors On Paintjob Fix
+Fire On Driver
+Fix Bike Transfender Glitch
+Fix Car Fire On Water
+Fuel Leak
+Fuel System v1.0
+Fuel+
+Full Radio Control
+Functional firefighter ladder
+Gasoline Mod
+Gear Control
+GPS Redux v1.4.6
+GTA V to SA Burnout RRMS Edition
+Handbrake Mod
+Headlight Destroyer
+Helmet Mod
+Improved Change Gear Anim
+Improved Garages
+Improved Handling
+ImVehFt
+ImVehSys
+IndieVehicles
+Invisible Car Fix
+Lean On The Bike
+Lock And Park
+Lock Car Doors
+Luxury Cars Attract The Attention Of Pedestrians
+Manual Driveby Refixed Update v.25.06.05
+Manual DriveBy Remake
+Mid Air Car Control
+Minimalist Speedometer
+ModelExtras
+More Locked Cars
+Moving Siren Lights
+Music from cars
+New Car Camera
+No Aggressive Drivers
+No Radio Auto Change
+No Rhino
+NPC Lowrider
+NPC Tuning
+Oil Leaking
+Open Doors
+Open Trunk And Hood
+Packer With Cars
+Park Car
+Parking Save Garages Extended
+Pay ‘N’ Spray Select Color
+Pixar Cars
+Police ResponseTto Traffic Violations
+Prizep Fix
+Radio Off On Water
+Random Events With Drivers
+RC Tiger Fix
+Real Life Vehicle Options
+Real Traffic Fix
+Rear Lights Mod
+Remote Lock Car
+Rhino noEP
+Rules Mod
+Rural Car Repairs
+SA Styled Speedometer
+Save License Plate
+Siren And Vigilante
+SkidBlow
+Speedo2077
+Speedometer
+Speedometer v2
+SpeedometerSA
+SpeedoSA
+Stay On Bike
+Stealing A Car Like In GTA 4
+Steering Wheel
+Stop Lights For Trailers
+Taxi Ride Mod
+Taxi77
+Traffic Light
+Traffic Path Fix
+Trailer Lights v1
+Trailers Lights Fix
+Truck Sound
+Truck Sounds v2
+Truck Trailer
+Trucks&Trailers
+Tunnel Car Echo Sound Effect
+Unflip Your Cars Like in GTA V
+Universal Vehicle Lights
+Unlock Car Door
+VCStuffSA.SA
+VehFuncs
+Vehicle Collision Cam Shake
+Vehicle Collision Shake
+Vehicle Door Unlocker
+Vehicle Flags Changer
+Vehicle Immunities
+Void Radio Wheel v0.6
+Voodoo Physics Fix
+Wheel bump sound v1.0
+Wheel Detach
+Winch Taking Cars
+Wind noise at high speeds
+WorkingHorn
+Worn Brake Pad Sound
+Zero's RC
+
+
+
+Cutscene Fix
+Little Smoke Skin Pack Cutscene
+Programs
+
+
+
+Different Cleo Plugins
+
+Additional Fixes
+Advanced Aiming Mod (Presets)
+Advanced Aiming Mod v1.4
+Aimless Mode
+Air Traffic
+Air Traffic Pro
+Air Traffic Realism
+Airplane Tire Skid  v1.1
+Ammunition Seller v2.1
+Anim Train
+Arrest Like In GTA 4
+Auto Remove Marker
+Autosave & Checkpoint v1.1
+Ballas Greet You
+Ballas Pull Up On You
+Basketball Fix
+Beach ball
+Being Taken To The Hospital
+BetterHeliCoronas
+BigMap
+Boat Radar
+Body Stats Fix
+Burnout With Space
+Camera Settings
+Ceiling Bird Chirp
+Chainsaw Smoke
+Changeable health bar colors (depending on health %)
+Ciggy & Antenna
+CJ Look Interest
+CJ Startup Settings
+Clube Front Noise
+Colored Crosshair
+Combat improvement and Melee overhaul
+Commercial Mod
+Cop N Threat Radar
+Cops bulletproof
+Cops Faster and Climbing
+CoverMod
+Create Pickups Mod
+Damage mark on the screen
+Dealer Weapons
+Death animations Ragdoll Style
+DeathAnimsMod
+Difficult Move In Water
+Disable jetpack heat effect
+Diving Mod
+Dodo With Ad Banner
+DriveByOnOff
+Driver
+Drop Weapons Like In GTA IV
+Drug Dealer Fix
+Dynamic FOV
+Dyom Сleo Fix
+Ear Ringing Simple
+EchoWeapons
+Engine Volume
+Enhanced Jetpack
+Faster animation of sellers
+Fireman Fireproof Fix
+Fix Handle By Orion SR
+Fix Plane Speed After Explodes
+Fix Vision
+Fix Water Square
+Fixed Cam
+Fixed Cam Mod
+Flashing Wanted Stars
+Food Eating Fix
+Galo Cinza
+Gang Weapons Unlimited Randomizer (beta)
+Gangs Guns Variations
+Garbage Mans
+Generate Free IDs List
+Gifted Rides - New Parked Vehicles
+Gravity Fix
+Grenade mod
+Grove In Ganton
+GTA V Quick Cinematic Camera
+GTA V Sniper Vision
+Hard Rain Remake
+HeadSetRadio
+Health Recovery And Blood Screen
+Heli Cam Lock
+Heli Pilots
+Helicopter in the sky
+Helicopter Plane Traffic
+Helicopter Traffic
+Helicopters In The Sky
+HeliEngineFix
+Hidden Adrenaline Pickup
+Hide Radar While Aiming
+Hide Zone and Vehicle Displays
+HideFromCops
+High Noon Fix
+Hit Scan Sniper
+Hit the Entity Fix
+Hood Fellas Greeting You
+Hospital Health Pickups
+HUD Colors
+Improved Barber
+Improved Club
+Improved Gangs War v1.1
+Improved Jetpack Control
+IndieVehHandlings
+Inmune Headshot
+Insects Mod
+Instakill
+Inventory System
+JetPack Adjuster
+Kill Cam
+Lamppost Insects
+Lampposts FX v1.1
+Leviathan
+Light Destroyer
+Lighted barriers
+Lighthouse & Pyramid Fix
+Long Trains
+Manhunt Sneak Kills
+Mission Balancing Tool Update v.25.05.22
+Mod Suck Rolls For 50 Stories
+Modernized DriveBy
+Money Drop Fix
+More Radar Icons
+News papers
+Night Pimpin
+No Extra Air Resistance
+NoRadio
+NPC Health Indicator
+One Wanted Star Melee Fix
+Original Drug Dealers
+Ovens Catch On Fire
+PerPixel Lighting Mod
+Phone Mod
+Pickups Mod
+Pills Bottle
+Plane Beep
+Plane Explode Fix
+Planes Inertia
+Planning Department
+Player Move Head
+Police Dept Fix
+Properties Plus, Buy Properties mod v1.2.1
+Quick Map
+Quick Weapon Draw
+Radar Zoom
+Radio Effects
+Rain Audio Fix
+Rain Mods
+Rampage Fury Missions
+Random Events Project
+Random Train Drivers
+Real Multiple Protagonists 2.0
+Real Time
+Real Weapons Names
+Realistic Beach
+Realistic Weapons Settings
+Reload Mod
+Restore Original Mouse Sensibility
+Restore Stealth Voices
+Restored Icons
+Rubbish GTA 4
+Run
+Rusty Brown's Ring Donuts
+RZL-Trainer v5.0.1
+SA Homies Mod
+SA Sonic Adventure 2
+SA switch weapon v1.2
+SACamFX
+SAFighting Extended
+SAMP Adjustments
+Sawn Off Dual Wield Fix
+Searchlights
+Securicar Drop Money
+Security Van Heist
+SFDP Heli Fix
+Shoot After Death
+Shoreline Waves
+Show ammo over
+Show Date
+Show Dirt
+Siren On Without Driver
+Skate Extra Sounds
+Skate Mod Remake
+SkatePopSound
+Sleep
+Smarter Cop Decisions
+Sniper Realism
+Sniper Scope
+Sparky
+Spider Man Mod
+Split Screen for 2 Player Mode
+Spray Can Stunlock Fix
+Star For Red
+Stealth Kill Camera
+Store Expulsion
+Stories Sprinting Fix
+Stowaway Mission Weapons Fix
+Street Art
+Suicidal Photographers Fix
+Sun
+SWAT Helicopter
+SWAT Helicopter with 5 stars Plus
+Swat Pos
+Teargas Fix
+The holster on the cops
+The Weapon Is On The Player
+Throw Rotate Fix
+Time Payn Spray
+Tiring Sounds
+TweaksVv70
+Unlimited Camera Ammo
+VCS&LCS Side Missions
+Void Weapon Wheel v1.3
+Wagon Detach
+Walk Targeting Fix
+Wanted Music
+Wanted Radar Warning
+Water Hurt
+Weapon dat Professional Killer
+Weapon Dealer
+Weapon Detaills Update v3.1 (30.03.2025)
+Weapon pickup
+Weapon Pickup Maker Update (4/4/2025)
+Weapon Zoom Unlimited Update v.25.06.05
+WeaponRecoilAuto
+WeaponTweaks
+Weather Forecast
+
+
+
+Graphic Mods
+
+Color Mod v2
+Enhance ParticleTXD v1.0
+Graphics Tweaker v1.3.1
+IMFX v17.11.2017t
+Improved Streaming v1.0.1
+Mobile Font Fixed v1.0.1
+NextGen and Combat FX Plus
+Project2DFX v4.4
+Real Skybox v1.3.4
+ReShade v6.4.1
+RGGSA2.0 ENB
+SA Mobile Hud v2.01.1
+Shadows Settings Extender v2.1.2
+SkyGfx Extended v1.7
+SkyGrad
+
+
+
+GTA Night Mods
+
+2dfx Snack Vending Machine
+Illuminated Vinewood Sign
+Improved Night Windows
+Lighthouse & Pyramid Fix
+Lit Gant Bridge
+Lit LS Forum
+Lit Ocean Docks Bridge
+LS Downtown Night Windows
+LS Lit Church
+Missing Lampposts Fix
+Project Immerse-Yourself v0.3
+Project reLIT
+Roadblock Lights
+UFO Bar Lit
+Welcome Las Venturas
+
+
+
+Peds Plugins
+
+Activation Of Unused Hidden Pedestrians
+All Pedestrians
+Animation Fix
+Assaltar pedestres com uma arma
+Burned Peds
+Busy Pedestrians (Peds Events Project) Update (04.05.2025)
+Busy Pedestrians mod
+ChatWithPeds
+Communication Repairers
+Crowds Of People
+Cyber Cafe Interior
+Devil Town Gang
+DYOM Gangs Addon
+Fall Bike Ped Reaction
+Fix Npc
+Fix People Fighting Cops
+Gangs With Music
+Gangster Sit Fix
+Gangster Swat Fix
+Gangster Walk Fix
+Garbage Truck Driver
+Grove Vs Ballas Fight
+Hands Up Fix
+Hats for Peds
+Interior and Peds
+LV Planning Department Fix
+Normal Map Plugin
+Original Peds Vary Extended (Fixed)
+Palisades Park Pedestrian Path Fix
+Panic Face
+Ped Attractor Chair Anim Fix
+Ped Dead Float Fix
+Ped Fear Fix
+Ped Fire Fix
+Ped Interior Light Fix v1.0
+Ped Money Tweaker
+Ped Run Fix
+Ped Spawn Creator
+Ped Tweaks
+PedFuncs
+Peds Are Scared By RPG
+Peds Bleeding
+Peds Buy Food
+Peds Extender
+Peds Get Scared With RPG
+Peds Hands Up Fix
+Peds jump at shot
+Peds Resist Headshot
+Peds use Vend
+PedsDontDrown
+PedSkills
+Police Searching
+Postman
+Ragdoll Bullet Physics
+Real Multiple Protagonists
+Real Peds
+Realistic Population
+Restored Unused Peds
+Revamped Peds.ide
+Star For Attack Dead Ped
+Street Cleaners
+Street musicians
+Tired Peds
+Total Peds
+Total Peds 2
+Urbanize Project Version 06-25
+Wang Cars Peds
+
+
+
+Sound Plugins
+
+Audio Remaster SACSFX 2K22
+Open Door Signal in Vehicles
+Pier 69 Cesar phone voice Fix
+SA Restore Android Radios
+SAAS
+Uncompressed SFX Pack
+Vehicles Sound Revamped
+
+
+
+Timecyc
+
+24h TimeCycle
+Improved California Weather Timecyc v3.0.1
+Real Linear Graphics v2.6
+Timecyc Cinematic v1.3
+Updated TimeCycle (24h TimeCycle)
+
+
+
+Textures
+
+Proper Fixes v1.5
+RoSA Project Evolved - March
+Revamped Vehicle Project
