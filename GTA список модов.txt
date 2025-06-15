@@ -544,6 +544,7 @@ Graphic Mods
 
 Color Mod v2
 Enhance ParticleTXD v1.0
+FxsFuncs v1.2
 Graphics Tweaker v1.3.1
 IMFX v17.11.2017t
 Improved Streaming v1.0.1
