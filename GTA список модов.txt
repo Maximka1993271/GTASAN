@@ -235,6 +235,7 @@ New Car Camera
 No Aggressive Drivers
 No Radio Auto Change
 No Rhino
+NoRadio v2
 NPC Lowrider
 NPC Tuning
 Oil Leaking
