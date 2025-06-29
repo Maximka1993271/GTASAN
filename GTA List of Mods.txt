@@ -500,6 +500,7 @@ Sleep
 Smarter Cop Decisions
 Sniper Realism
 Sniper Scope
+SniperZoomControl
 Sparky
 Spider Man Mod
 Split Screen for 2 Player Mode
