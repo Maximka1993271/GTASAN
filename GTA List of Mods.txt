@@ -188,7 +188,7 @@ Destructive Rhino Mod
 Detach Trailer
 Diesel
 DohertyGarage v1.4.6
-DrIVe Mod
+DrIVe Mod v2.0 (04.07.2025)
 Dynamic Motorway Traffic
 Emergency Lights Mod
 Engine Off On Vehicle Exit
