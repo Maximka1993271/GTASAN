@@ -259,7 +259,7 @@ Remote Lock Car
 Rhino noEP
 Rules Mod
 Rural Car Repairs
-SA Styled Speedometer
+SA Styled Speedometer v2
 Save License Plate
 Siren And Vigilante
 SkidBlow
