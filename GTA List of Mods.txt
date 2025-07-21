@@ -228,7 +228,7 @@ Manual Driveby Refixed Update v.25.07.16
 Manual DriveBy Remake
 Mid Air Car Control
 Minimalist Speedometer
-ModelExtras
+ModelExtras v2.0-rc22
 More Locked Cars
 Moving Siren Lights
 Music from cars
