@@ -338,6 +338,7 @@ BetterHeliCoronas
 BigMap
 Boat Radar
 Body Stats Fix
+BrBa & BCS Cartel Event
 Burnout With Space
 Camera Settings
 Ceiling Bird Chirp
@@ -413,6 +414,7 @@ Hit Scan Sniper
 Hit the Entity Fix
 Hood Fellas Greeting You
 Hospital Health Pickups
+HS missiles for Hunter
 HUD Colors
 Improved Barber
 Improved Club
