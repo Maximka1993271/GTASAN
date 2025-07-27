@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk, messagebox, scrolledtext, filedialog
+from tkinter import ttk, messagebox, filedialog
 import os
 import sys
 import configparser
@@ -888,6 +888,9 @@ class ModPriorityGUI(tk.Tk):
         # Обновляем фон Canvas для анимированной полоски
         if hasattr(self, 'colorful_line'):
             self.colorful_line.config(bg=bg_color)
+        # Обновляем фон Canvas для рамки поиска
+        if hasattr(self, 'search_border_canvas'):
+            self.search_border_canvas.config(bg=bg_color)
 
 
         # Сообщение о смене темы (только если это не начальная установка)
@@ -911,11 +914,33 @@ class ModPriorityGUI(tk.Tk):
         self.search_label = ttk.Label(self.top_frame, text=self.current_lang["search_mod"], font=self.font_main)
         self.search_label.pack(side=tk.LEFT, padx=(0, 5))
 
+        # Создаем фрейм для размещения поля поиска и его анимированной рамки
+        self.search_input_frame = ttk.Frame(self.top_frame, style="TFrame")
+        self.search_input_frame.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=(0, 10))
+
+        # Создаем Canvas для анимированной рамки вокруг поля поиска
+        self.search_border_canvas = tk.Canvas(self.search_input_frame, height=30, highlightthickness=0)
+        self.search_border_canvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True) # Canvas заполняет родительский фрейм
+        
         self.search_var = tk.StringVar()
-        self.search_entry = tk.Entry(self.top_frame, textvariable=self.search_var, font=self.font_main, width=40)
-        self.search_entry.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=(0, 10))
+        self.search_entry = tk.Entry(self.search_border_canvas, textvariable=self.search_var, font=self.font_main, relief=tk.FLAT)
+        # Встраиваем Entry виджет внутрь Canvas.
+        # Его позиция и размер будут обновляться динамически функцией resize_search_entry_and_border.
+        self.search_entry_window_id = self.search_border_canvas.create_window(
+            0, 0, # Начальная позиция, будет обновлена
+            anchor="nw",
+            window=self.search_entry
+        )
+        # Привязываем событие изменения размера Canvas к функции, которая изменит размер Entry и рамки
+        self.search_border_canvas.bind("<Configure>", self.resize_search_entry_and_border)
+
         self.search_entry.bind("<KeyRelease>", self.apply_search_filter)
         ToolTip(self.search_entry, self.current_lang["search_syntax_help"]) # Добавляем подсказку
+
+        # Инициализируем анимацию рамки поиска
+        self.search_hue_offset = 0.0
+        self.search_animation_speed = 0.02 # Немного быстрее анимация для рамки
+        self.animate_search_border()
 
         self.update_mods_button = ttk.Button(self.top_frame, text=self.current_lang["update_mod_list"], command=self.load_mods_and_assign_priorities)
         self.update_mods_button.pack(side=tk.LEFT, padx=(0, 5))
@@ -1044,6 +1069,54 @@ class ModPriorityGUI(tk.Tk):
 
         # Планируем следующий кадр анимации через 20 миллисекунд (50 кадров в секунду)
         self.after(20, self.animate_colorful_line)
+
+    def resize_search_entry_and_border(self, event):
+        """Изменяет размер поля поиска и перерисовывает его анимированную рамку."""
+        canvas = self.search_border_canvas
+        canvas_width = event.width
+        canvas_height = event.height
+
+        border_thickness = 2 # Толщина анимированной рамки
+
+        # Вычисляем внутренние размеры для поля ввода
+        entry_x1 = border_thickness
+        entry_y1 = border_thickness
+        entry_width = max(1, canvas_width - 2 * border_thickness)
+        entry_height = max(1, canvas_height - 2 * border_thickness)
+
+        # Обновляем позицию и размер встроенного Entry виджета
+        canvas.coords(self.search_entry_window_id, entry_x1, entry_y1)
+        canvas.itemconfigure(self.search_entry_window_id, width=entry_width, height=entry_height)
+
+        self.draw_search_border() # Перерисовываем рамку
+
+    def draw_search_border(self, event=None):
+        """Отрисовывает анимированную рамку вокруг поля поиска."""
+        canvas = self.search_border_canvas
+        canvas.delete("border_rect") # Удаляем предыдущую рамку
+        canvas_width = canvas.winfo_width()
+        canvas_height = canvas.winfo_height()
+
+        # Вычисляем цвет на основе смещения оттенка
+        hue = self.search_hue_offset % 1.0
+        r, g, b = colorsys.hls_to_rgb(hue, 0.6, 1.0) # Немного более высокая светлота для рамки
+        color = f'#{int(r*255):02x}{int(g*255):02x}{int(b*255):02x}'
+
+        # Рисуем прямоугольник, который покрывает всю область Canvas, действуя как рамка
+        border_width = 2 # Толщина анимированной рамки
+        canvas.create_rectangle(
+            border_width / 2, border_width / 2,
+            canvas_width - border_width / 2, canvas_height - border_width / 2,
+            outline=color,
+            width=border_width,
+            tags="border_rect"
+        )
+
+    def animate_search_border(self):
+        """Анимирует цвет рамки поля поиска."""
+        self.search_hue_offset = (self.search_hue_offset + self.search_animation_speed) % 1.0
+        self.draw_search_border()
+        self.after(30, self.animate_search_border) # Планируем следующий кадр
 
     def log(self, message, add_timestamp=True):
         """
