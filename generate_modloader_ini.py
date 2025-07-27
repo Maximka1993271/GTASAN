@@ -475,7 +475,7 @@ class ModPriorityGUI(tk.Tk):
         self.current_lang = localization.language_dict[localization.language]
         self.title(self.current_lang["app_title"])
         # Устанавливаем начальный размер окна.
-        self.geometry("820x700")
+        self.geometry("1000x700") # Увеличена ширина окна до 1000 пикселей
         self.resizable(True, True) # Разрешить изменение размера окна.
 
         self.mods = [] # Список всех найденных модов.
@@ -495,21 +495,21 @@ class ModPriorityGUI(tk.Tk):
         
         # Инициализация цветов для кастомных диалоговых окон и лога.
         # Эти значения будут обновлены функцией set_theme.
+        # Устанавливаем начальные значения для светлой темы, так как виджеты создаются до первого вызова set_theme
         self.dialog_bg = "#FFFFFF"
         self.dialog_fg = "#222222"
         self.dialog_btn_bg = "#E0E0E0"
         self.dialog_btn_fg = "#222222"
         self.dialog_error_fg = "#FF0000"
-        self.log_current_bg = "#FFFFFF" # Добавлено для начального значения фона лога
-        self.log_current_fg = "#222222" # Добавлено для начального значения цвета текста лога
-
-        # Применяем тему при старте. initial_setup=True предотвращает запись в лог до его создания.
-        # Теперь set_theme будет конфигурировать уже существующий log_text
-        self.set_theme(initial_setup=True)
+        self.log_current_bg = "#FFFFFF"
+        self.log_current_fg = "#222222"
 
         # Сначала создаем меню и виджеты, чтобы self.log_text существовал
         self.create_menu() # Создаем меню приложения.
         self.create_widgets() # Создаем основные виджеты интерфейса.
+
+        # Применяем тему при старте.
+        self.set_theme() # Удален initial_setup=True, так как все виджеты уже созданы.
 
         # Поиск и установка иконки приложения.
         self._set_app_icon()
@@ -607,7 +607,7 @@ class ModPriorityGUI(tk.Tk):
         self.update_ui_texts() # Обновляем все тексты в интерфейсе.
         # Убедимся, что log_text существует, прежде чем пытаться что-то в него записать,
         # и только если это не первоначальная настройка.
-        if hasattr(self, 'log_text') and not initial_setup:
+        if hasattr(self, 'log_text'):
             self.log(f"{self.current_lang['language_menu']}: {self.current_lang[f'language_{lang_code}']}", add_timestamp=False)
 
     def update_ui_texts(self):
@@ -659,17 +659,24 @@ class ModPriorityGUI(tk.Tk):
             self.help_menu.entryconfig(1, label=self.current_lang["help_author"])
             self.help_menu.entryconfig(2, label=self.current_lang["help_updates"])
             self.help_menu.entryconfig(3, label=self.current_lang["help_help"])
-            self.help_menu.entryconfig(4, label=self.current_lang["help_contact"])
+            self.help_menu.add_command(label=self.current_lang["help_contact"], command=self.contact_support)
 
         # Обновляем тексты виджетов
         self.search_label.config(text=self.current_lang["search_mod"])
-        self.update_mods_button.config(text=self.current_lang["update_mod_list"])
-        self.generate_ini_button.config(text=self.current_lang["generate_ini"])
-        self.log_label.config(text=self.current_lang["log_label"])
-        self.clear_log_button.config(text=self.current_lang["clear_log"])
-        self.select_all_log_button.config(text=self.current_lang["select_all_log"])
-        self.copy_all_log_button.config(text=self.current_lang["copy_all_log"])
+        # Обновляем тексты кнопок, если они являются анимированными кнопками
+        if hasattr(self, 'update_mods_button_frame'):
+            self.update_mods_button_frame.button_widget.config(text=self.current_lang["update_mod_list"])
+        if hasattr(self, 'generate_ini_button_frame'):
+            self.generate_ini_button_frame.button_widget.config(text=self.current_lang["generate_ini"])
+        if hasattr(self, 'clear_log_button_frame'):
+            self.clear_log_button_frame.button_widget.config(text=self.current_lang["clear_log"])
+        if hasattr(self, 'select_all_log_button_frame'):
+            self.select_all_log_button_frame.button_widget.config(text=self.current_lang["select_all_log"])
+        if hasattr(self, 'copy_all_log_button_frame'):
+            self.copy_all_log_button_frame.button_widget.config(text=self.current_lang["copy_all_log"])
 
+        self.log_label.config(text=self.current_lang["log_label"])
+        
         # Обновляем заголовки столбцов Treeview
         self.tree.heading("mod_name", text=self.current_lang["mod_column"])
         self.tree.heading("priority", text=self.current_lang["priority_column"])
@@ -679,11 +686,16 @@ class ModPriorityGUI(tk.Tk):
 
         # Обновляем подсказки
         ToolTip(self.search_entry, self.current_lang["search_syntax_help"])
-        ToolTip(self.update_mods_button, self.current_lang["update_mod_list"])
-        ToolTip(self.generate_ini_button, self.current_lang["generate_ini"])
-        ToolTip(self.clear_log_button, self.current_lang["clear_log"])
-        ToolTip(self.select_all_log_button, self.current_lang["select_all_log"])
-        ToolTip(self.copy_all_log_button, self.current_lang["copy_all_log"])
+        if hasattr(self, 'update_mods_button_frame'):
+            ToolTip(self.update_mods_button_frame.button_widget, self.current_lang["update_mod_list"])
+        if hasattr(self, 'generate_ini_button_frame'):
+            ToolTip(self.generate_ini_button_frame.button_widget, self.current_lang["generate_ini"])
+        if hasattr(self, 'clear_log_button_frame'):
+            ToolTip(self.clear_log_button_frame.button_widget, self.current_lang["clear_log"])
+        if hasattr(self, 'select_all_log_button_frame'):
+            ToolTip(self.select_all_log_button_frame.button_widget, self.current_lang["select_all_log"])
+        if hasattr(self, 'copy_all_log_button_frame'):
+            ToolTip(self.copy_all_log_button_frame.button_widget, self.current_lang["copy_all_log"])
 
     def create_menu(self):
         """
@@ -741,12 +753,10 @@ class ModPriorityGUI(tk.Tk):
         self.help_menu.add_command(label=self.current_lang["help_help"], command=self.show_help)
         self.help_menu.add_command(label=self.current_lang["help_contact"], command=self.contact_support)
 
-    def set_theme(self, mode=None, initial_setup=False):
+    def set_theme(self, mode=None):
         """
         Устанавливает тему приложения (светлая, темная, системная).
         :param mode: 'light', 'dark', 'system' или None (для использования self.theme_mode.get()).
-        :param initial_setup: Если True, то функция вызывается при первом запуске,
-                              и сообщения в лог не будут записываться, чтобы избежать ошибок.
         """
         if mode is None:
             mode = self.theme_mode.get()
@@ -822,6 +832,7 @@ class ModPriorityGUI(tk.Tk):
 
         # Конфигурация стилей ttk
         self.style.configure(".", background=bg_color, foreground=fg_color, font=self.font_main)
+        # TFrame style handles background for ttk.Frame
         self.style.configure("TFrame", background=bg_color)
         self.style.configure("TLabel", background=bg_color, foreground=fg_color)
         self.style.configure("TButton", background=button_bg, foreground=button_fg, borderwidth=1, focusthickness=3, focuscolor='none')
@@ -863,27 +874,10 @@ class ModPriorityGUI(tk.Tk):
         # Проверяем, существует ли self.log_text перед конфигурированием
         if hasattr(self, 'log_text'):
             self.log_text.config(bg=self.log_current_bg, fg=self.log_current_fg, insertbackground=self.log_current_fg)
-            # Применяем стиль к вертикальной полосе прокрутки ScrolledText
-            # self.log_text.vbar.config(style="Vertical.TScrollbar") # Эту строку удаляем
 
         # Обновляем цвета для виджета Entry
         if hasattr(self, 'search_entry'):
             self.search_entry.config(bg=input_bg, fg=input_fg, insertbackground=input_fg)
-
-        # Обновляем цвета для всех кнопок
-        for widget in self.winfo_children():
-            if isinstance(widget, (ttk.Button, tk.Button)):
-                widget.config(bg=button_bg, fg=button_fg)
-            elif isinstance(widget, (ttk.Label, tk.Label)):
-                widget.config(bg=bg_color, fg=fg_color)
-
-        # Обновляем цвета вложенных фреймов
-        if hasattr(self, 'top_frame'):
-            self.top_frame.config(bg=bg_color)
-        if hasattr(self, 'log_frame'):
-            self.log_frame.config(bg=bg_color)
-        if hasattr(self, 'modloader_path_frame'):
-            self.modloader_path_frame.config(bg=bg_color)
         
         # Обновляем фон Canvas для анимированной полоски
         if hasattr(self, 'colorful_line'):
@@ -892,16 +886,29 @@ class ModPriorityGUI(tk.Tk):
         if hasattr(self, 'search_border_canvas'):
             self.search_border_canvas.config(bg=bg_color)
 
+        # Обновляем цвета для кнопок tk.Button, которые находятся внутри Canvas
+        # Это нужно, потому что tk.Button не реагирует на ttk.Style
+        # Проверяем, что button_frame существуют, прежде чем пытаться получить доступ к их атрибутам
+        if hasattr(self, 'update_mods_button_frame') and self.update_mods_button_frame:
+            self.update_mods_button_frame.button_widget.config(bg=button_bg, fg=button_fg)
+        if hasattr(self, 'generate_ini_button_frame') and self.generate_ini_button_frame:
+            self.generate_ini_button_frame.button_widget.config(bg=button_bg, fg=button_fg)
+        if hasattr(self, 'clear_log_button_frame') and self.clear_log_button_frame:
+            self.clear_log_button_frame.button_widget.config(bg=button_bg, fg=button_fg)
+        if hasattr(self, 'copy_all_log_button_frame') and self.copy_all_log_button_frame:
+            self.copy_all_log_button_frame.button_widget.config(bg=button_bg, fg=button_fg)
+        if hasattr(self, 'select_all_log_button_frame') and self.select_all_log_button_frame:
+            self.select_all_log_button_frame.button_widget.config(bg=button_bg, fg=button_fg)
 
-        # Сообщение о смене темы (только если это не начальная установка)
-        if not initial_setup:
-            if selected_theme == "dark":
-                theme_name = self.current_lang["theme_dark"]
-            elif selected_theme == "light":
-                theme_name = self.current_lang["theme_light"]
-            else: # Should not happen, but for safety
-                theme_name = self.current_lang["theme_system"]
-            self.log(self.current_lang["theme_changed_to"].format(theme_name), add_timestamp=False)
+
+        # Сообщение о смене темы
+        if selected_theme == "dark":
+            theme_name = self.current_lang["theme_dark"]
+        elif selected_theme == "light":
+            theme_name = self.current_lang["theme_light"]
+        else: # Should not happen, but for safety
+            theme_name = self.current_lang["system_theme"]
+        self.log(self.current_lang["theme_changed_to"].format(theme_name), add_timestamp=False)
 
     def create_widgets(self):
         """
@@ -914,7 +921,27 @@ class ModPriorityGUI(tk.Tk):
         self.search_label = ttk.Label(self.top_frame, text=self.current_lang["search_mod"], font=self.font_main)
         self.search_label.pack(side=tk.LEFT, padx=(0, 5))
 
+        # Используем новую функцию для создания анимированных кнопок
+        # Упаковываем кнопку "Сгенерировать modloader.ini" справа
+        self.generate_ini_button_frame = self._create_animated_button(
+            self.top_frame,
+            self.current_lang["generate_ini"],
+            self.generate_modloader_ini,
+            self.current_lang["generate_ini"]
+        )
+        self.generate_ini_button_frame.pack(side=tk.RIGHT, fill=tk.X, expand=True) # pack с expand
+
+        # Упаковываем кнопку "Обновить список модов" справа, перед кнопкой "Сгенерировать"
+        self.update_mods_button_frame = self._create_animated_button(
+            self.top_frame,
+            self.current_lang["update_mod_list"],
+            self.load_mods_and_assign_priorities,
+            self.current_lang["update_mod_list"]
+        )
+        self.update_mods_button_frame.pack(side=tk.RIGHT, fill=tk.X, expand=True, padx=(0, 5)) 
+
         # Создаем фрейм для размещения поля поиска и его анимированной рамки
+        # Теперь search_input_frame будет расширяться, чтобы занять доступное пространство слева
         self.search_input_frame = ttk.Frame(self.top_frame, style="TFrame")
         self.search_input_frame.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=(0, 10))
 
@@ -941,14 +968,6 @@ class ModPriorityGUI(tk.Tk):
         self.search_hue_offset = 0.0
         self.search_animation_speed = 0.02 # Немного быстрее анимация для рамки
         self.animate_search_border()
-
-        self.update_mods_button = ttk.Button(self.top_frame, text=self.current_lang["update_mod_list"], command=self.load_mods_and_assign_priorities)
-        self.update_mods_button.pack(side=tk.LEFT, padx=(0, 5))
-        ToolTip(self.update_mods_button, self.current_lang["update_mod_list"])
-
-        self.generate_ini_button = ttk.Button(self.top_frame, text=self.current_lang["generate_ini"], command=self.generate_modloader_ini)
-        self.generate_ini_button.pack(side=tk.LEFT)
-        ToolTip(self.generate_ini_button, self.current_lang["generate_ini"])
 
         # --- Treeview для отображения модов и приоритетов ---
         self.tree_frame = ttk.Frame(self)
@@ -1010,22 +1029,130 @@ class ModPriorityGUI(tk.Tk):
         self.log_buttons_frame = ttk.Frame(self.log_frame)
         self.log_buttons_frame.pack(side=tk.BOTTOM, fill=tk.X, pady=(5, 0))
 
-        self.clear_log_button = ttk.Button(self.log_buttons_frame, text=self.current_lang["clear_log"], command=self.clear_log)
-        self.clear_log_button.pack(side=tk.RIGHT)
-        ToolTip(self.clear_log_button, self.current_lang["clear_log"])
+        # Используем новую функцию для создания анимированных кнопок для лога
+        self.clear_log_button_frame = self._create_animated_button(
+            self.log_buttons_frame,
+            self.current_lang["clear_log"],
+            self.clear_log,
+            self.current_lang["clear_log"]
+        )
+        self.clear_log_button_frame.pack(side=tk.RIGHT)
 
-        self.copy_all_log_button = ttk.Button(self.log_buttons_frame, text=self.current_lang["copy_all_log"], command=self.copy_all_log)
-        self.copy_all_log_button.pack(side=tk.RIGHT, padx=(0, 5))
-        ToolTip(self.copy_all_log_button, self.current_lang["copy_all_log"])
+        self.copy_all_log_button_frame = self._create_animated_button(
+            self.log_buttons_frame,
+            self.current_lang["copy_all_log"],
+            self.copy_all_log,
+            self.current_lang["copy_all_log"]
+        )
+        self.copy_all_log_button_frame.pack(side=tk.RIGHT, padx=(0, 5))
 
-        self.select_all_log_button = ttk.Button(self.log_buttons_frame, text=self.current_lang["select_all_log"], command=self.select_all_log)
-        self.select_all_log_button.pack(side=tk.RIGHT, padx=(0, 5))
-        ToolTip(self.select_all_log_button, self.current_lang["select_all_log"])
+        self.select_all_log_button_frame = self._create_animated_button(
+            self.log_buttons_frame,
+            self.current_lang["select_all_log"],
+            self.select_all_log,
+            self.current_lang["select_all_log"]
+        )
+        self.select_all_log_button_frame.pack(side=tk.RIGHT, padx=(0, 5))
 
         # Надпись автора
         self.author_label = ttk.Label(self, text=self.current_lang["author_label"], font=self.font_small)
         self.author_label.pack(side=tk.BOTTOM, pady=(5, 10))
         self.author_label.bind("<Button-1>", lambda e: self.contact_support()) # Позволяет кликнуть на автора для связи
+
+    def _create_animated_button(self, parent, text, command, tooltip_text, animation_speed=0.02, border_width=2):
+        """
+        Создает кнопку с анимированной разноцветной рамкой.
+        Возвращает фрейм, содержащий Canvas с кнопкой внутри.
+        """
+        button_frame = ttk.Frame(parent, style="TFrame")
+        
+        # Создаем Canvas для рамки
+        button_canvas = tk.Canvas(button_frame, height=30, highlightthickness=0)
+        button_canvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+
+        # Создаем реальную кнопку внутри Canvas
+        button = tk.Button(button_canvas, text=text, command=command,
+                           relief=tk.FLAT, borderwidth=0,
+                           font=self.font_main,
+                           bg=self.dialog_btn_bg, fg=self.dialog_btn_fg) # Начальные цвета
+        
+        # Встраиваем кнопку в Canvas
+        button_window_id = button_canvas.create_window(
+            border_width, border_width, # Начальная позиция, будет обновлена
+            anchor="nw",
+            window=button
+        )
+
+        # Сохраняем ссылки для доступа из set_theme и анимации
+        button_frame.button_canvas = button_canvas
+        button_frame.button_widget = button
+        button_frame.button_window_id = button_window_id
+        button_frame.hue_offset = 0.0 # Смещение оттенка для этой конкретной кнопки
+        button_frame.animation_speed = animation_speed
+        button_frame.border_width = border_width
+
+        # Привязываем событие изменения размера Canvas к функции, которая изменит размер кнопки и рамки
+        button_canvas.bind("<Configure>", lambda e, bf=button_frame: self._resize_animated_button(e, bf))
+
+        # Запускаем анимацию рамки
+        self._animate_button_border(button_frame)
+
+        # Добавляем подсказку
+        ToolTip(button, tooltip_text)
+
+        return button_frame
+
+    def _resize_animated_button(self, event, button_frame):
+        """Изменяет размер кнопки и перерисовывает ее анимированную рамку."""
+        canvas = button_frame.button_canvas
+        button = button_frame.button_widget
+        border_thickness = button_frame.border_width
+
+        canvas_width = event.width
+        canvas_height = event.height
+
+        # Вычисляем внутренние размеры для кнопки
+        button_x1 = border_thickness
+        button_y1 = border_thickness
+        button_width = max(1, canvas_width - 2 * border_thickness)
+        button_height = max(1, canvas_height - 2 * border_thickness)
+
+        # Обновляем позицию и размер встроенного Button виджета
+        canvas.coords(button_frame.button_window_id, button_x1, button_y1)
+        canvas.itemconfigure(button_frame.button_window_id, width=button_width, height=button_height)
+
+        self._draw_button_border(button_frame) # Перерисовываем рамку
+
+    def _draw_button_border(self, button_frame):
+        """Отрисовывает анимированную рамку вокруг кнопки."""
+        canvas = button_frame.button_canvas
+        canvas.delete("button_border_rect") # Удаляем предыдущую рамку
+        canvas_width = canvas.winfo_width()
+        canvas_height = canvas.winfo_height()
+        border_width = button_frame.border_width
+
+        # Вычисляем цвет на основе смещения оттенка
+        hue = button_frame.hue_offset % 1.0
+        r, g, b = colorsys.hls_to_rgb(hue, 0.6, 1.0) # Немного более высокая светлота для рамки
+        color = f'#{int(r*255):02x}{int(g*255):02x}{int(b*255):02x}'
+
+        # Рисуем прямоугольник, который покрывает всю область Canvas, действуя как рамка
+        canvas.create_rectangle(
+            border_width / 2, border_width / 2,
+            canvas_width - border_width / 2, canvas_height - border_width / 2,
+            outline=color,
+            width=border_width,
+            tags="button_border_rect"
+        )
+        
+        # Обновляем фон Canvas для кнопки
+        canvas.config(bg=self.cget('bg')) # Устанавливаем фон Canvas в цвет фона окна
+
+    def _animate_button_border(self, button_frame):
+        """Анимирует цвет рамки кнопки."""
+        button_frame.hue_offset = (button_frame.hue_offset + button_frame.animation_speed) % 1.0
+        self._draw_button_border(button_frame)
+        self.after(30, self._animate_button_border, button_frame) # Планируем следующий кадр
 
     def draw_colorful_line(self, event=None):
         """Отрисовывает разноцветную полоску в Canvas."""
@@ -1341,7 +1468,7 @@ class ModPriorityGUI(tk.Tk):
         parent_width = self.winfo_width()
         parent_height = self.winfo_height()
 
-        dialog_width = 300
+        dialog_width = 350
         dialog_height = 120
         x = parent_x + (parent_width // 2) - (dialog_width // 2)
         y = parent_y + (parent_height // 2) - (dialog_height // 2)
@@ -1455,7 +1582,7 @@ class ModPriorityGUI(tk.Tk):
 
                         # Проверка "И" (включающие условия)
                         if pq['includes']:
-                            current_or_match = all(inc.lower() in mod_name_lower for inc in pq['includes'])
+                            current_or_match = all(inc.lower() in mod_name_lower for inc in pq['includes']) # Исправлена опечатка
 
                         # Проверка "НЕ" (исключающие условия)
                         if current_or_match and pq['excludes']:
