@@ -104,6 +104,10 @@ APP_VERSION = "2.0"                      # Версия приложения.
 GITHUB_REPO_URL = "https://github.com/Maximka1993271/GTASAN/releases/download/ModloaderPriorityEditor/GTA.SA.Modloader.Priority.Editior.2.0.rar"
 AUTHOR_EMAIL = "melnikovmaksim540@gmail.com"
 
+# Символы для звезд рейтинга
+STAR_FILLED = "★"
+STAR_EMPTY = "☆"
+
 # =============================================================================
 # --- Пользовательские приоритеты модов ---
 # Эти приоритеты переопределяют любые другие источники и назначаются модам по умолчанию.
@@ -269,7 +273,8 @@ LANG_EN = {
     "no_mods_selected_for_deletion": "No mods selected for deletion.",
     "save_button": "Save",
     "edit_priority_title": "Edit Priority",
-    "info_title": "Information"
+    "info_title": "Information",
+    "rate_program_label": "Rate this program:"
 }
 
 # Модуль для локализации
@@ -420,10 +425,11 @@ LANG_RU = {
     "invalid_search_syntax": "❌ Неверный синтаксис поиска. Проверьте запрос.",
     "yes_button": "Да",
     "no_button": "Нет",
-    "no_mods_selected_for_deletion": "Моды для удаления не выбраны.",
+    "no_mods_selected_for_deletion": "Моды для удфаления не выбраны.",
     "save_button": "Сохранить",
     "edit_priority_title": "Редактировать Приоритет",
-    "info_title": "Информация"
+    "info_title": "Информация",
+    "rate_program_label": "Рейтинг Программы:"
 }
 
 # Создание экземпляра локализации
@@ -503,6 +509,9 @@ class ModPriorityGUI(tk.Tk):
         self.dialog_error_fg = "#FF0000"
         self.log_current_bg = "#FFFFFF"
         self.log_current_fg = "#222222"
+
+        # Переменная для хранения рейтинга, инициализируем с 5 звездами
+        self.rating_var = tk.IntVar(value=10) # Инициализация rating_var ПЕРЕД create_widgets()
 
         # Сначала создаем меню и виджеты, чтобы self.log_text существовал
         self.create_menu() # Создаем меню приложения.
@@ -696,6 +705,10 @@ class ModPriorityGUI(tk.Tk):
             ToolTip(self.select_all_log_button_frame.button_widget, self.current_lang["select_all_log"])
         if hasattr(self, 'copy_all_log_button_frame'):
             ToolTip(self.copy_all_log_button_frame.button_widget, self.current_lang["copy_all_log"])
+        
+        # Обновляем текст для рейтинга
+        if hasattr(self, 'rate_label'):
+            self.rate_label.config(text=self.current_lang["rate_program_label"])
 
     def create_menu(self):
         """
@@ -900,6 +913,11 @@ class ModPriorityGUI(tk.Tk):
         if hasattr(self, 'select_all_log_button_frame') and self.select_all_log_button_frame:
             self.select_all_log_button_frame.button_widget.config(bg=button_bg, fg=button_fg)
 
+        # Обновляем цвета для звезд
+        if hasattr(self, 'star_labels'):
+            for star_label in self.star_labels:
+                star_label.config(bg=bg_color)
+            self.update_stars() # Обновляем цвета и заполнение звезд
 
         # Сообщение о смене темы
         if selected_theme == "dark":
@@ -995,9 +1013,13 @@ class ModPriorityGUI(tk.Tk):
         # Отрисовываем сегменты полоски при изменении размера окна
         self.colorful_line.bind("<Configure>", self.draw_colorful_line)
 
-        # --- Фрейм для лога ---
-        self.log_frame = ttk.Frame(self)
-        self.log_frame.pack(side=tk.BOTTOM, fill=tk.X, padx=10, pady=5)
+        # --- Нижняя секция (лог, рейтинг, автор) ---
+        self.bottom_section_frame = ttk.Frame(self)
+        self.bottom_section_frame.pack(side=tk.BOTTOM, fill=tk.X, padx=10, pady=5)
+
+        # --- Фрейм для лога (внутри bottom_section_frame) ---
+        self.log_frame = ttk.Frame(self.bottom_section_frame)
+        self.log_frame.pack(side=tk.TOP, fill=tk.X, pady=(0, 5)) # Отступ снизу для разделения с рейтингом
 
         self.log_label = ttk.Label(self.log_frame, text=self.current_lang["log_label"], font=self.font_main)
         self.log_label.pack(side=tk.TOP, anchor=tk.W)
@@ -1016,7 +1038,6 @@ class ModPriorityGUI(tk.Tk):
         self.log_scrollbar = ttk.Scrollbar(self.log_text_container, orient="vertical", command=self.log_text.yview, style="Vertical.TScrollbar")
         self.log_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         self.log_text.config(yscrollcommand=self.log_scrollbar.set)
-
 
         # Контекстное меню для лога
         self.log_context_menu = tk.Menu(self.log_text, tearoff=0)
@@ -1054,9 +1075,34 @@ class ModPriorityGUI(tk.Tk):
         )
         self.select_all_log_button_frame.pack(side=tk.RIGHT, padx=(0, 5))
 
-        # Надпись автора
-        self.author_label = ttk.Label(self, text=self.current_lang["author_label"], font=self.font_small)
-        self.author_label.pack(side=tk.BOTTOM, pady=(5, 10))
+        # --- Фрейм для рейтинга (внутри bottom_section_frame, после log_frame) ---
+        self.rating_frame = ttk.Frame(self.bottom_section_frame)
+        self.rating_frame.pack(side=tk.TOP, pady=(0, 0)) # Отступы для центрирования
+        
+        # Помещаем всё в отдельный подфрейм справа
+        self.rating_inner_frame = ttk.Frame(self.rating_frame)
+        self.rating_inner_frame.pack(side=tk.RIGHT)
+
+        self.rate_label = ttk.Label(self.rating_inner_frame, text=self.current_lang["rate_program_label"], font=self.font_main)
+        self.rate_label.pack(side=tk.LEFT, padx=(0, 5))
+
+        self.star_labels = []
+        for i in range(5):
+            star_label = tk.Label(self.rating_inner_frame, text=STAR_EMPTY, font=("Segoe UI", 16)) # Удалены cursor и bind
+            star_label.pack(side=tk.LEFT, padx=1)
+            self.star_labels.append(star_label)
+            # Удалены привязки к событиям для неизменяемого рейтинга
+            # star_label.bind("<Button-1>", lambda e, rating=i+1: self.set_rating(rating))
+            # star_label.bind("<Enter>", lambda e, rating=i+1: self.hover_stars(rating))
+            # star_label.bind("<Leave>", lambda e: self.hover_stars(0)) # Reset on leave
+            self.star_labels.append(star_label)
+
+        # Update star appearance initially
+        self.update_stars() # Обновляем, чтобы показать 5 звезд сразу
+
+        # Надпись автора (внутри bottom_section_frame, после rating_frame)
+        self.author_label = ttk.Label(self.bottom_section_frame, text=self.current_lang["author_label"], font=self.font_small)
+        self.author_label.place(relx=1.0, rely=1.0, anchor='se', x=-10, y=-10)
         self.author_label.bind("<Button-1>", lambda e: self.contact_support()) # Позволяет кликнуть на автора для связи
 
     def _create_animated_button(self, parent, text, command, tooltip_text, animation_speed=0.02, border_width=2):
@@ -1865,6 +1911,37 @@ class ModPriorityGUI(tk.Tk):
             self.mods.clear()
             self.apply_search_filter() # Обновляем Treeview
             self.log(self.current_lang["all_mods_deleted_log"])
+
+    def set_rating(self, rating):
+        """Устанавливает рейтинг и обновляет отображение звезд."""
+        # Этот метод больше не вызывается из UI, так как звезды статичны.
+        # Но он остается для внутренней логики, если потребуется.
+        self.rating_var.set(rating)
+        self.update_stars()
+        self.log(f"Program rated: {rating} stars.", add_timestamp=False)
+
+    def update_stars(self):
+        """Обновляет визуальное отображение звезд на основе текущего рейтинга."""
+        current_rating = self.rating_var.get()
+        for i, star_label in enumerate(self.star_labels):
+            if i < current_rating:
+                star_label.config(text=STAR_FILLED, fg="#FFD700") # Gold color for filled stars
+            else:
+                star_label.config(text=STAR_EMPTY, fg="#888888") # Grey color for empty stars
+            # Ensure background matches theme
+            star_label.config(bg=self.cget('bg'))
+    
+    # Метод hover_stars больше не используется, так как звезды статичны.
+    # def hover_stars(self, hovered_rating):
+    #     """Обновляет визуальное отображение звезд при наведении курсора."""
+    #     if hovered_rating == 0: # Mouse left the rating area
+    #         self.update_stars() # Revert to actual rating
+    #     else:
+    #         for i, star_label in enumerate(self.star_labels):
+    #             if i < hovered_rating:
+    #                 star_label.config(text=STAR_FILLED, fg="#FFD700")
+    #             else:
+    #                 star_label.config(text=STAR_EMPTY, fg="#888888")
 
     def show_about(self):
         """Показывает информацию о программе."""
