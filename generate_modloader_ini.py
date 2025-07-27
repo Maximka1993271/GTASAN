@@ -8,6 +8,7 @@ from datetime import datetime
 import webbrowser
 import csv
 import re
+import colorsys # Добавлен для работы с цветовыми пространствами HLS
 
 # =============================================================================
 # --- Условные импорты и вспомогательные функции для Windows ---
@@ -49,13 +50,55 @@ else:
     # Заглушка для не-Windows систем, всегда возвращает False, так как темная тема Windows не применима.
     def is_windows_dark_theme():
         return False
+        
+# =============================================================================
+# --- Класс ToolTip для создания подсказок ---
+# =============================================================================
+class ToolTip:
+    def __init__(self, widget, text):
+        self.widget = widget
+        self.text = text
+        self.tooltip_window = None
+        self.widget.bind("<Enter>", self.show_tooltip)
+        self.widget.bind("<Leave>", self.hide_tooltip)
+        self.widget.bind("<ButtonPress>", self.hide_tooltip) # Скрыть подсказку при нажатии
+
+    def show_tooltip(self, event=None):
+        # Если подсказка уже показана, не показывать снова
+        if self.tooltip_window:
+            return
+
+        # Задержка перед показом подсказки
+        # self.id = self.widget.after(500, self._show_tooltip_after_delay)
+        # Убрал задержку для простоты, но можно добавить, если нужно.
+
+        x = self.widget.winfo_rootx() + self.widget.winfo_width() # Координата X правого края виджета
+        y = self.widget.winfo_rooty() # Координата Y верхнего края виджета
+        
+        # Создаем Toplevel окно для подсказки
+        self.tooltip_window = tk.Toplevel(self.widget)
+        self.tooltip_window.wm_overrideredirect(True) # Убирает рамку окна и заголовок
+        self.tooltip_window.wm_geometry(f"+{x}+{y}")
+        
+        # Создаем Label с текстом подсказки
+        label = tk.Label(self.tooltip_window, text=self.text, background="#ffffe0", # Светло-желтый фон
+                         relief="solid", borderwidth=1,
+                         font=("tahoma", "8", "normal"))
+        label.pack(ipadx=1) # Внутренний отступ
+
+    def hide_tooltip(self, event=None):
+        if self.tooltip_window:
+            self.tooltip_window.destroy()
+        self.tooltip_window = None
+        # if hasattr(self, 'id'): # Отменить запланированный показ, если он был
+        #    self.widget.after_cancel(self.id)
 
 # =============================================================================
 # --- Глобальные константы приложения ---
 # Определяет пути по умолчанию, имена файлов и метаданные приложения.
 # =============================================================================
 DEFAULT_MODLOADER_SUBDIR = "modloader" # Название поддиректории modloader по умолчанию.
-OUTPUT_FILE_NAME = "modloader.ini"       # Имя файла, в который сохраняются приоритеты модов.
+OUTPUT_FILE_NAME = "modloader.ini"         # Имя файла, в который сохраняются приоритеты модов.
 BACKUP_FILE_NAME = "modloader.ini.bak" # Имя файла для резервной копии modloader.ini.
 APP_VERSION = "2.0"                      # Версия приложения.
 GITHUB_REPO_URL = "https://github.com/Maximka1993271/GTASAN/releases/download/ModloaderPriorityEditor/GTA.SA.Modloader.Priority.Editior.2.0.rar"
@@ -107,7 +150,7 @@ LANG_EN = {
     "help_about": "About",
     "help_author": "About Author",
     "help_updates": "Check for Updates",
-    "help_help": "Usage Guide", 
+    "help_help": "Usage Guide",
     "help_contact": "Contact Support",
     
     # Поиск
@@ -221,7 +264,7 @@ LANG_EN = {
     "search_applied": "Search applied: '{0}'. Found {1} mods.",
     "invalid_search_syntax": "❌ Invalid search syntax. Please check your query.",
     
-    "yes_button": "Yes", 
+    "yes_button": "Yes",
     "no_button": "No",
     "no_mods_selected_for_deletion": "No mods selected for deletion.",
     "save_button": "Save",
@@ -375,7 +418,7 @@ LANG_RU = {
     "search_syntax_help": "Синтаксис поиска: Используйте | для ИЛИ, - для НЕ, p: для приоритета (например, 'mod1 | mod2 -mod3 p:>50').",
     "search_applied": "Поиск применен: '{0}'. Найдено модов: {1}.",
     "invalid_search_syntax": "❌ Неверный синтаксис поиска. Проверьте запрос.",
-    "yes_button": "Да",  
+    "yes_button": "Да",
     "no_button": "Нет",
     "no_mods_selected_for_deletion": "Моды для удаления не выбраны.",
     "save_button": "Сохранить",
@@ -424,15 +467,15 @@ class ModPriorityGUI(tk.Tk):
         self.modloader_dir = self.app_config.get("Paths", "modloader_path",
                                                  fallback=os.path.join(self.program_root_dir, DEFAULT_MODLOADER_SUBDIR))
         # Путь для modloader.ini теперь всегда находится в папке modloader, которую выбрал пользователь.
-        self.output_ini_path = os.path.join(self.modloader_dir, OUTPUT_FILE_NAME) 
+        self.output_ini_path = os.path.join(self.modloader_dir, OUTPUT_FILE_NAME)
 
         self.ini_config_data = configparser.ConfigParser()
 
         # Начальный язык, будет установлен из конфига позже.
-        self.current_lang = localization.language_dict[localization.language] 
+        self.current_lang = localization.language_dict[localization.language]
         self.title(self.current_lang["app_title"])
         # Устанавливаем начальный размер окна.
-        self.geometry("820x700") 
+        self.geometry("820x700")
         self.resizable(True, True) # Разрешить изменение размера окна.
 
         self.mods = [] # Список всех найденных модов.
@@ -444,25 +487,25 @@ class ModPriorityGUI(tk.Tk):
         self.language_mode = tk.StringVar(value=self.app_config.get("Language", "mode", fallback="ru"))
 
         # Инициализируем шрифты СРАЗУ, чтобы они были доступны при создании виджетов.
-        self.font_main = ("Segoe UI", 11) 
-        self.font_small = ("Segoe UI", 10, "italic") 
+        self.font_main = ("Segoe UI", 11)
+        self.font_small = ("Segoe UI", 10, "italic")
 
         # Инициализация ttk.Style перед созданием виджетов для применения тем.
         self.style = ttk.Style(self)
         
         # Инициализация цветов для кастомных диалоговых окон и лога.
         # Эти значения будут обновлены функцией set_theme.
-        self.dialog_bg = "#FFFFFF" 
-        self.dialog_fg = "#222222" 
-        self.dialog_btn_bg = "#E0E0E0" 
-        self.dialog_btn_fg = "#222222" 
-        self.dialog_error_fg = "#FF0000" 
+        self.dialog_bg = "#FFFFFF"
+        self.dialog_fg = "#222222"
+        self.dialog_btn_bg = "#E0E0E0"
+        self.dialog_btn_fg = "#222222"
+        self.dialog_error_fg = "#FF0000"
         self.log_current_bg = "#FFFFFF" # Добавлено для начального значения фона лога
         self.log_current_fg = "#222222" # Добавлено для начального значения цвета текста лога
 
         # Применяем тему при старте. initial_setup=True предотвращает запись в лог до его создания.
         # Теперь set_theme будет конфигурировать уже существующий log_text
-        self.set_theme(initial_setup=True) 
+        self.set_theme(initial_setup=True)
 
         # Сначала создаем меню и виджеты, чтобы self.log_text существовал
         self.create_menu() # Создаем меню приложения.
@@ -472,7 +515,7 @@ class ModPriorityGUI(tk.Tk):
         self._set_app_icon()
 
         # Устанавливаем начальный язык на основе загруженной конфигурации.
-        self.set_language(self.language_mode.get(), initial_setup=True) 
+        self.set_language(self.language_mode.get(), initial_setup=True)
 
         # Загружаем последний поисковый запрос из конфига.
         last_search_query = self.app_config.get("Search", "last_query", fallback="")
@@ -480,6 +523,12 @@ class ModPriorityGUI(tk.Tk):
 
         self.load_mods_and_assign_priorities() # Первая загрузка модов при старте приложения.
         
+        # Добавляем параметры для анимации полоски
+        self.hue_offset = 0.0 # Смещение оттенка для анимации
+        self.animation_speed = 0.01 # Скорость анимации (чем меньше, тем быстрее)
+        self.segment_count = 50 # Количество сегментов для полоски
+        self.animate_colorful_line() # Запускаем анимацию полоски
+
         # Обработчик закрытия окна для сохранения настроек приложения.
         self.protocol("WM_DELETE_WINDOW", self.on_closing)
 
@@ -558,7 +607,7 @@ class ModPriorityGUI(tk.Tk):
         self.update_ui_texts() # Обновляем все тексты в интерфейсе.
         # Убедимся, что log_text существует, прежде чем пытаться что-то в него записать,
         # и только если это не первоначальная настройка.
-        if hasattr(self, 'log_text') and not initial_setup: 
+        if hasattr(self, 'log_text') and not initial_setup:
             self.log(f"{self.current_lang['language_menu']}: {self.current_lang[f'language_{lang_code}']}", add_timestamp=False)
 
     def update_ui_texts(self):
@@ -569,7 +618,7 @@ class ModPriorityGUI(tk.Tk):
         self.title(self.current_lang["app_title"])
 
         # Обновляем надписи в меню. Проверяем наличие menubar, чтобы избежать ошибок при первом запуске.
-        if hasattr(self, 'menubar'): 
+        if hasattr(self, 'menubar'):
             menu_labels = {
                 "file_menu": self.file_menu,
                 "edit_menu": self.edit_menu,
@@ -595,7 +644,7 @@ class ModPriorityGUI(tk.Tk):
             self.edit_menu.entryconfig(6, label=self.current_lang["delete_all_mods"])
 
             # Обновление элементов подменю "Настройки"
-            self.settings_menu.entryconfig(0, label=self.current_lang["theme_menu"])  
+            self.settings_menu.entryconfig(0, label=self.current_lang["theme_menu"])
             self.theme_menu.entryconfig(0, label=self.current_lang["theme_system"])
             self.theme_menu.entryconfig(1, label=self.current_lang["theme_dark"])
             self.theme_menu.entryconfig(2, label=self.current_lang["theme_light"])
@@ -603,535 +652,513 @@ class ModPriorityGUI(tk.Tk):
             self.settings_menu.entryconfig(1, label=self.current_lang["language_menu"])
             self.language_menu.entryconfig(0, label=self.current_lang["language_en"])
             self.language_menu.entryconfig(1, label=self.current_lang["language_ru"])
-
-            self.settings_menu.entryconfig(2, label=self.current_lang["settings_modloader_path"])
+            self.settings_menu.entryconfig(3, label=self.current_lang["settings_modloader_path"])
 
             # Обновление элементов подменю "Помощь"
             self.help_menu.entryconfig(0, label=self.current_lang["help_about"])
             self.help_menu.entryconfig(1, label=self.current_lang["help_author"])
             self.help_menu.entryconfig(2, label=self.current_lang["help_updates"])
-            self.help_menu.entryconfig(3, label=self.current_lang["help_help"]) 
-            self.help_menu.entryconfig(4, label=self.current_lang["help_contact"]) 
+            self.help_menu.entryconfig(3, label=self.current_lang["help_help"])
+            self.help_menu.entryconfig(4, label=self.current_lang["help_contact"])
 
+        # Обновляем тексты виджетов
+        self.search_label.config(text=self.current_lang["search_mod"])
+        self.update_mods_button.config(text=self.current_lang["update_mod_list"])
+        self.generate_ini_button.config(text=self.current_lang["generate_ini"])
+        self.log_label.config(text=self.current_lang["log_label"])
+        self.clear_log_button.config(text=self.current_lang["clear_log"])
+        self.select_all_log_button.config(text=self.current_lang["select_all_log"])
+        self.copy_all_log_button.config(text=self.current_lang["copy_all_log"])
 
-        # Обновляем тексты виджетов, если они существуют.
-        if hasattr(self, 'search_label'):
-            self.search_label.config(text=self.current_lang["search_mod"])
-        if hasattr(self, 'update_button'):
-            self.update_button.config(text=self.current_lang["update_mod_list"])
-        if hasattr(self, 'generate_button'):
-            self.generate_button.config(text=self.current_lang["generate_ini"])
-        if hasattr(self, 'tree'):
-            self.tree.heading("mod_name", text=self.current_lang["mod_column"])
-            self.tree.heading("priority", text=self.current_lang["priority_column"])
-        if hasattr(self, 'log_label'):
-            self.log_label.config(text=self.current_lang["log_label"])
-        if hasattr(self, 'clear_log_button'):
-            self.clear_log_button.config(text=self.current_lang["clear_log"])
-        if hasattr(self, 'author_label'):
-            self.author_label.config(text=self.current_lang["author_label"])
-        
-        # Обновляем текст для кнопок "Выделить всё" и "Копировать всё".
-        if hasattr(self, 'select_all_log_button'):
-            self.select_all_log_button.config(text=self.current_lang["select_all_log"])
-        if hasattr(self, 'copy_all_log_button'):
-            self.copy_all_log_button.config(text=self.current_lang["copy_all_log"])
+        # Обновляем заголовки столбцов Treeview
+        self.tree.heading("mod_name", text=self.current_lang["mod_column"])
+        self.tree.heading("priority", text=self.current_lang["priority_column"])
 
-    def set_theme(self, initial_setup=False):
-        """
-        Устанавливает тему интерфейса (светлая/темная/системная).
-        :param initial_setup: Если True, то функция вызывается при первом запуске,
-                              чтобы избежать ошибок при доступе к еще не созданным виджетам.
-        """
-        mode = self.theme_mode.get()
-        dark = False
-        if mode == "system":
-            dark = is_windows_dark_theme() # Проверяем системную тему Windows.
-        elif mode == "dark":
-            dark = True
+        # Обновляем текст подписи автора
+        self.author_label.config(text=self.current_lang["author_label"])
 
-        # Шрифты уже инициализированы в __init__
-        # self.font_main = ("Segoe UI", 11) 
-        # self.font_small = ("Segoe UI", 10, "italic") 
-
-        self.style.theme_use('clam') # Используем тему 'clam' как основу для кастомизации.
-
-        if dark:
-            # Цвета для темной темы.
-            bg = "#121212" # Общий фон.
-            fg = "#E0E0E0" # Общий цвет текста.
-            entry_bg = "#1E1E1E" # Фон полей ввода.
-            entry_fg = "#E0E0E0" # Цвет текста полей ввода.
-            btn_bg = "#333333" # Фон кнопок.
-            btn_fg = "#FFFFFF" # Цвет текста кнопок.
-            sel_bg = "#555555" # Фон выделения.
-            sel_fg = "#FFFFFF" # Цвет текста выделения.
-            self.log_current_bg = "#212121" # Фон лога.
-            self.log_current_fg = "#E0E0E0" # Цвет текста лога.
-            tree_bg = "#1E1E1E" # Фон таблицы.
-            tree_fg = "#E0E0E0" # Цвет текста таблицы.
-            tree_heading_bg = "#444444" # Фон заголовков таблицы.
-            tree_heading_fg = "#FFFFFF" # Цвет текста заголовков таблицы.
-            border_color = "#444444" # Цвет границы.
-            self.dialog_bg = "#282828" # Фон кастомных диалогов.
-            self.dialog_fg = "#E0E0E0" # Цвет текста кастомных диалогов.
-            self.dialog_btn_bg = "#3A3A3A" # Фон кнопок кастомных диалогов.
-            self.dialog_btn_fg = "#E0E0E0" # Цвет текста кнопок кастомных диалогов.
-            self.dialog_error_fg = "#FF6666" # Цвет текста ошибок для темной темы.
-            menu_bg = "#333333" # Фон меню.
-            menu_fg = "#E0E0E0" # Цвет текста меню.
-            menu_active_bg = "#555555" # Фон активного элемента меню.
-            menu_active_fg = "#FFFFFF" # Цвет текста активного элемента меню.
-
-        else:
-            # Цвета для светлой темы.
-            bg = "#F0F0F0"
-            fg = "#222222"
-            entry_bg = "#FFFFFF"
-            entry_fg = "#000000"
-            btn_bg = "#0078D7" 
-            btn_fg = "#FFFFFF"
-            sel_bg = "#ADD8E6" 
-            sel_fg = "#000000"
-            self.log_current_bg = "#FFFFFF"
-            self.log_current_fg = "#222222"
-            tree_bg = "#FFFFFF"
-            tree_fg = "#222222"
-            tree_heading_bg = "#E0E0E0"
-            tree_heading_fg = "#000000"
-            border_color = "#CCCCCC"
-            self.dialog_bg = "#FFFFFF"
-            self.dialog_fg = "#222222"
-            self.dialog_btn_bg = "#E0E0E0"
-            self.dialog_btn_fg = "#222222"
-            self.dialog_error_fg = "#FF0000"
-            menu_bg = "#F0F0F0"
-            menu_fg = "#222222"
-            menu_active_bg = "#ADD8E6"
-            menu_active_fg = "#000000"
-
-        # Применяем глобальные стили.
-        self.configure(bg=bg)
-        self.style.configure(".", background=bg, foreground=fg, font=self.font_main)
-        self.style.configure("TFrame", background=bg)
-        self.style.configure("TLabel", background=bg, foreground=fg)
-        
-        # Стили для обычных кнопок.
-        self.style.configure("TButton", background=btn_bg, foreground=btn_fg, font=self.font_main, borderwidth=0)
-        self.style.map("TButton",
-                        background=[('active', sel_bg), ('pressed', sel_bg)], # Используем sel_bg для активной/нажатой кнопки.
-                        foreground=[('active', sel_fg), ('pressed', sel_fg)],
-                        bordercolor=[('focus', border_color)],
-                        focusthickness=[('focus', 1)])
-
-        # Стили для таблицы (Treeview).
-        self.style.configure("Treeview",
-                              background=tree_bg,
-                              fieldbackground=tree_bg,
-                              foreground=tree_fg,
-                              bordercolor=border_color,
-                              font=self.font_main,
-                              rowheight=25) # Немного увеличиваем высоту строк для лучшей читаемости.
-        self.style.map('Treeview',
-                        background=[('selected', sel_bg)],
-                        foreground=[('selected', sel_fg)])
-        self.style.configure("Treeview.Heading",
-                              background=tree_heading_bg,
-                              foreground=tree_heading_fg,
-                              font=(self.font_main[0], 12, 'bold'))
-        self.style.map("Treeview.Heading",
-                        background=[('active', tree_heading_bg)], # Предотвращаем подсветку при наведении.
-                        foreground=[('active', tree_heading_fg)])
-
-
-        # Стили для полей ввода (Entry).
-        self.style.configure("TEntry",
-                             fieldbackground=entry_bg,
-                             foreground=entry_fg,
-                             bordercolor=border_color,
-                             font=self.font_main)
-        self.style.map("TEntry",
-                       fieldbackground=[('focus', entry_bg)],
-                       foreground=[('focus', entry_fg)])
-
-        # Стили для ScrolledText (лога).
-        if hasattr(self, 'log_text'): # Теперь этот блок будет выполняться при изменении темы
-            self.log_text.config(bg=self.log_current_bg, fg=self.log_current_fg, font=self.font_main)
-        
-        # Обновляем цвета меню, если оно уже создано.
-        if hasattr(self, 'menubar'):
-            self.menubar.config(bg=menu_bg, fg=menu_fg)
-            for menu in [self.file_menu, self.edit_menu, self.settings_menu, self.theme_menu, self.language_menu, self.help_menu]:
-                menu.config(bg=menu_bg, fg=menu_fg,
-                            activebackground=menu_active_bg,
-                            activeforeground=menu_active_fg)
-        
-        # Если это не первоначальная настройка, записываем в лог.
-        if not initial_setup and hasattr(self, 'log_text'):
-            self.log(f"{self.current_lang['theme_menu']}: {self.current_lang[f'theme_{mode}']}", add_timestamp=False)
+        # Обновляем подсказки
+        ToolTip(self.search_entry, self.current_lang["search_syntax_help"])
+        ToolTip(self.update_mods_button, self.current_lang["update_mod_list"])
+        ToolTip(self.generate_ini_button, self.current_lang["generate_ini"])
+        ToolTip(self.clear_log_button, self.current_lang["clear_log"])
+        ToolTip(self.select_all_log_button, self.current_lang["select_all_log"])
+        ToolTip(self.copy_all_log_button, self.current_lang["copy_all_log"])
 
     def create_menu(self):
-        """Создает и настраивает главное меню приложения."""
+        """
+        Создает главное меню приложения с пунктами "Файл", "Правка", "Настройки" и "Помощь".
+        """
         self.menubar = tk.Menu(self)
         self.config(menu=self.menubar)
 
-        # Меню "Файл"
+        # --- Меню "Файл" ---
         self.file_menu = tk.Menu(self.menubar, tearoff=0)
         self.menubar.add_cascade(label=self.current_lang["file_menu"], menu=self.file_menu)
-        self.file_menu.add_command(label=self.current_lang["file_open"], command=self.open_file_dialog)
-        self.file_menu.add_command(label=self.current_lang["file_save"], command=self.generate_modloader_ini)
-        self.file_menu.add_command(label=self.current_lang["file_save_as"], command=lambda: self.save_file_dialog(save_as=True))
+        self.file_menu.add_command(label=self.current_lang["file_open"], command=self.open_ini_file)
+        self.file_menu.add_command(label=self.current_lang["file_save"], command=self.save_ini_file)
+        self.file_menu.add_command(label=self.current_lang["file_save_as"], command=self.save_ini_file_as)
         self.file_menu.add_separator()
         self.file_menu.add_command(label=self.current_lang["file_exit"], command=self.on_closing)
 
-        # Меню "Правка"
+        # --- Меню "Правка" ---
         self.edit_menu = tk.Menu(self.menubar, tearoff=0)
         self.menubar.add_cascade(label=self.current_lang["edit_menu"], menu=self.edit_menu)
         self.edit_menu.add_command(label=self.current_lang["edit_import"], command=self.import_priorities_from_file)
-        self.edit_menu.add_command(label=self.current_lang["edit_export_csv"], command=self.export_priorities_to_csv)
+        self.edit_menu.add_command(label=self.current_lang["edit_export_csv"], command=self.export_to_csv)
         self.edit_menu.add_separator()
         self.edit_menu.add_command(label=self.current_lang["edit_reset_priorities"], command=self.reset_all_priorities)
-        self.edit_menu.add_command(label=self.current_lang["edit_restore_defaults"], command=self.restore_standard_priorities)
+        self.edit_menu.add_command(label=self.current_lang["edit_restore_defaults"], command=self.restore_default_priorities)
         self.edit_menu.add_command(label=self.current_lang["edit_delete_mod"], command=self.delete_selected_mods)
         self.edit_menu.add_command(label=self.current_lang["delete_all_mods"], command=self.delete_all_mods)
 
-        # Меню "Настройки"
+        # --- Меню "Настройки" ---
         self.settings_menu = tk.Menu(self.menubar, tearoff=0)
         self.menubar.add_cascade(label=self.current_lang["settings_menu"], menu=self.settings_menu)
 
         # Подменю "Тема"
         self.theme_menu = tk.Menu(self.settings_menu, tearoff=0)
         self.settings_menu.add_cascade(label=self.current_lang["theme_menu"], menu=self.theme_menu)
-        self.theme_mode.trace_add("write", lambda *args: self.set_theme())
-        self.theme_menu.add_radiobutton(label=self.current_lang["theme_system"], variable=self.theme_mode, value="system")
-        self.theme_menu.add_radiobutton(label=self.current_lang["theme_dark"], variable=self.theme_mode, value="dark")
-        self.theme_menu.add_radiobutton(label=self.current_lang["theme_light"], variable=self.theme_mode, value="light")
+        self.theme_menu.add_radiobutton(label=self.current_lang["theme_system"], variable=self.theme_mode, value="system", command=lambda: self.set_theme("system"))
+        self.theme_menu.add_radiobutton(label=self.current_lang["theme_dark"], variable=self.theme_mode, value="dark", command=lambda: self.set_theme("dark"))
+        self.theme_menu.add_radiobutton(label=self.current_lang["theme_light"], variable=self.theme_mode, value="light", command=lambda: self.set_theme("light"))
 
         # Подменю "Язык"
         self.language_menu = tk.Menu(self.settings_menu, tearoff=0)
         self.settings_menu.add_cascade(label=self.current_lang["language_menu"], menu=self.language_menu)
-        self.language_mode.trace_add("write", lambda *args: self.set_language(self.language_mode.get()))
-        self.language_menu.add_radiobutton(label=self.current_lang["language_en"], variable=self.language_mode, value="en")
-        self.language_menu.add_radiobutton(label=self.current_lang["language_ru"], variable=self.language_mode, value="ru")
+        self.language_menu.add_radiobutton(label=self.current_lang["language_en"], variable=self.language_mode, value="en", command=lambda: self.set_language("en"))
+        self.language_menu.add_radiobutton(label=self.current_lang["language_ru"], variable=self.language_mode, value="ru", command=lambda: self.set_language("ru"))
 
-        self.settings_menu.add_command(label=self.current_lang["settings_modloader_path"], command=self.browse_modloader_path)
+        self.settings_menu.add_separator()
+        self.settings_menu.add_command(label=self.current_lang["settings_modloader_path"], command=self.change_modloader_path)
 
-        # Меню "Помощь"
+        # --- Меню "Помощь" ---
         self.help_menu = tk.Menu(self.menubar, tearoff=0)
         self.menubar.add_cascade(label=self.current_lang["help_menu"], menu=self.help_menu)
-        self.help_menu.add_command(label=self.current_lang["help_about"], command=self.about_program)
-        self.help_menu.add_command(label=self.current_lang["help_author"], command=self.about_author)
+        self.help_menu.add_command(label=self.current_lang["help_about"], command=self.show_about)
+        self.help_menu.add_command(label=self.current_lang["help_author"], command=self.show_author_info)
         self.help_menu.add_command(label=self.current_lang["help_updates"], command=self.check_for_updates)
         self.help_menu.add_command(label=self.current_lang["help_help"], command=self.show_help)
         self.help_menu.add_command(label=self.current_lang["help_contact"], command=self.contact_support)
+
+    def set_theme(self, mode=None, initial_setup=False):
+        """
+        Устанавливает тему приложения (светлая, темная, системная).
+        :param mode: 'light', 'dark', 'system' или None (для использования self.theme_mode.get()).
+        :param initial_setup: Если True, то функция вызывается при первом запуске,
+                              и сообщения в лог не будут записываться, чтобы избежать ошибок.
+        """
+        if mode is None:
+            mode = self.theme_mode.get()
+        else:
+            self.theme_mode.set(mode) # Устанавливаем переменную, чтобы радиокнопки были корректны.
+
+        if mode == "system":
+            if os.name == 'nt' and is_windows_dark_theme():
+                selected_theme = "dark"
+            else:
+                selected_theme = "light"
+        else:
+            selected_theme = mode
+
+        # Определяем цвета в зависимости от выбранной темы
+        if selected_theme == "dark":
+            self.style.theme_use("clam") # 'clam' - это хорошая база для темной темы
+            bg_color = "#2e2e2e"
+            fg_color = "#ffffff"
+            tree_bg = "#3c3c3c"
+            tree_fg = "#ffffff"
+            tree_heading_bg = "#4a4a4a"
+            tree_selected_bg = "#555555"
+            tree_selected_fg = "#ffffff"
+            input_bg = "#4a4a4a"
+            input_fg = "#ffffff"
+            log_bg = "#1e1e1e"
+            log_fg = "#cccccc"
+            button_bg = "#4a4a4a"
+            button_fg = "#ffffff"
+            # Цвета для кастомных диалогов в темной теме
+            self.dialog_bg = "#3c3c3c"
+            self.dialog_fg = "#ffffff"
+            self.dialog_btn_bg = "#555555"
+            self.dialog_btn_fg = "#ffffff"
+            self.dialog_error_fg = "#FF6B6B" # Более мягкий красный для темной темы
+        else: # light theme
+            self.style.theme_use("clam") # 'clam' тоже подходит для светлой темы
+            bg_color = "#f0f0f0"
+            fg_color = "#000000"
+            tree_bg = "#ffffff"
+            tree_fg = "#000000"
+            tree_heading_bg = "#e0e0e0"
+            tree_selected_bg = "#a8d8ff"
+            tree_selected_fg = "#000000"
+            input_bg = "#ffffff"
+            input_fg = "#000000"
+            log_bg = "#ffffff"
+            log_fg = "#333333"
+            button_bg = "#e0e0e0"
+            button_fg = "#000000"
+            # Цвета для кастомных диалогов в светлой теме
+            self.dialog_bg = "#FFFFFF"
+            self.dialog_fg = "#222222"
+            self.dialog_btn_bg = "#E0E0E0"
+            self.dialog_btn_fg = "#222222"
+            self.dialog_error_fg = "#FF0000"
+
+        # Обновляем фон основного окна
+        self.config(bg=bg_color)
+
+        # Конфигурация стилей ttk
+        self.style.configure(".", background=bg_color, foreground=fg_color, font=self.font_main)
+        self.style.configure("TFrame", background=bg_color)
+        self.style.configure("TLabel", background=bg_color, foreground=fg_color)
+        self.style.configure("TButton", background=button_bg, foreground=button_fg, borderwidth=1, focusthickness=3, focuscolor='none')
+        self.style.map("TButton", background=[('active', button_bg)], foreground=[('active', button_fg)]) # Fix for active state
+
+        self.style.configure("TEntry", fieldbackground=input_bg, foreground=input_fg, borderwidth=1)
+        self.style.configure("Treeview",
+                             background=tree_bg,
+                             foreground=tree_fg,
+                             fieldbackground=tree_bg,
+                             rowheight=25)
+        self.style.map("Treeview",
+                       background=[('selected', tree_selected_bg)],
+                       foreground=[('selected', tree_selected_fg)])
+        self.style.configure("Treeview.Heading",
+                             background=tree_heading_bg,
+                             foreground=fg_color,
+                             font=self.font_main)
+        self.style.map("Treeview.Heading",
+                       background=[('active', tree_heading_bg)]) # Prevent heading background change on hover
+
+        # Обновляем цвета лога
+        self.log_current_bg = log_bg
+        self.log_current_fg = log_fg
+        # Проверяем, существует ли self.log_text перед конфигурированием
+        if hasattr(self, 'log_text'):
+            self.log_text.config(bg=self.log_current_bg, fg=self.log_current_fg, insertbackground=self.log_current_fg)
+
+        # Обновляем цвета для виджета Entry
+        if hasattr(self, 'search_entry'):
+            self.search_entry.config(bg=input_bg, fg=input_fg, insertbackground=input_fg)
+
+        # Обновляем цвета для всех кнопок
+        for widget in self.winfo_children():
+            if isinstance(widget, (ttk.Button, tk.Button)):
+                widget.config(bg=button_bg, fg=button_fg)
+            elif isinstance(widget, (ttk.Label, tk.Label)):
+                widget.config(bg=bg_color, fg=fg_color)
+
+        # Обновляем цвета вложенных фреймов
+        if hasattr(self, 'top_frame'):
+            self.top_frame.config(bg=bg_color)
+        if hasattr(self, 'log_frame'):
+            self.log_frame.config(bg=bg_color)
+        if hasattr(self, 'modloader_path_frame'):
+            self.modloader_path_frame.config(bg=bg_color)
+        
+        # Обновляем фон Canvas для анимированной полоски
+        if hasattr(self, 'colorful_line'):
+            self.colorful_line.config(bg=bg_color)
+
+
+        # Сообщение о смене темы (только если это не начальная установка)
+        if not initial_setup:
+            if selected_theme == "dark":
+                theme_name = self.current_lang["theme_dark"]
+            elif selected_theme == "light":
+                theme_name = self.current_lang["theme_light"]
+            else: # Should not happen, but for safety
+                theme_name = self.current_lang["theme_system"]
+            self.log(self.current_lang["theme_changed_to"].format(theme_name), add_timestamp=False)
 
     def create_widgets(self):
         """
         Создает и размещает все основные виджеты пользовательского интерфейса.
         """
-        # Фрейм для поиска и кнопок управления
-        top_frame = ttk.Frame(self, padding="10")
-        top_frame.pack(fill="x", pady=(5, 0))
+        # --- Фрейм для поисковой строки и кнопок ---
+        self.top_frame = ttk.Frame(self)
+        self.top_frame.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
 
-        self.search_label = ttk.Label(top_frame, text=self.current_lang["search_mod"])
-        self.search_label.pack(side="left", padx=(0, 5))
+        self.search_label = ttk.Label(self.top_frame, text=self.current_lang["search_mod"], font=self.font_main)
+        self.search_label.pack(side=tk.LEFT, padx=(0, 5))
 
         self.search_var = tk.StringVar()
-        self.search_entry = ttk.Entry(top_frame, textvariable=self.search_var, width=40)
-        self.search_entry.pack(side="left", expand=True, fill="x", padx=(0, 10))
-        self.search_entry.bind("<KeyRelease>", self.apply_search_filter) # Привязка к событию отпускания клавиши для динамического поиска.
+        self.search_entry = tk.Entry(self.top_frame, textvariable=self.search_var, font=self.font_main, width=40)
+        self.search_entry.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=(0, 10))
+        self.search_entry.bind("<KeyRelease>", self.apply_search_filter)
+        ToolTip(self.search_entry, self.current_lang["search_syntax_help"]) # Добавляем подсказку
 
-        self.update_button = ttk.Button(top_frame, text=self.current_lang["update_mod_list"], command=self.load_mods_and_assign_priorities)
-        self.update_button.pack(side="left", padx=(0, 5))
+        self.update_mods_button = ttk.Button(self.top_frame, text=self.current_lang["update_mod_list"], command=self.load_mods_and_assign_priorities)
+        self.update_mods_button.pack(side=tk.LEFT, padx=(0, 5))
+        ToolTip(self.update_mods_button, self.current_lang["update_mod_list"])
 
-        self.generate_button = ttk.Button(top_frame, text=self.current_lang["generate_ini"], command=self.generate_modloader_ini)
-        self.generate_button.pack(side="left")
+        self.generate_ini_button = ttk.Button(self.top_frame, text=self.current_lang["generate_ini"], command=self.generate_modloader_ini)
+        self.generate_ini_button.pack(side=tk.LEFT)
+        ToolTip(self.generate_ini_button, self.current_lang["generate_ini"])
 
-        # Фрейм для таблицы модов
-        tree_frame = ttk.Frame(self, padding="10")
-        tree_frame.pack(fill="both", expand=True)
+        # --- Treeview для отображения модов и приоритетов ---
+        self.tree_frame = ttk.Frame(self)
+        self.tree_frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=10, pady=5)
 
-        # Создание Treeview (таблицы) для отображения модов
-        self.tree = ttk.Treeview(tree_frame, columns=("mod_name", "priority"), show="headings")
-        self.tree.heading("mod_name", text=self.current_lang["mod_column"])
-        self.tree.heading("priority", text=self.current_lang["priority_column"])
-        self.tree.column("mod_name", width=300, anchor="w")
-        self.tree.column("priority", width=100, anchor="center")
-        self.tree.pack(side="left", fill="both", expand=True)
+        self.tree = ttk.Treeview(self.tree_frame, columns=("mod_name", "priority"), show="headings")
+        self.tree.heading("mod_name", text=self.current_lang["mod_column"], command=lambda: self.sort_treeview("mod_name", False))
+        self.tree.heading("priority", text=self.current_lang["priority_column"], command=lambda: self.sort_treeview("priority", False))
+        self.tree.column("mod_name", width=300, anchor=tk.W)
+        self.tree.column("priority", width=100, anchor=tk.CENTER)
+        self.tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
-        # Скроллбар для таблицы
-        tree_scrollbar = ttk.Scrollbar(tree_frame, orient="vertical", command=self.tree.yview)
-        tree_scrollbar.pack(side="right", fill="y")
-        self.tree.configure(yscrollcommand=tree_scrollbar.set)
+        # Скроллбар для Treeview
+        self.tree_scrollbar = ttk.Scrollbar(self.tree_frame, orient="vertical", command=self.tree.yview)
+        self.tree_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+        self.tree.configure(yscrollcommand=self.tree_scrollbar.set)
 
-        self.tree.bind("<Double-1>", self.on_double_click_tree) # Привязка события двойного клика для редактирования приоритета.
-        self.tree.bind("<Delete>", self.delete_selected_mods_event) # Привязка события нажатия Delete для удаления модов.
+        self.tree.bind("<Double-1>", self.on_item_double_click) # Двойной клик для редактирования.
+        self.tree.bind("<Delete>", lambda e: self.delete_selected_mods()) # Обработка клавиши Delete
 
-        # Фрейм для лога и кнопок управления логом
-        log_frame = ttk.Frame(self, padding="10")
-        log_frame.pack(fill="both", expand=False)
+        # --- Разноцветная полоска ---
+        # Создаем Canvas для отрисовки полоски
+        self.colorful_line = tk.Canvas(self, height=5, bg=self.cget('bg'), highlightthickness=0)
+        self.colorful_line.pack(fill=tk.X, padx=10, pady=5)
+        # Отрисовываем сегменты полоски при изменении размера окна
+        self.colorful_line.bind("<Configure>", self.draw_colorful_line)
 
-        log_buttons_frame = ttk.Frame(log_frame)
-        log_buttons_frame.pack(fill="x", pady=(0, 5))
+        # --- Фрейм для лога ---
+        self.log_frame = ttk.Frame(self)
+        self.log_frame.pack(side=tk.BOTTOM, fill=tk.X, padx=10, pady=5)
 
-        self.log_label = ttk.Label(log_buttons_frame, text=self.current_lang["log_label"])
-        self.log_label.pack(side="left", padx=(0, 5))
+        self.log_label = ttk.Label(self.log_frame, text=self.current_lang["log_label"], font=self.font_main)
+        self.log_label.pack(side=tk.TOP, anchor=tk.W)
 
-        self.clear_log_button = ttk.Button(log_buttons_frame, text=self.current_lang["clear_log"], command=self.clear_log)
-        self.clear_log_button.pack(side="right")
-        
-        self.copy_all_log_button = ttk.Button(log_buttons_frame, text=self.current_lang["copy_all_log"], command=self.copy_log_content)
-        self.copy_all_log_button.pack(side="right", padx=(0, 5))
+        self.log_text = scrolledtext.ScrolledText(self.log_frame, wrap=tk.WORD, height=8, state='disabled',
+                                                 font=("Consolas", 9), relief=tk.FLAT,
+                                                 bg=self.log_current_bg, fg=self.log_current_fg,
+                                                 insertbackground=self.log_current_fg)
+        self.log_text.pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=(5, 0))
 
-        self.select_all_log_button = ttk.Button(log_buttons_frame, text=self.current_lang["select_all_log"], command=self.select_all_log_content)
-        self.select_all_log_button.pack(side="right", padx=(0, 5))
+        # Контекстное меню для лога
+        self.log_context_menu = tk.Menu(self.log_text, tearoff=0)
+        self.log_context_menu.add_command(label=self.current_lang["select_all_log"], command=self.select_all_log)
+        self.log_context_menu.add_command(label=self.current_lang["copy_all_log"], command=self.copy_all_log)
+        self.log_context_menu.add_command(label=self.current_lang["clear_log"], command=self.clear_log)
+        self.log_text.bind("<Button-3>", self.show_log_context_menu)
 
+        # Кнопки управления логом
+        self.log_buttons_frame = ttk.Frame(self.log_frame)
+        self.log_buttons_frame.pack(side=tk.BOTTOM, fill=tk.X, pady=(5, 0))
 
-        self.log_text = scrolledtext.ScrolledText(log_frame, wrap="word", height=10)
-        self.log_text.pack(fill="both", expand=True)
-        # Устанавливаем цвета лога сразу при его создании, используя уже инициализированные шрифты.
-        self.log_text.config(state="disabled", bg=self.log_current_bg, fg=self.log_current_fg, font=self.font_main)
+        self.clear_log_button = ttk.Button(self.log_buttons_frame, text=self.current_lang["clear_log"], command=self.clear_log)
+        self.clear_log_button.pack(side=tk.RIGHT)
+        ToolTip(self.clear_log_button, self.current_lang["clear_log"])
 
-        # Лейбл автора
-        self.author_label = ttk.Label(self, text=self.current_lang["author_label"], font=self.font_small, anchor="center")
-        self.author_label.pack(fill="x", pady=(5, 10))
+        self.copy_all_log_button = ttk.Button(self.log_buttons_frame, text=self.current_lang["copy_all_log"], command=self.copy_all_log)
+        self.copy_all_log_button.pack(side=tk.RIGHT, padx=(0, 5))
+        ToolTip(self.copy_all_log_button, self.current_lang["copy_all_log"])
 
-    def on_double_click_tree(self, event):
-        """
-        Обработчик двойного клика по строке Treeview для редактирования приоритета.
-        """
-        item_id = self.tree.identify_row(event.y)
-        if not item_id:
-            return
+        self.select_all_log_button = ttk.Button(self.log_buttons_frame, text=self.current_lang["select_all_log"], command=self.select_all_log)
+        self.select_all_log_button.pack(side=tk.RIGHT, padx=(0, 5))
+        ToolTip(self.select_all_log_button, self.current_lang["select_all_log"])
 
-        column = self.tree.identify_column(event.x)
-        # Разрешаем редактирование только для колонки "Приоритет" (column #2).
-        if column == "#2": 
-            # Получаем текущие значения мода.
-            mod_data = self.tree.item(item_id, 'values')
-            mod_name = mod_data[0]
-            current_priority = mod_data[1]
+        # Надпись автора
+        self.author_label = ttk.Label(self, text=self.current_lang["author_label"], font=self.font_small)
+        self.author_label.pack(side=tk.BOTTOM, pady=(5, 10))
+        self.author_label.bind("<Button-1>", lambda e: self.contact_support()) # Позволяет кликнуть на автора для связи
 
-            # Создаем всплывающее окно для ввода нового приоритета.
-            self.edit_priority_window = tk.Toplevel(self)
-            self.edit_priority_window.title(localization.get_text("edit_priority_title")) # Использование локализации
-            self.edit_priority_window.transient(self) # Делает окно дочерним по отношению к главному окну.
-            self.edit_priority_window.grab_set() # Блокирует взаимодействие с другими окнами приложения.
-            self.edit_priority_window.focus_set() # Устанавливает фокус на это окно.
+    def draw_colorful_line(self, event=None):
+        """Отрисовывает разноцветную полоску в Canvas."""
+        canvas = self.colorful_line
+        canvas.delete("all")
+        canvas_width = canvas.winfo_width()
+        canvas_height = canvas.winfo_height()
 
-            # Размещаем окно по центру главного окна.
-            self.edit_priority_window.update_idletasks()
-            main_x = self.winfo_x()
-            main_y = self.winfo_y()
-            main_width = self.winfo_width()
-            main_height = self.winfo_height()
+        # Вычисляем ширину каждого сегмента
+        segment_width = canvas_width / self.segment_count
 
-            win_width = self.edit_priority_window.winfo_width()
-            win_height = self.edit_priority_window.winfo_height()
-
-            x = main_x + (main_width // 2) - (win_width // 2)
-            y = main_y + (main_height // 2) - (win_height // 2)
-            self.edit_priority_window.geometry(f"+{x}+{y}")
-
-            # Виджеты внутри всплывающего окна.
-            ttk.Label(self.edit_priority_window, text=f"{localization.get_text('mod_column')}: {mod_name}",
-                      background=self.dialog_bg, foreground=self.dialog_fg).pack(pady=5) # Использование локализации
+        for i in range(self.segment_count):
+            # Вычисляем оттенок (hue) в цветовом пространстве HSL
+            # Нормализуем позицию от 0 до 1, добавляем смещение для анимации
+            normalized_position = i / self.segment_count
+            # Используем 0.5 для диапазона оттенков, чтобы получить более широкий спектр
+            hue = (self.hue_offset + normalized_position * 0.5) % 1.0 
             
-            # Используем Spinbox для выбора приоритета от 0 до 99.
-            self.priority_spinbox = ttk.Spinbox(self.edit_priority_window, from_=0, to=99,
-                                                 width=5, font=self.font_main)
-            self.priority_spinbox.set(current_priority)
-            self.priority_spinbox.pack(pady=5)
-            self.priority_spinbox.focus_set() # Устанавливаем фокус на Spinbox.
-            self.priority_spinbox.bind("<Return>", lambda event: self.save_new_priority(item_id)) # Сохранение по Enter.
-
-            save_button = ttk.Button(self.edit_priority_window, text=localization.get_text("save_button"),
-                                     command=lambda: self.save_new_priority(item_id)) # Использование локализации
-            save_button.pack(pady=5)
-
-            # Применяем стили к всплывающему окну.
-            self.edit_priority_window.configure(bg=self.dialog_bg)
-            # Применение стилей к Spinbox
-            self.style.configure("TSpinbox", fieldbackground=self.dialog_btn_bg, foreground=self.dialog_btn_fg)
-            self.style.map("TSpinbox",
-                            fieldbackground=[('focus', self.dialog_btn_bg)],
-                            foreground=[('focus', self.dialog_btn_fg)])
-
-
-    def save_new_priority(self, item_id):
-        """
-        Сохраняет новый приоритет мода, введенный пользователем.
-        """
-        try:
-            new_priority_str = self.priority_spinbox.get()
-            # Добавлена проверка на пустую строку, чтобы предотвратить ValueError
-            if not new_priority_str:
-                raise ValueError(self.current_lang["priority_value_error"])
+            # Конвертируем HLS (оттенок, светлота, насыщенность) в RGB
+            # Насыщенность 1.0 для ярких цветов, светлота 0.5 для средних
+            r, g, b = colorsys.hls_to_rgb(hue, 0.5, 1.0) 
             
-            new_priority = int(new_priority_str)
-            if not is_valid_priority(new_priority):
-                raise ValueError(self.current_lang["priority_value_error"])
+            # Преобразуем RGB значения (0-1) в шестнадцатеричный формат (0-255)
+            color = f'#{int(r*255):02x}{int(g*255):02x}{int(b*255):02x}'
+            
+            # Координаты сегмента
+            x1 = i * segment_width
+            y1 = 0
+            x2 = (i + 1) * segment_width
+            y2 = canvas_height
+            
+            # Рисуем прямоугольник для сегмента
+            canvas.create_rectangle(x1, y1, x2, y2, fill=color, outline=color)
 
-            # Обновляем приоритет в списке self.mods
-            mod_name = self.tree.item(item_id, 'values')[0]
-            for mod in self.mods:
-                if mod["name"] == mod_name:
-                    mod["priority"] = new_priority
-                    self.log(self.current_lang["priority_changed_log"].format(mod_name, new_priority))
-                    break
+    def animate_colorful_line(self):
+        """
+        Функция анимации, которая обновляет смещение оттенка и перерисовывает полоску.
+        """
+        self.hue_offset = (self.hue_offset + self.animation_speed) % 1.0 # Обновляем смещение оттенка
+        self.draw_colorful_line() # Перерисовываем полоску с новым смещением
 
-            # Обновляем отображение в Treeview
-            self.tree.item(item_id, values=(mod_name, new_priority))
-            self.edit_priority_window.destroy()
-        except ValueError as e:
-            messagebox.showerror(self.current_lang["priority_value_error_title"], str(e),
-                                 parent=self.edit_priority_window) # Привязываем к дочернему окну.
-        except Exception as e:
-            messagebox.showerror(self.current_lang["priority_value_error_title"],
-                                 f"Неизвестная ошибка: {e}", parent=self.edit_priority_window)
-
+        # Планируем следующий кадр анимации через 20 миллисекунд (50 кадров в секунду)
+        self.after(20, self.animate_colorful_line)
 
     def log(self, message, add_timestamp=True):
         """
-        Добавляет сообщение в текстовое поле лога.
-        :param message: Сообщение для добавления.
-        :param add_timestamp: Если True, добавляет временную метку к сообщению.
+        Добавляет сообщение в лог-окно.
+        :param message: Текст сообщения.
+        :param add_timestamp: Если True, добавляет отметку времени к сообщению.
         """
-        self.log_text.config(state="normal") # Разрешаем редактирование для вставки текста.
-        timestamp = datetime.now().strftime("%H:%M:%S")
-        if add_timestamp:
-            self.log_text.insert(tk.END, f"[{timestamp}] {message}\n")
-        else:
-            self.log_text.insert(tk.END, f"{message}\n")
+        self.log_text.config(state='normal') # Включаем режим редактирования.
+        timestamp = datetime.now().strftime("[%H:%M:%S]")
+        log_message = f"{timestamp} {message}\n" if add_timestamp else f"{message}\n"
+        self.log_text.insert(tk.END, log_message)
         self.log_text.see(tk.END) # Прокручиваем лог до конца.
-        self.log_text.config(state="disabled") # Запрещаем редактирование снова.
+        self.log_text.config(state='disabled') # Выключаем режим редактирования.
 
     def clear_log(self):
-        """Очищает содержимое текстового поля лога."""
-        self.log_text.config(state="normal")
+        """Очищает содержимое лог-окна."""
+        self.log_text.config(state='normal')
         self.log_text.delete(1.0, tk.END)
-        self.log_text.config(state="disabled")
-        self.log(self.current_lang["clear_log"], add_timestamp=False)
+        self.log_text.config(state='disabled')
+        self.log(self.current_lang["clear_log"], add_timestamp=False) # Сообщение об очистке
 
-    def select_all_log_content(self):
-        """Выделяет весь текст в логе."""
+    def select_all_log(self):
+        """Выделяет весь текст в лог-окне."""
         self.log_text.tag_add("sel", "1.0", tk.END)
         self.log_text.mark_set(tk.INSERT, "1.0")
         self.log_text.see(tk.INSERT)
 
-    def copy_log_content(self):
-        """Копирует выделенный или весь текст лога в буфер обмена."""
+    def copy_all_log(self):
+        """Копирует весь текст из лог-окна в буфер обмена."""
         try:
-            # Пытаемся скопировать выделенный текст
-            selected_text = self.log_text.selection_get()
             self.clipboard_clear()
-            self.clipboard_append(selected_text)
+            self.clipboard_append(self.log_text.get(1.0, tk.END).strip())
+            self.update() # Обновляем буфер обмена
         except tk.TclError:
-            # Если текст не выделен, копируем весь лог
-            full_text = self.log_text.get(1.0, tk.END).strip()
-            if full_text:
-                self.clipboard_clear()
-                self.clipboard_append(full_text)
-            else:
-                self.log("Лог пуст, нечего копировать.")
-        self.log("Содержимое лога скопировано в буфер обмена.", add_timestamp=False)
+            self.log("Failed to copy to clipboard.", add_timestamp=False)
 
+    def show_log_context_menu(self, event):
+        """Показывает контекстное меню для лога."""
+        try:
+            self.log_context_menu.tk_popup(event.x_root, event.y_root)
+        finally:
+            self.log_context_menu.grab_release()
+
+    def change_modloader_path(self):
+        """
+        Открывает диалог выбора папки для установки нового пути к modloader.
+        """
+        new_path = filedialog.askdirectory(title=self.current_lang["settings_modloader_path"], initialdir=self.modloader_dir)
+        if new_path and os.path.isdir(new_path):
+            self.modloader_dir = new_path
+            self.output_ini_path = os.path.join(self.modloader_dir, OUTPUT_FILE_NAME)
+            self.app_config.set("Paths", "modloader_path", self.modloader_dir)
+            self.save_app_config()
+            self.log(self.current_lang["modloader_path_changed"].format(self.modloader_dir))
+            self.load_mods_and_assign_priorities() # Обновляем список модов с новым путем
+        else:
+            self.log(self.current_lang["modloader_folder_not_found"].format(self.modloader_dir))
 
     def load_mods_and_assign_priorities(self):
         """
-        Загружает моды из указанной папки modloader и назначает им приоритеты.
-        Приоритеты могут быть взяты из custom_priorities, из modloader.ini,
-        из .ini файлов внутри папок модов, или назначены по умолчанию.
+        Сканирует папку modloader, загружает моды и назначает им приоритеты.
+        Приоритеты могут быть взяты из существующего modloader.ini, из ini-файлов модов
+        или назначены по умолчанию.
         """
-        self.log(self.current_lang["loading_mods_from"].format(self.modloader_dir))
-        # Очищаем текущий список модов и Treeview перед загрузкой новых.
-        self.mods = [] 
-        self.tree.delete(*self.tree.get_children()) # Более питонический способ очистки Treeview.
+        self.mods.clear() # Очищаем текущий список модов.
+        self.tree.delete(*self.tree.get_children()) # Очищаем Treeview.
+
+        self.log(self.current_lang["scanning_modloader_folder"].format(self.modloader_dir))
 
         if not os.path.isdir(self.modloader_dir):
             self.log(self.current_lang["modloader_folder_not_found"].format(self.modloader_dir))
             return
 
-        self.log(self.current_lang["scanning_modloader_folder"].format(self.modloader_dir))
-        
-        # Сначала загружаем существующие приоритеты из modloader.ini
-        ini_priorities = self._load_priorities_from_modloader_ini(self.output_ini_path)
+        # Загружаем приоритеты из существующего modloader.ini
+        current_ini_priorities = self._read_ini_priorities(self.output_ini_path)
 
         found_mod_count = 0
         for entry_name in os.listdir(self.modloader_dir):
-            full_path = os.path.join(self.modloader_dir, entry_name)
-            
-            # Игнорируем не-директории и папки, начинающиеся с '.' или '_'
-            if not os.path.isdir(full_path) or entry_name.startswith('.') or entry_name.startswith('_'):
+            entry_path = os.path.join(self.modloader_dir, entry_name)
+
+            # Проверяем, является ли запись папкой и не начинается ли с символа игнорирования
+            if os.path.isdir(entry_path) and not entry_name.startswith(('_', '.')):
+                self.log(self.current_lang["found_mod_folder"].format(entry_name))
+                priority = None
+
+                # 1. Сначала пытаемся взять приоритет из modloader.ini
+                if entry_name in current_ini_priorities:
+                    priority = current_ini_priorities[entry_name]
+                    self.log(self.current_lang["priority_from_mod_ini"].format(priority, entry_name))
+                else:
+                    # 2. Затем ищем modname.ini внутри папки мода
+                    mod_ini_path = os.path.join(entry_path, f"{entry_name}.ini")
+                    if os.path.exists(mod_ini_path):
+                        mod_ini_config = configparser.ConfigParser()
+                        try:
+                            mod_ini_config.read(mod_ini_path, encoding='utf-8')
+                            if 'modloader' in mod_ini_config and 'priority' in mod_ini_config['modloader']:
+                                try:
+                                    priority = int(mod_ini_config['modloader']['priority'])
+                                    if not is_valid_priority(priority):
+                                        self.log(self.current_lang["invalid_priority_value"].format(entry_name, mod_ini_config['modloader']['priority']))
+                                        priority = None # Сбрасываем, если невалидный
+                                except ValueError:
+                                    self.log(self.current_lang["invalid_priority_value"].format(entry_name, mod_ini_config['modloader']['priority']))
+                                    priority = None
+                                if priority is not None:
+                                    self.log(self.current_lang["priority_from_mod_ini"].format(priority, entry_name))
+                        except Exception as e:
+                            self.log(f"⚠️ Error reading mod INI for '{entry_name}': {e}")
+
+                # 3. Если приоритет не найден, используем пользовательские приоритеты
+                if priority is None and entry_name.lower() in custom_priorities:
+                    priority = custom_priorities[entry_name.lower()]
+                    self.log(self.current_lang["priority_auto_assigned"].format(priority, entry_name))
+
+                # 4. Если все еще нет приоритета, назначаем 0 (или любой другой дефолт)
+                if priority is None:
+                    priority = 0
+                    self.log(self.current_lang["priority_auto_assigned"].format(priority, entry_name))
+
+
+                self.mods.append({"name": entry_name, "priority": priority})
+                found_mod_count += 1
+            elif not entry_name.startswith(('_', '.')):
+                # Логируем только те записи, которые не являются папками и не начинаются с игнорируемых символов
                 self.log(self.current_lang["skipping_entry"].format(entry_name))
-                continue
 
-            mod_priority = 0 # Приоритет по умолчанию.
-            
-            # 1. Проверяем custom_priorities (высший приоритет)
-            if entry_name.lower() in custom_priorities:
-                mod_priority = custom_priorities[entry_name.lower()]
-                self.log(self.current_lang["priority_auto_assigned"].format(mod_priority, entry_name))
-            
-            # 2. Проверяем modloader.ini
-            elif entry_name in ini_priorities:
-                mod_priority = ini_priorities[entry_name]
-                self.log(self.current_lang["priority_from_mod_ini"].format(mod_priority, entry_name))
-            
-            # 3. Проверяем .ini файл внутри папки мода
-            else:
-                mod_ini_path = os.path.join(full_path, "modinfo.ini") # Пример имени ini-файла мода.
-                if os.path.exists(mod_ini_path):
-                    mod_ini_config = configparser.ConfigParser()
-                    try:
-                        mod_ini_config.read(mod_ini_path, encoding='utf-8')
-                        if mod_ini_config.has_section("Modloader") and "Priority" in mod_ini_config["Modloader"]:
-                            try:
-                                p_val = int(mod_ini_config["Modloader"]["Priority"])
-                                if is_valid_priority(p_val):
-                                    mod_priority = p_val
-                                else:
-                                    self.log(self.current_lang["invalid_priority_value"].format(entry_name, mod_ini_config["Modloader"]["Priority"]))
-                            except ValueError:
-                                self.log(self.current_lang["invalid_priority_value"].format(entry_name, mod_ini_config["Modloader"]["Priority"]))
-                                # mod_priority остается 0
-                    except Exception as e:
-                        self.log(f"⚠️ Ошибка чтения INI файла мода '{entry_name}': {e}. Приоритет установлен на 0.")
-            
-            self.mods.append({"name": entry_name, "path": full_path, "priority": mod_priority})
-            self.log(self.current_lang["found_mod_folder"].format(entry_name))
-            found_mod_count += 1
-        
         if not self.mods:
-            self.log(self.current_lang["no_valid_mod_folders"])
             self.log(self.current_lang["mods_not_found"].format(self.modloader_dir))
-            # Не вызываем apply_search_filter, так как Treeview уже очищен,
-            # и нет модов для отображения.
-            return
+            self.log(self.current_lang["no_valid_mod_folders"])
+        else:
+            self.log(self.current_lang["mods_loaded"].format(found_mod_count))
 
-        self.log(self.current_lang["mods_loaded"].format(found_mod_count))
-        self.check_priority_conflicts()
-        self.apply_search_filter() # Применяем фильтр после загрузки модов.
+        self.apply_search_filter() # Применяем фильтр для отображения (или отображаем все, если фильтр пуст)
+        self._check_priority_conflicts()
 
-
-    def _load_priorities_from_modloader_ini(self, ini_path):
+    def _read_ini_priorities(self, ini_path):
         """
-        Загружает приоритеты модов из существующего modloader.ini.
-        Вспомогательная функция, вызывается из load_mods_and_assign_priorities.
-        :param ini_path: Путь к файлу modloader.ini.
-        :return: Словарь с приоритетами модов.
+        Читает приоритеты модов из существующего modloader.ini файла.
+        :param ini_path: Путь к modloader.ini.
+        :return: Словарь {mod_name: priority}.
         """
         priorities = {}
+        config = configparser.ConfigParser()
         if os.path.exists(ini_path):
-            config = configparser.ConfigParser()
             try:
                 config.read(ini_path, encoding='utf-8')
-                if "Profiles.Default.Priority" in config:
-                    for mod_name, priority_str in config["Profiles.Default.Priority"].items():
+                if 'Profiles.Default.Priority' in config:
+                    for mod_name, priority_str in config['Profiles.Default.Priority'].items():
                         try:
-                            priority_val = int(priority_str)
-                            if is_valid_priority(priority_val):
-                                priorities[mod_name] = priority_val
+                            priority = int(priority_str)
+                            if is_valid_priority(priority):
+                                priorities[mod_name] = priority
                             else:
                                 self.log(self.current_lang["invalid_priority_value"].format(mod_name, priority_str))
                         except ValueError:
@@ -1140,214 +1167,428 @@ class ModPriorityGUI(tk.Tk):
                     self.log(self.current_lang["no_priority_sections"])
             except Exception as e:
                 self.log(self.current_lang["file_read_error"].format(e))
+        else:
+            self.log(self.current_lang["file_not_found"].format(ini_path))
         return priorities
 
-    def check_priority_conflicts(self):
+    def _check_priority_conflicts(self):
         """
-        Проверяет наличие конфликтов приоритетов (несколько модов с одним и тем же приоритетом).
+        Проверяет наличие конфликтов приоритетов (несколько модов с одинаковым приоритетом)
+        и логирует их.
         """
-        priority_map = {}
+        priority_map = {} # Словарь для хранения {priority: [mod1, mod2, ...]}
         for mod in self.mods:
             priority = mod["priority"]
+            mod_name = mod["name"]
             if priority not in priority_map:
                 priority_map[priority] = []
-            priority_map[priority].append(mod["name"])
-        
+            priority_map[priority].append(mod_name)
+
         conflicts_found = False
-        conflict_messages = []
-        for priority, mod_list in priority_map.items():
-            if len(mod_list) > 1:
-                conflict_messages.append(self.current_lang["priority_conflict_detail"].format(priority, ", ".join(mod_list)))
+        for priority, mods_list in priority_map.items():
+            if len(mods_list) > 1:
+                self.log(self.current_lang["priority_conflict_detail"].format(priority, ", ".join(mods_list)))
                 conflicts_found = True
-        
+
         if conflicts_found:
             self.log(self.current_lang["priority_conflicts_found"])
-            for msg in conflict_messages:
-                self.log(msg)
         else:
             self.log(self.current_lang["no_priority_conflicts"])
 
-    def generate_modloader_ini(self, save_as=False):
+    def on_item_double_click(self, event):
         """
-        Генерирует или сохраняет файл modloader.ini с текущими приоритетами.
-        :param save_as: Если True, открывает диалог "Сохранить как".
+        Обработчик двойного клика по элементу Treeview для редактирования приоритета.
+        """
+        region = self.tree.identify("region", event.x, event.y)
+        if region == "cell":
+            column = self.tree.identify_column(event.x)
+            if column == "#2": # Проверяем, что кликнули по колонке "Приоритет"
+                item_id = self.tree.focus()
+                if item_id:
+                    self.edit_priority(item_id)
+
+    def edit_priority(self, item_id):
+        """
+        Открывает диалоговое окно для редактирования приоритета выбранного мода.
+        :param item_id: ID элемента Treeview, приоритет которого нужно изменить.
+        """
+        current_values = self.tree.item(item_id, 'values')
+        mod_name = current_values[0]
+        current_priority = current_values[1]
+
+        # Создаем кастомный диалог
+        dialog = tk.Toplevel(self)
+        dialog.title(self.current_lang["edit_priority_title"])
+        dialog.transient(self) # Сделать диалог дочерним по отношению к главному окну
+        dialog.grab_set() # Захватить фокус, пока диалог открыт
+        dialog.focus_set()
+
+        # Центрирование диалога относительно родительского окна
+        self.update_idletasks() # Убедимся, что размеры главного окна обновлены
+        parent_x = self.winfo_x()
+        parent_y = self.winfo_y()
+        parent_width = self.winfo_width()
+        parent_height = self.winfo_height()
+
+        dialog_width = 300
+        dialog_height = 120
+        x = parent_x + (parent_width // 2) - (dialog_width // 2)
+        y = parent_y + (parent_height // 2) - (dialog_height // 2)
+        dialog.geometry(f"{dialog_width}x{dialog_height}+{x}+{y}")
+        dialog.resizable(False, False)
+
+        dialog.config(bg=self.dialog_bg)
+
+        ttk.Label(dialog, text=f"{self.current_lang['mod_column']}: {mod_name}",
+                  background=self.dialog_bg, foreground=self.dialog_fg).pack(pady=5)
+        ttk.Label(dialog, text=self.current_lang["priority_column"],
+                  background=self.dialog_bg, foreground=self.dialog_fg).pack()
+
+        priority_var = tk.StringVar(value=str(current_priority))
+        priority_entry = tk.Entry(dialog, textvariable=priority_var, width=10,
+                                   justify='center', font=self.font_main,
+                                   bg=self.log_current_bg, fg=self.log_current_fg,
+                                   insertbackground=self.log_current_fg)
+        priority_entry.pack(pady=5)
+        priority_entry.bind("<Return>", lambda event: save_and_close()) # Сохранить по Enter
+        priority_entry.focus_set()
+
+        error_label = ttk.Label(dialog, text="", foreground=self.dialog_error_fg, background=self.dialog_bg)
+        error_label.pack()
+
+        def save_and_close():
+            try:
+                new_priority = int(priority_var.get())
+                if is_valid_priority(new_priority):
+                    # Находим мод в self.mods и обновляем его приоритет
+                    for mod in self.mods:
+                        if mod["name"] == mod_name:
+                            mod["priority"] = new_priority
+                            break
+                    # Обновляем Treeview
+                    self.tree.item(item_id, values=(mod_name, new_priority))
+                    self.log(self.current_lang["priority_changed_log"].format(mod_name, new_priority))
+                    self._check_priority_conflicts() # Проверяем конфликты после изменения
+                    dialog.destroy()
+                else:
+                    error_label.config(text=self.current_lang["priority_value_error"])
+            except ValueError:
+                error_label.config(text=self.current_lang["priority_value_error"])
+
+        button_frame = ttk.Frame(dialog, style="TFrame")
+        button_frame.pack(pady=10)
+
+        save_button = tk.Button(button_frame, text=self.current_lang["save_button"], command=save_and_close,
+                                 bg=self.dialog_btn_bg, fg=self.dialog_btn_fg, relief=tk.FLAT)
+        save_button.pack(side=tk.LEFT, padx=5)
+
+        cancel_button = tk.Button(button_frame, text=self.current_lang["no_button"], command=dialog.destroy,
+                                   bg=self.dialog_btn_bg, fg=self.dialog_btn_fg, relief=tk.FLAT)
+        cancel_button.pack(side=tk.LEFT, padx=5)
+
+        self.wait_window(dialog) # Ждем закрытия диалога
+
+    def sort_treeview(self, col, reverse):
+        """
+        Сортирует Treeview по выбранной колонке.
+        :param col: Имя колонки для сортировки.
+        :param reverse: True для обратной сортировки, False для прямой.
+        """
+        l = [(self.tree.set(k, col), k) for k in self.tree.get_children('')]
+        # Для числовых колонок (приоритет) сортируем как числа
+        if col == "priority":
+            l.sort(key=lambda t: int(t[0]), reverse=reverse)
+        else:
+            l.sort(key=lambda t: t[0].lower(), reverse=reverse) # Для текстовых колонок
+
+        # Переупорядочиваем элементы в Treeview
+        for index, (val, k) in enumerate(l):
+            self.tree.move(k, '', index)
+
+        # Обновляем заголовок колонки для указания направления сортировки
+        self.tree.heading(col, command=lambda: self.sort_treeview(col, not reverse))
+
+    def apply_search_filter(self, event=None):
+        """
+        Применяет фильтр к списку модов на основе введенного поискового запроса.
+        Поддерживает операторы ИЛИ (|), НЕ (-) и поиск по приоритету (p:).
+        """
+        query = self.search_var.get().strip()
+        self.filtered_mods = []
+        self.tree.delete(*self.tree.get_children()) # Очищаем Treeview
+
+        if not query:
+            self.filtered_mods = list(self.mods) # Если запрос пуст, показываем все моды.
+        else:
+            try:
+                # Разбираем запрос: отдельные условия разделены пробелами,
+                # кроме операторов ИЛИ, которые объединяют.
+                # Сначала разделим по ИЛИ, затем внутри каждого сегмента по пробелам
+                or_terms = [term.strip() for term in query.split('|')]
+                parsed_queries = []
+                for or_term in or_terms:
+                    and_not_terms = [t.strip() for t in or_term.split(' ') if t.strip()]
+                    includes = [t for t in and_not_terms if not t.startswith('-') and not t.lower().startswith('p:')]
+                    excludes = [t[1:] for t in and_not_terms if t.startswith('-')]
+                    priority_filters = [t for t in and_not_terms if t.lower().startswith('p:')]
+                    parsed_queries.append({'includes': includes, 'excludes': excludes, 'priority_filters': priority_filters})
+
+                for mod in self.mods:
+                    mod_name_lower = mod["name"].lower()
+                    mod_priority = mod["priority"]
+                    
+                    is_match = False
+                    for pq in parsed_queries:
+                        # Проверка "ИЛИ" условий
+                        current_or_match = True
+
+                        # Проверка "И" (включающие условия)
+                        if pq['includes']:
+                            current_or_match = all(inc.lower() in mod_name_lower for inc in pq['includes'])
+
+                        # Проверка "НЕ" (исключающие условия)
+                        if current_or_match and pq['excludes']:
+                            current_or_match = not any(exc.lower() in mod_name_lower for exc in pq['excludes'])
+
+                        # Проверка фильтров приоритетов
+                        if current_or_match and pq['priority_filters']:
+                            priority_match = True
+                            for p_filter in pq['priority_filters']:
+                                try:
+                                    operator_value = p_filter[2:] # p:>50 -> >50
+                                    if '>' in operator_value:
+                                        op, val_str = operator_value.split('>')
+                                        val = int(val_str)
+                                        if not (mod_priority > val):
+                                            priority_match = False
+                                            break
+                                    elif '<' in operator_value:
+                                        op, val_str = operator_value.split('<')
+                                        val = int(val_str)
+                                        if not (mod_priority < val):
+                                            priority_match = False
+                                            break
+                                    elif '=' in operator_value: # Exact match
+                                        op, val_str = operator_value.split('=')
+                                        val = int(val_str)
+                                        if not (mod_priority == val):
+                                            priority_match = False
+                                            break
+                                    else: # Just a number means exact match
+                                        val = int(operator_value)
+                                        if not (mod_priority == val):
+                                            priority_match = False
+                                            break
+                                except ValueError:
+                                    self.log(self.current_lang["invalid_search_syntax"], add_timestamp=False)
+                                    return # Exit if syntax is bad
+                            current_or_match = current_or_match and priority_match
+
+                        if current_or_match:
+                            is_match = True
+                            break # Match found for this OR clause
+
+                    if is_match:
+                        self.filtered_mods.append(mod)
+
+            except Exception as e:
+                self.log(self.current_lang["invalid_search_syntax"], add_timestamp=False)
+                # print(f"Search parsing error: {e}") # For debugging
+                self.filtered_mods = list(self.mods) # Show all on error
+                return
+
+
+        # Обновляем Treeview с отфильтрованными модами
+        for mod in self.filtered_mods:
+            self.tree.insert("", tk.END, values=(mod["name"], mod["priority"]))
+
+        self.log(self.current_lang["search_applied"].format(query, len(self.filtered_mods)))
+
+    def generate_modloader_ini(self):
+        """
+        Генерирует файл modloader.ini на основе текущих приоритетов модов.
         """
         if not self.mods:
-            messagebox.showinfo(self.current_lang["info_title"], self.current_lang["no_mods_to_generate"]) # Использование локализации
+            self.log(self.current_lang["no_mods_to_generate"])
             return
 
-        target_path = self.output_ini_path
-        if save_as:
-            file_path = filedialog.asksaveasfilename(
-                defaultextension=".ini",
-                filetypes=[("INI files", "*.ini"), ("All files", "*.*")],
-                initialfile=OUTPUT_FILE_NAME,
-                title=self.current_lang["file_save_as"]
-            )
-            if file_path:
-                target_path = file_path
-            else:
-                return # Пользователь отменил сохранение.
-
-        config = configparser.ConfigParser()
-        # Создаем секцию, если ее нет.
-        if not config.has_section("Profiles.Default.Priority"):
-            config.add_section("Profiles.Default.Priority")
-
-        for mod in self.mods:
-            config["Profiles.Default.Priority"][mod["name"]] = str(mod["priority"])
-
-        # Создаем резервную копию, если файл уже существует.
-        if os.path.exists(target_path):
-            backup_path = target_path + ".bak"
+        # Создаем резервную копию, если файл существует
+        if os.path.exists(self.output_ini_path):
+            backup_path = os.path.join(self.modloader_dir, BACKUP_FILE_NAME)
             try:
-                shutil.copy2(target_path, backup_path)
-                self.log(self.current_lang["backup_created"].format(backup_path))
+                shutil.copyfile(self.output_ini_path, backup_path)
+                self.log(self.current_lang["backup_created"].format(BACKUP_FILE_NAME))
             except Exception as e:
                 self.log(self.current_lang["backup_error"].format(e))
 
+        config = configparser.ConfigParser()
+        # Добавляем опцию allow_no_value для секций без значений, если это нужно.
+        # config = configparser.ConfigParser(allow_no_value=True)
+
+        # Создаем секцию для приоритетов
+        config['Profiles.Default.Priority'] = {}
+        for mod in self.mods:
+            # Преобразуем имя мода, чтобы избежать проблем с ini-форматом, если нужно
+            safe_mod_name = mod["name"].replace('\\', '/') # Пример: замена бэкслэшей
+            config['Profiles.Default.Priority'][safe_mod_name] = str(mod["priority"])
+
+        # Создаем другие стандартные секции, если они отсутствуют
+        if 'Profiles.Default.Plugins' not in config:
+            config['Profiles.Default.Plugins'] = {}
+        if 'Profiles.Default' not in config:
+            config['Profiles.Default'] = {}
+            config['Profiles.Default']['name'] = 'Default'
+
         try:
-            # Создаем директорию, если она не существует.
-            os.makedirs(os.path.dirname(target_path), exist_ok=True)
-            with open(target_path, 'w', encoding='utf-8') as configfile:
+            with open(self.output_ini_path, 'w', encoding='utf-8') as configfile:
                 config.write(configfile)
-            self.log(self.current_lang["file_saved_success"].format(target_path))
-            messagebox.showinfo(self.current_lang["file_save"], self.current_lang["file_saved_info"].format(os.path.basename(target_path)))
+            self.log(self.current_lang["file_saved_success"].format(OUTPUT_FILE_NAME))
         except Exception as e:
             self.log(self.current_lang["file_save_error"].format(e))
-            messagebox.showerror(self.current_lang["file_save_error"], self.current_lang["file_save_error_details"].format(e))
+            self.show_message(self.current_lang["file_save_error_title"],
+                              self.current_lang["file_save_error_details"].format(e), "error")
 
-    def open_file_dialog(self):
+    def open_ini_file(self):
         """
-        Открывает диалоговое окно для выбора INI файла для импорта приоритетов.
+        Открывает INI файл, позволяет выбрать путь к нему.
         """
         file_path = filedialog.askopenfilename(
-            defaultextension=".ini",
-            filetypes=[("INI files", "*.ini"), ("All files", "*.*")],
-            title=self.current_lang["open_ini_file_title"]
+            title=self.current_lang["open_ini_file_title"],
+            filetypes=(("INI files", "*.ini"), ("All files", "*.*")),
+            initialdir=self.modloader_dir
         )
         if file_path:
             self.import_priorities_from_file(file_path)
 
-    def save_file_dialog(self, save_as=False):
+    def save_ini_file(self):
         """
-        Сохраняет файл modloader.ini, используя диалог сохранения, если save_as=True.
-        Эта функция обертка для generate_modloader_ini.
+        Сохраняет текущие приоритеты в INI файл (modloader.ini по текущему пути).
         """
-        self.generate_modloader_ini(save_as=save_as)
+        self.generate_modloader_ini()
+
+    def save_ini_file_as(self):
+        """
+        Сохраняет текущие приоритеты в новый INI файл, позволяя выбрать путь.
+        """
+        file_path = filedialog.asksaveasfilename(
+            title=self.current_lang["file_save_as"],
+            defaultextension=".ini",
+            filetypes=(("INI files", "*.ini"), ("All files", "*.*")),
+            initialdir=self.modloader_dir
+        )
+        if file_path:
+            self.output_ini_path = file_path # Обновляем путь сохранения
+            self.generate_modloader_ini()
 
     def import_priorities_from_file(self, file_path=None):
         """
-        Импортирует приоритеты из выбранного INI файла.
+        Импортирует приоритеты из указанного INI файла.
         :param file_path: Путь к файлу для импорта. Если None, открывается диалог выбора файла.
         """
-        if file_path is None:
+        if not file_path:
             file_path = filedialog.askopenfilename(
-                defaultextension=".ini",
-                filetypes=[("INI files", "*.ini"), ("All files", "*.*")],
-                title=self.current_lang["edit_import"]
+                title=self.current_lang["edit_import"],
+                filetypes=(("INI files", "*.ini"), ("All files", "*.*")),
+                initialdir=self.modloader_dir
             )
-            if not file_path:
-                return # Пользователь отменил.
-
-        if not os.path.exists(file_path):
-            self.log(self.current_lang["file_not_found"].format(file_path))
-            messagebox.showerror(self.current_lang["file_read_error"], self.current_lang["file_not_found"].format(file_path))
+        if not file_path:
             return
 
         config = configparser.ConfigParser()
         try:
             config.read(file_path, encoding='utf-8')
-            
-            if "Profiles.Default.Priority" not in config:
+            if 'Profiles.Default.Priority' in config:
+                imported_priorities = {}
+                for mod_name, priority_str in config['Profiles.Default.Priority'].items():
+                    try:
+                        priority = int(priority_str)
+                        if is_valid_priority(priority):
+                            imported_priorities[mod_name] = priority
+                        else:
+                            self.log(self.current_lang["invalid_priority_value"].format(mod_name, priority_str))
+                    except ValueError:
+                        self.log(self.current_lang["invalid_priority_value"].format(mod_name, priority_str))
+
+                # Применяем импортированные приоритеты к текущим модам
+                for mod in self.mods:
+                    if mod["name"] in imported_priorities:
+                        mod["priority"] = imported_priorities[mod["name"]]
+                self.apply_search_filter() # Обновляем Treeview
+                self._check_priority_conflicts()
+                self.log(self.current_lang["priorities_imported"].format(os.path.basename(file_path)))
+            else:
                 self.log(self.current_lang["no_priority_sections"])
-                messagebox.showinfo(self.current_lang["edit_import"], self.current_lang["no_priority_sections"])
-                return
-
-            imported_count = 0
-            for mod_name, priority_str in config["Profiles.Default.Priority"].items():
-                try:
-                    priority = int(priority_str)
-                    if not is_valid_priority(priority):
-                        raise ValueError("Invalid priority range")
-                    
-                    # Обновляем приоритет для существующего мода или добавляем новый.
-                    # Поиск мода в списке self.mods
-                    mod_found = next((mod for mod in self.mods if mod["name"].lower() == mod_name.lower()), None)
-                    if mod_found:
-                        mod_found["priority"] = priority
-                    else:
-                        # Если мод не найден в текущем списке, добавляем его.
-                        # path может быть пустым, если мод не был найден в modloader_dir.
-                        self.mods.append({"name": mod_name, "path": "", "priority": priority}) 
-                    imported_count += 1
-                except ValueError:
-                    self.log(self.current_lang["invalid_priority_value"].format(mod_name, priority_str))
-            
-            self.apply_search_filter() # Обновляем отображение в Treeview.
-            self.check_priority_conflicts() # Проверяем конфликты после импорта.
-            self.log(self.current_lang["priorities_imported"].format(os.path.basename(file_path)))
-            messagebox.showinfo(self.current_lang["edit_import"], self.current_lang["priorities_imported"].format(os.path.basename(file_path)))
-
+                self.show_message(self.current_lang["info_title"], self.current_lang["no_priority_sections"], "info")
         except Exception as e:
             self.log(self.current_lang["file_read_error"].format(e))
-            messagebox.showerror(self.current_lang["file_read_error"], f"Не удалось прочитать файл:\n{e}")
+            self.show_message(self.current_lang["priority_value_error_title"],
+                              self.current_lang["file_read_error"].format(e), "error")
 
-    def export_priorities_to_csv(self):
+    def export_to_csv(self):
         """
         Экспортирует текущие приоритеты модов в CSV файл.
         """
         if not self.mods:
-            messagebox.showinfo(self.current_lang["info_title"], self.current_lang["no_mods_to_export"]) # Использование локализации
             self.log(self.current_lang["no_mods_to_export"])
+            self.show_message(self.current_lang["info_title"], self.current_lang["no_mods_to_export"], "info")
             return
 
         file_path = filedialog.asksaveasfilename(
+            title=self.current_lang["edit_export_csv"],
             defaultextension=".csv",
-            filetypes=[("CSV files", "*.csv"), ("All files", "*.*")],
-            initialfile="mod_priorities.csv",
-            title=self.current_lang["edit_export_csv"]
+            filetypes=(("CSV files", "*.csv"), ("All files", "*.*")),
+            initialdir=self.program_root_dir # Экспортируем в корневую папку программы
         )
         if file_path:
             try:
                 with open(file_path, 'w', newline='', encoding='utf-8') as csvfile:
-                    fieldnames = ["Mod Name", "Priority"]
+                    fieldnames = ['Mod Name', 'Priority']
                     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
                     writer.writeheader()
                     for mod in self.mods:
-                        writer.writerow({"Mod Name": mod["name"], "Priority": mod["priority"]})
-                self.log(self.current_lang["export_csv_complete"].format(file_path))
-                messagebox.showinfo(self.current_lang["edit_export_csv"], self.current_lang["export_csv_info"].format(os.path.basename(file_path)))
+                        writer.writerow({'Mod Name': mod["name"], 'Priority': mod["priority"]})
+                self.log(self.current_lang["export_csv_complete"].format(os.path.basename(file_path)))
+                self.show_message(self.current_lang["info_title"],
+                                  self.current_lang["export_csv_info"].format(os.path.basename(file_path)), "info")
             except Exception as e:
                 self.log(self.current_lang["export_csv_error"].format(e))
-                messagebox.showerror(self.current_lang["export_csv_error"], self.current_lang["export_csv_error_details"].format(e))
+                self.show_message(self.current_lang["priority_value_error_title"],
+                                  self.current_lang["export_csv_error_details"].format(e), "error")
 
     def reset_all_priorities(self):
         """
-        Сбрасывает приоритеты всех модов на 0 после подтверждения.
+        Сбрасывает приоритеты всех модов на 0.
         """
-        if messagebox.askyesno(self.current_lang["reset_priorities_confirm_title"], self.current_lang["reset_priorities_confirm"]):
+        if not self.mods:
+            return
+
+        if self.show_confirmation(self.current_lang["reset_priorities_confirm_title"],
+                                  self.current_lang["reset_priorities_confirm"]):
             for mod in self.mods:
                 mod["priority"] = 0
-            self.apply_search_filter() # Обновляем отображение.
+            self.apply_search_filter() # Обновляем Treeview
+            self._check_priority_conflicts()
             self.log(self.current_lang["priorities_reset"])
-            self.check_priority_conflicts() # Проверяем конфликты после сброса.
 
-    def restore_standard_priorities(self):
+    def restore_default_priorities(self):
         """
-        Восстанавливает стандартные приоритеты, используя custom_priorities,
-        затем modloader.ini, затем .ini мода, затем 0.
+        Восстанавливает приоритеты модов на основе custom_priorities.
         """
-        if messagebox.askyesno(self.current_lang["restore_defaults_confirm_title"], self.current_lang["restore_defaults_confirm"]):
-            self.load_mods_and_assign_priorities() # Перезагружаем моды для восстановления приоритетов.
+        if not self.mods:
+            return
+
+        if self.show_confirmation(self.current_lang["restore_defaults_confirm_title"],
+                                  self.current_lang["restore_defaults_confirm"]):
+            for mod in self.mods:
+                mod_name_lower = mod["name"].lower()
+                if mod_name_lower in custom_priorities:
+                    mod["priority"] = custom_priorities[mod_name_lower]
+                else:
+                    mod["priority"] = 0 # Сброс для тех, которых нет в custom_priorities
+            self.apply_search_filter() # Обновляем Treeview
+            self._check_priority_conflicts()
             self.log(self.current_lang["priorities_restored"])
-
-
-    def delete_selected_mods_event(self, event=None):
-        """
-        Обработчик события нажатия клавиши Delete для удаления выбранных модов.
-        """
-        self.delete_selected_mods()
 
     def delete_selected_mods(self):
         """
@@ -1355,245 +1596,173 @@ class ModPriorityGUI(tk.Tk):
         """
         selected_items = self.tree.selection()
         if not selected_items:
-            messagebox.showinfo(self.current_lang["info_title"], self.current_lang["no_mods_selected_for_deletion"]) # Использование локализации
+            self.log(self.current_lang["no_mods_selected_for_deletion"])
+            self.show_message(self.current_lang["info_title"], self.current_lang["no_mods_selected_for_deletion"], "info")
             return
 
-        mods_to_delete_names = [self.tree.item(item_id, 'values')[0] for item_id in selected_items]
+        mod_names_to_delete = []
+        for item_id in selected_items:
+            mod_names_to_delete.append(self.tree.item(item_id, 'values')[0])
 
-        if len(mods_to_delete_names) == 1:
-            confirm_message = self.current_lang["mod_deleted_confirm"].format(mods_to_delete_names[0])
+        if len(mod_names_to_delete) == 1:
+            confirm_message = self.current_lang["mod_deleted_confirm"].format(mod_names_to_delete[0])
         else:
-            confirm_message = self.current_lang["multiple_mods_deleted_confirm"].format(len(mods_to_delete_names))
+            confirm_message = self.current_lang["multiple_mods_deleted_confirm"].format(len(mod_names_to_delete))
 
-        if messagebox.askyesno(self.current_lang["mod_deleted_confirm_title"], confirm_message):
-            # Удаляем моды из основного списка self.mods
-            self.mods = [mod for mod in self.mods if mod["name"] not in mods_to_delete_names]
-            
-            # Обновляем отображение в Treeview
-            self.apply_search_filter() 
-            self.log(self.current_lang["mod_deleted_count"].format(len(mods_to_delete_names)))
-            for mod_name in mods_to_delete_names:
-                self.log(self.current_lang["mod_deleted_log"].format(mod_name))
+        if self.show_confirmation(self.current_lang["mod_deleted_confirm_title"], confirm_message):
+            self.mods = [mod for mod in self.mods if mod["name"] not in mod_names_to_delete]
+            self.apply_search_filter() # Обновляем Treeview
+            self._check_priority_conflicts()
+            self.log(self.current_lang["mod_deleted_count"].format(len(mod_names_to_delete)))
 
     def delete_all_mods(self):
         """
-        Удаляет все моды из списка после подтверждения.
+        Удаляет все моды из списка.
         """
         if not self.mods:
-            messagebox.showinfo(self.current_lang["info_title"], self.current_lang["no_mods_to_generate"]) # Использование локализации
             return
 
-        if messagebox.askyesno(self.current_lang["delete_all_mods_confirm_title"], self.current_lang["delete_all_mods_confirm"]):
-            self.mods = [] # Очищаем список модов.
-            self.apply_search_filter() # Обновляем отображение.
+        if self.show_confirmation(self.current_lang["delete_all_mods_confirm_title"],
+                                  self.current_lang["delete_all_mods_confirm"]):
+            self.mods.clear()
+            self.apply_search_filter() # Обновляем Treeview
             self.log(self.current_lang["all_mods_deleted_log"])
 
-    def browse_modloader_path(self):
-        """
-        Открывает диалоговое окно для выбора папки modloader и сохраняет путь.
-        """
-        folder_selected = filedialog.askdirectory(title=self.current_lang["settings_modloader_path"])
-        if folder_selected:
-            self.modloader_dir = folder_selected
-            self.output_ini_path = os.path.join(self.modloader_dir, OUTPUT_FILE_NAME)
-            self.app_config.set("Paths", "modloader_path", self.modloader_dir)
-            self.save_app_config()
-            self.log(self.current_lang["modloader_path_changed"].format(self.modloader_dir))
-            self.load_mods_and_assign_priorities() # Перезагружаем моды из нового пути.
-
-    def about_program(self):
+    def show_about(self):
         """Показывает информацию о программе."""
-        messagebox.showinfo(self.current_lang["about_title"], self.current_lang["about_message"])
+        self.show_message(self.current_lang["about_title"], self.current_lang["about_message"], "info")
 
-    def about_author(self):
+    def show_author_info(self):
         """Показывает информацию об авторе."""
-        messagebox.showinfo(self.current_lang["author_title"], self.current_lang["author_message"])
+        self.show_message(self.current_lang["author_title"], self.current_lang["author_message"], "info")
 
     def check_for_updates(self):
-        """Проверяет наличие обновлений."""
-        # В реальном приложении здесь будет логика проверки версии на GitHub/сервере.
-        # Для примера просто выводим сообщение.
-        messagebox.showinfo(self.current_lang["updates_title"], self.current_lang["updates_message"])
-        # Можно добавить открытие ссылки на GitHub Releases:
-        # webbrowser.open(GITHUB_REPO_URL)
+        """Проверяет наличие обновлений на GitHub."""
+        try:
+            webbrowser.open_new_tab(GITHUB_REPO_URL)
+            self.log(self.current_lang["updates_message"].format(APP_VERSION))
+        except Exception as e:
+            self.log(f"Failed to open URL: {e}")
 
     def show_help(self):
         """Показывает справку по использованию программы."""
-        messagebox.showinfo(self.current_lang["help_title"], self.current_lang["help_message"])
+        self.show_message(self.current_lang["help_title"], self.current_lang["help_message"], "info")
 
     def contact_support(self):
         """Открывает почтовый клиент для связи с поддержкой."""
         subject = self.current_lang["contact_support_subject"]
-        body = f"\n\n--- Information for Support ---\nApp Version: {APP_VERSION}\nOS: {sys.platform}\n"
-        webbrowser.open(f"mailto:{AUTHOR_EMAIL}?subject={subject}&body={body}")
+        body = f"Hello, I have a question about GTA SA Modloader Priority Editor v{APP_VERSION}."
+        mailto_url = f"mailto:{AUTHOR_EMAIL}?subject={subject}&body={body}"
+        try:
+            webbrowser.open_new_tab(mailto_url)
+        except Exception as e:
+            self.log(f"Failed to open email client: {e}")
+            self.show_message(self.current_lang["priority_value_error_title"],
+                              f"Could not open email client. Please contact {AUTHOR_EMAIL} directly.", "error")
 
-    def parse_search_query(self, query):
+    def show_message(self, title, message, type="info"):
         """
-        Парсит поисковый запрос, разбивая его на включающие, исключающие и приоритетные условия.
-        Возвращает список словарей, каждый из которых описывает условие поиска.
-        Примеры синтаксиса:
-        - "mod1 mod2": включает 'mod1' И 'mod2' (по умолчанию AND для пробелов)
-        - "mod1 | mod2": включает 'mod1' ИЛИ 'mod2'
-        - "-mod3": исключает 'mod3'
-        - "p:>50": приоритет больше 50
-        - "p:=20": приоритет равен 20
+        Показывает кастомное сообщение или ошибку.
+        :param title: Заголовок окна.
+        :param message: Сообщение.
+        :param type: 'info', 'warning', 'error' для настройки цветов.
         """
-        terms = []
-        # Регулярное выражение для разделения запроса:
-        # Ищем либо слова/фразы в кавычках, либо комбинации с '|', либо одиночные слова,
-        # либо условия приоритета (p:операторчисло).
-        parts = re.findall(r'"([^"]*)"|(\S*p:[<>=!]+\d+)\S*|(\S+)', query.lower())
+        msg_box = tk.Toplevel(self)
+        msg_box.title(title)
+        msg_box.transient(self)
+        msg_box.grab_set()
+        msg_box.focus_set()
 
-        for p_quoted, p_priority, p_word in parts:
-            if p_quoted: # Обработка фраз в кавычках (если бы они были нужны для "AND" поиска)
-                terms.append({'type': 'include', 'value': p_quoted})
-            elif p_priority: # Обработка условий приоритета
-                priority_part = p_priority[2:] # Удаляем 'p:'
-                match = re.match(r'([<>=!]+)(\d+)', priority_part)
-                if match:
-                    operator = match.group(1)
-                    value = int(match.group(2))
-                    terms.append({'type': 'priority', 'operator': operator, 'value': value})
-                else:
-                    self.log(self.current_lang["invalid_search_syntax"])
-                    return [] # Возвращаем пустой список, если синтаксис приоритета неверен.
-            elif p_word: # Обработка обычных слов или OR-условий
-                if p_word.startswith('-'): # Исключающий термин
-                    terms.append({'type': 'exclude', 'value': p_word[1:]})
-                elif '|' in p_word: # OR-условие
-                    or_values = [v.strip() for v in p_word.split('|') if v.strip()]
-                    if or_values:
-                        terms.append({'type': 'include_or', 'values': or_values})
-                else: # Обычный включающий термин
-                    terms.append({'type': 'include', 'value': p_word})
-        return terms
+        self.update_idletasks()
+        parent_x = self.winfo_x()
+        parent_y = self.winfo_y()
+        parent_width = self.winfo_width()
+        parent_height = self.winfo_height()
 
+        msg_width = 350
+        msg_height = 150
+        x = parent_x + (parent_width // 2) - (msg_width // 2)
+        y = parent_y + (parent_height // 2) - (msg_height // 2)
+        msg_box.geometry(f"{msg_width}x{msg_height}+{x}+{y}")
+        msg_box.resizable(False, False)
 
-    def apply_search_filter(self, event=None):
-        """
-        Применяет фильтр поиска к списку модов и обновляет Treeview.
-        """
-        search_query = self.search_var.get().strip()
-        self.filtered_mods = []
+        msg_box.config(bg=self.dialog_bg)
 
-        # Очищаем Treeview перед отображением отфильтрованных результатов.
-        self.tree.delete(*self.tree.get_children())
-
-        if not search_query:
-            # Если строка поиска пуста, показываем все моды.
-            self.filtered_mods = sorted(self.mods, key=lambda x: x['name'].lower())
-            for mod in self.filtered_mods:
-                self.tree.insert("", "end", values=(mod["name"], mod["priority"]))
-            self.log(f"Поиск сброшен. Отображено модов: {len(self.filtered_mods)}.")
-            return
-
-        parsed_terms = self.parse_search_query(search_query)
-        if not parsed_terms: # Если парсинг не удался (например, из-за неверного синтаксиса).
-            # Сообщение об ошибке уже будет в логе из parse_search_query
-            return
-
-        # Фильтруем моды
-        for mod in self.mods:
-            if self._mod_matches_search_terms(mod, parsed_terms):
-                self.filtered_mods.append(mod)
-        
-        # Сортируем отфильтрованные моды по имени.
-        self.filtered_mods.sort(key=lambda x: x['name'].lower())
-
-        # Вставляем отфильтрованные моды в Treeview
-        for mod in self.filtered_mods:
-            self.tree.insert("", "end", values=(mod["name"], mod["priority"]))
-        
-        self.log(self.current_lang["search_applied"].format(search_query, len(self.filtered_mods)))
-
-    def _mod_matches_search_terms(self, mod, search_terms):
-        """
-        Проверяет, соответствует ли мод заданным поисковым условиям.
-        :param mod: Словарь с данными мода (имя, приоритет).
-        :param search_terms: Список спарсенных поисковых условий.
-        :return: True, если мод соответствует всем условиям, иначе False.
-        """
-        mod_name_lower = mod['name'].lower()
-        mod_priority = mod['priority']
-
-        # Флаги для отслеживания наличия и соответствия различных типов условий
-        has_direct_includes = False # Есть ли обычные включающие условия (не OR)
-        direct_includes_match = True # Соответствуют ли все обычные включающие условия
-        
-        has_or_includes = False # Есть ли OR-условия
-        or_includes_match = True # Соответствует ли хотя бы одно из OR-условий (по умолчанию True, если OR нет)
-
-        for term in search_terms:
-            if term['type'] == 'include':
-                has_direct_includes = True
-                if term['value'] not in mod_name_lower:
-                    direct_includes_match = False
-                    break # Не соответствует обычному включающему условию
-            elif term['type'] == 'exclude':
-                if term['value'] in mod_name_lower:
-                    return False # Мод содержит исключающий термин
-            elif term['type'] == 'priority':
-                if not self._filter_priority(mod_priority, term):
-                    return False # Приоритет не соответствует
-            elif term['type'] == 'include_or':
-                has_or_includes = True
-                # Для OR-условий нужно, чтобы хотя бы один термин совпал.
-                # Если ни один не совпал, то or_includes_match станет False.
-                if not any(or_value in mod_name_lower for or_value in term['values']):
-                    or_includes_match = False
-                    # Если OR-условие не совпало, и это было единственное OR-условие,
-                    # или если оно было частью группы OR-условий, которые все должны быть удовлетворены,
-                    # то мод не подходит.
-                    # Т.е. если есть 'A | B' И 'C | D', то мод должен соответствовать 'A' или 'B' И 'C' или 'D'.
-                    # Поэтому, если одно OR-условие не соответствует, то мод не подходит.
-                    return False
-
-        # Если были прямые включающие условия, и не все они совпали
-        if has_direct_includes and not direct_includes_match:
-            return False
-        
-        # Если были OR-условия, и ни одно из них не совпало (хотя эта проверка уже сделана внутри цикла)
-        # Этот if блок может быть избыточен, так как `return False` уже сработает.
-        # if has_or_includes and not or_includes_match:
-        #     return False
-
-        return True # Мод соответствует всем условиям
-
-    def _filter_priority(self, priority, priority_filter):
-        """
-        Фильтрует приоритет мода по заданному фильтру.
-        :param priority: Текущий приоритет мода.
-        :param priority_filter: Словарь с оператором и значением для фильтрации приоритета.
-        :return: True, если приоритет соответствует фильтру, иначе False.
-        """
-        if not priority_filter: # Если фильтр приоритета отсутствует, считаем, что он соответствует.
-            return True
-
-        op = priority_filter['operator']
-        val = priority_filter['value']
-
-        if op == '>':
-            return priority > val
-        elif op == '<':
-            return priority < val
-        elif op == '=' or op == '==': # Добавлена поддержка '=='
-            return priority == val
-        elif op == '>=':
-            return priority >= val
-        elif op == '<=':
-            return priority <= val
-        elif op == '!=':
-            return priority != val
+        if type == "error":
+            fg_color = self.dialog_error_fg
         else:
-            # Это не должно происходить, если parse_search_query работает правильно.
-            # Но на случай расширения или ошибки, лучше иметь.
-            self.log(f"Неподдерживаемый оператор приоритета: {op}")
-            return False
+            fg_color = self.dialog_fg
 
+        message_label = ttk.Label(msg_box, text=message, wraplength=msg_width - 40,
+                                  background=self.dialog_bg, foreground=fg_color,
+                                  font=self.font_main, justify=tk.CENTER)
+        message_label.pack(expand=True, padx=20, pady=10)
+
+        ok_button = tk.Button(msg_box, text="OK", command=msg_box.destroy,
+                               bg=self.dialog_btn_bg, fg=self.dialog_btn_fg, relief=tk.FLAT)
+        ok_button.pack(pady=5)
+        ok_button.focus_set() # Фокус на кнопке OK для удобства
+
+        self.wait_window(msg_box)
+
+    def show_confirmation(self, title, message):
+        """
+        Показывает кастомное окно подтверждения (Да/Нет).
+        :param title: Заголовок окна.
+        :param message: Сообщение.
+        :return: True, если пользователь выбрал "Да", False в противном случае.
+        """
+        confirm_box = tk.Toplevel(self)
+        confirm_box.title(title)
+        confirm_box.transient(self)
+        confirm_box.grab_set()
+        confirm_box.focus_set()
+
+        self.update_idletasks()
+        parent_x = self.winfo_x()
+        parent_y = self.winfo_y()
+        parent_width = self.winfo_width()
+        parent_height = self.winfo_height()
+
+        confirm_width = 350
+        confirm_height = 120
+        x = parent_x + (parent_width // 2) - (confirm_width // 2)
+        y = parent_y + (parent_height // 2) - (confirm_height // 2)
+        confirm_box.geometry(f"{confirm_width}x{confirm_height}+{x}+{y}")
+        confirm_box.resizable(False, False)
+
+        confirm_box.config(bg=self.dialog_bg)
+
+        message_label = ttk.Label(confirm_box, text=message, wraplength=confirm_width - 40,
+                                  background=self.dialog_bg, foreground=self.dialog_fg,
+                                  font=self.font_main, justify=tk.CENTER)
+        message_label.pack(expand=True, padx=20, pady=10)
+
+        result = tk.BooleanVar(value=False)
+
+        def set_result_and_destroy(val):
+            result.set(val)
+            confirm_box.destroy()
+
+        button_frame = ttk.Frame(confirm_box, style="TFrame")
+        button_frame.pack(pady=5)
+
+        yes_button = tk.Button(button_frame, text=self.current_lang["yes_button"],
+                                command=lambda: set_result_and_destroy(True),
+                                bg=self.dialog_btn_bg, fg=self.dialog_btn_fg, relief=tk.FLAT)
+        yes_button.pack(side=tk.LEFT, padx=5)
+        yes_button.focus_set() # Фокус на кнопке "Да" по умолчанию
+
+        no_button = tk.Button(button_frame, text=self.current_lang["no_button"],
+                               command=lambda: set_result_and_destroy(False),
+                               bg=self.dialog_btn_bg, fg=self.dialog_btn_fg, relief=tk.FLAT)
+        no_button.pack(side=tk.LEFT, padx=5)
+
+        self.wait_window(confirm_box)
+        return result.get()
 
 # =============================================================================
 # --- Запуск приложения ---
-# Точка входа в приложение.
 # =============================================================================
 if __name__ == "__main__":
     app = ModPriorityGUI()
