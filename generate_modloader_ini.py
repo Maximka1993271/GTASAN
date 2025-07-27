@@ -95,7 +95,7 @@ class ToolTip:
 
 # =============================================================================
 # --- Глобальные константы приложения ---
-# Определяет пути по умолчанию, имена файлов и метаданные приложения.
+# Определяет пути по умолчанию, имена файлов и метаданды приложения.
 # =============================================================================
 DEFAULT_MODLOADER_SUBDIR = "modloader" # Название поддиректории modloader по умолчанию.
 OUTPUT_FILE_NAME = "modloader.ini"         # Имя файла, в который сохраняются приоритеты модов.
@@ -783,6 +783,12 @@ class ModPriorityGUI(tk.Tk):
             self.dialog_btn_bg = "#555555"
             self.dialog_btn_fg = "#ffffff"
             self.dialog_error_fg = "#FF6B6B" # Более мягкий красный для темной темы
+
+            # Цвета для скроллбара в темной теме
+            scrollbar_trough_color = "#3a3a3a"
+            scrollbar_thumb_color = "#6a6a6a"
+            scrollbar_active_thumb_color = "#8a8a8a"
+            scrollbar_border_color = "#5a5a5a"
         else: # light theme
             self.style.theme_use("clam") # 'clam' тоже подходит для светлой темы
             bg_color = "#f0f0f0"
@@ -804,6 +810,12 @@ class ModPriorityGUI(tk.Tk):
             self.dialog_btn_bg = "#E0E0E0"
             self.dialog_btn_fg = "#222222"
             self.dialog_error_fg = "#FF0000"
+
+            # Цвета для скроллбара в светлой теме
+            scrollbar_trough_color = "#e0e0e0"
+            scrollbar_thumb_color = "#b0b0b0"
+            scrollbar_active_thumb_color = "#909090"
+            scrollbar_border_color = "#c0c0c0"
 
         # Обновляем фон основного окна
         self.config(bg=bg_color)
@@ -831,12 +843,28 @@ class ModPriorityGUI(tk.Tk):
         self.style.map("Treeview.Heading",
                        background=[('active', tree_heading_bg)]) # Prevent heading background change on hover
 
+        # Scrollbar styling
+        self.style.configure("Vertical.TScrollbar",
+                             troughcolor=scrollbar_trough_color,
+                             background=scrollbar_thumb_color,
+                             bordercolor=scrollbar_border_color,
+                             arrowcolor=fg_color, # Arrows might not be visible depending on layout
+                             relief="flat",
+                             borderwidth=0) # Remove border for a cleaner look
+
+        self.style.map("Vertical.TScrollbar",
+                       background=[('active', scrollbar_active_thumb_color)],
+                       troughcolor=[('active', scrollbar_trough_color)],
+                       bordercolor=[('active', scrollbar_border_color)])
+
         # Обновляем цвета лога
         self.log_current_bg = log_bg
         self.log_current_fg = log_fg
         # Проверяем, существует ли self.log_text перед конфигурированием
         if hasattr(self, 'log_text'):
             self.log_text.config(bg=self.log_current_bg, fg=self.log_current_fg, insertbackground=self.log_current_fg)
+            # Применяем стиль к вертикальной полосе прокрутки ScrolledText
+            # self.log_text.vbar.config(style="Vertical.TScrollbar") # Эту строку удаляем
 
         # Обновляем цвета для виджета Entry
         if hasattr(self, 'search_entry'):
@@ -909,7 +937,7 @@ class ModPriorityGUI(tk.Tk):
         self.tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
         # Скроллбар для Treeview
-        self.tree_scrollbar = ttk.Scrollbar(self.tree_frame, orient="vertical", command=self.tree.yview)
+        self.tree_scrollbar = ttk.Scrollbar(self.tree_frame, orient="vertical", command=self.tree.yview, style="Vertical.TScrollbar")
         self.tree_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         self.tree.configure(yscrollcommand=self.tree_scrollbar.set)
 
@@ -930,11 +958,21 @@ class ModPriorityGUI(tk.Tk):
         self.log_label = ttk.Label(self.log_frame, text=self.current_lang["log_label"], font=self.font_main)
         self.log_label.pack(side=tk.TOP, anchor=tk.W)
 
-        self.log_text = scrolledtext.ScrolledText(self.log_frame, wrap=tk.WORD, height=8, state='disabled',
+        # Создаем контейнер для tk.Text и его ttk.Scrollbar
+        self.log_text_container = ttk.Frame(self.log_frame)
+        self.log_text_container.pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=(5, 0))
+
+        self.log_text = tk.Text(self.log_text_container, wrap=tk.WORD, height=8, state='disabled',
                                                  font=("Consolas", 9), relief=tk.FLAT,
                                                  bg=self.log_current_bg, fg=self.log_current_fg,
                                                  insertbackground=self.log_current_fg)
-        self.log_text.pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=(5, 0))
+        self.log_text.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+
+        # Скроллбар для лога
+        self.log_scrollbar = ttk.Scrollbar(self.log_text_container, orient="vertical", command=self.log_text.yview, style="Vertical.TScrollbar")
+        self.log_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+        self.log_text.config(yscrollcommand=self.log_scrollbar.set)
+
 
         # Контекстное меню для лога
         self.log_context_menu = tk.Menu(self.log_text, tearoff=0)
