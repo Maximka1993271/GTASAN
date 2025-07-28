@@ -1039,6 +1039,12 @@ class ModPriorityGUI(tk.Tk):
 
         self.tree.bind("<Double-1>", self.on_item_double_click) # Двойной клик для редактирования.
         self.tree.bind("<Delete>", lambda e: self.delete_selected_mods()) # Обработка клавиши Delete
+        self.tree.bind("<Button-3>", self.show_tree_context_menu) # Правый клик для контекстного меню
+
+        # Контекстное меню для Treeview
+        self.tree_context_menu = tk.Menu(self.tree, tearoff=0)
+        self.tree_context_menu.add_command(label=self.current_lang["edit_delete_mod"], command=self.delete_selected_mods)
+
 
         # --- Разноцветная полоска (нижняя) ---
         # Создаем Canvas для отрисовки полоски
@@ -1365,6 +1371,19 @@ class ModPriorityGUI(tk.Tk):
         finally:
             self.log_context_menu.grab_release()
 
+    def show_tree_context_menu(self, event):
+        """Показывает контекстное меню для Treeview."""
+        # Выбираем элемент под курсором, если он есть
+        item = self.tree.identify_row(event.y)
+        if item:
+            self.tree.selection_set(item) # Выделяем элемент, на котором был клик
+        
+        try:
+            self.tree_context_menu.tk_popup(event.x_root, event.y_root)
+        finally:
+            self.tree_context_menu.grab_release()
+
+
     def change_modloader_path(self):
         """
         Открывает диалог выбора папки для установки нового пути к modloader.
@@ -1414,13 +1433,12 @@ class ModPriorityGUI(tk.Tk):
             if os.path.isdir(mod_path) and not entry_name.startswith(('_', '.')):
                 mod_name = entry_name # Имя мода - это имя папки
 
-                self.log(self.current_lang["found_mod_folder"].format(mod_name))
                 priority = None
 
                 # 1. Сначала пытаемся взять приоритет из modloader.ini
                 if mod_name in current_ini_priorities:
                     priority = current_ini_priorities[mod_name]
-                    self.log(self.current_lang["priority_from_mod_ini"].format(priority, mod_name))
+                    # self.log(self.current_lang["priority_from_mod_ini"].format(priority, mod_name)) # Removed for performance
                 else:
                     # 2. Затем ищем modname.ini внутри папки мода
                     mod_ini_path = os.path.join(mod_path, f"{mod_name}.ini")
@@ -1437,25 +1455,25 @@ class ModPriorityGUI(tk.Tk):
                                 except ValueError:
                                     self.log(self.current_lang["invalid_priority_value"].format(mod_name, mod_ini_config['modloader']['priority']))
                                     priority = None
-                                if priority is not None:
-                                    self.log(self.current_lang["priority_from_mod_ini"].format(priority, mod_name))
+                                # if priority is not None: # Removed for performance
+                                    # self.log(self.current_lang["priority_from_mod_ini"].format(priority, mod_name))
                         except Exception as e:
                             self.log(f"⚠️ Error reading mod INI for '{mod_name}': {e}")
 
                 # 3. Если приоритет не найден, используем пользовательские приоритеты
                 if priority is None and mod_name.lower() in custom_priorities:
                     priority = custom_priorities[mod_name.lower()]
-                    self.log(self.current_lang["priority_auto_assigned"].format(priority, mod_name))
+                    # self.log(self.current_lang["priority_auto_assigned"].format(priority, mod_name)) # Removed for performance
 
                 # 4. Если все еще нет приоритета, назначаем 0 (или любой другой дефолт)
                 if priority is None:
                     priority = 0
-                    self.log(self.current_lang["priority_auto_assigned"].format(priority, mod_name))
+                    # self.log(self.current_lang["priority_auto_assigned"].format(priority, mod_name)) # Removed for performance
 
                 self.mods.append({"name": mod_name, "priority": priority})
                 found_mod_count += 1
-            else:
-                self.log(self.current_lang["skipping_entry"].format(entry_name))
+            # else: # Removed for performance
+                # self.log(self.current_lang["skipping_entry"].format(entry_name))
             
         if not self.mods:
             self.log(self.current_lang["mods_not_found"].format(self.modloader_dir))
@@ -2084,8 +2102,84 @@ class ModPriorityGUI(tk.Tk):
             self.log(f"Failed to open URL: {e}")
 
     def show_help(self):
-        """Показывает справку по использованию программы."""
-        self.show_message(self.current_lang["help_title"], self.current_lang["help_message"], "info")
+        """Показывает справку по использованию программы в кастомном окне."""
+        help_box = tk.Toplevel(self)
+        help_box.title(self.current_lang["help_title"])
+        help_box.transient(self)
+        help_box.grab_set()
+        help_box.focus_set()
+
+        self.update_idletasks()
+        parent_x = self.winfo_x()
+        parent_y = self.winfo_y()
+        parent_width = self.winfo_width()
+        parent_height = self.winfo_height()
+
+        # Увеличенные размеры окна справки
+        help_width = 500
+        help_height = 300
+        x = parent_x + (parent_width // 2) - (help_width // 2)
+        y = parent_y + (parent_height // 2) - (help_height // 2)
+        help_box.geometry(f"{help_width}x{help_height}+{x}+{y}")
+        help_box.resizable(False, False)
+
+        help_box.config(bg=self.dialog_bg)
+
+        # Анимированная полоска сверху (опционально, можно добавить для единообразия)
+        help_line_canvas = tk.Canvas(help_box, height=5, bg=self.dialog_bg, highlightthickness=0)
+        help_line_canvas.pack(fill=tk.X, padx=10, pady=(10, 5))
+        help_line_canvas.hue_offset = 0.0
+        help_line_canvas.segment_count = 50
+        help_line_canvas.animation_speed = 0.015
+        help_line_canvas.after_id = None
+
+        def draw_help_line(event=None):
+            canvas = help_line_canvas
+            canvas.delete("all")
+            width = canvas.winfo_width()
+            height = canvas.winfo_height()
+            segment_width = width / canvas.segment_count
+            for i in range(canvas.segment_count):
+                hue = (canvas.hue_offset + i / canvas.segment_count * 0.5) % 1.0
+                r, g, b = colorsys.hls_to_rgb(hue, 0.5, 1.0)
+                color = f'#{int(r*255):02x}{int(g*255):02x}{int(b*255):02x}'
+                x1 = i * segment_width
+                x2 = (i + 1) * segment_width
+                canvas.create_rectangle(x1, 0, x2, height, fill=color, outline=color)
+            canvas.config(bg=self.dialog_bg)
+
+        def animate_help_line():
+            help_line_canvas.hue_offset = (help_line_canvas.hue_offset + help_line_canvas.animation_speed) % 1.0
+            draw_help_line()
+            help_line_canvas.after_id = self.after(20, animate_help_line)
+
+        help_line_canvas.bind("<Configure>", draw_help_line)
+        animate_help_line()
+
+        # Заголовок справки
+        title_label = ttk.Label(help_box, text=self.current_lang["help_title"],
+                                background=self.dialog_bg, foreground=self.dialog_fg,
+                                font=("Segoe UI", 14, "bold"), justify=tk.CENTER)
+        title_label.pack(pady=(10, 5))
+
+        # Текст справки с увеличенным wraplength и отступами
+        help_message_text = self.current_lang["help_message"]
+        message_label = ttk.Label(help_box, text=help_message_text,
+                                  wraplength=help_width - 40, # Учитываем отступы
+                                  background=self.dialog_bg, foreground=self.dialog_fg,
+                                  font=("Segoe UI", 10), justify=tk.LEFT, anchor=tk.W) # Выравнивание по левому краю
+        message_label.pack(padx=20, pady=(0, 15), fill=tk.BOTH, expand=True)
+
+        # Кнопка "Закрыть"
+        close_button = tk.Button(help_box, text="OK", command=help_box.destroy,
+                                 bg=self.dialog_btn_bg, fg=self.dialog_btn_fg, relief=tk.FLAT)
+        close_button.pack(pady=(5, 10))
+        close_button.focus_set()
+
+        # При закрытии окна отменяем анимацию
+        help_box.protocol("WM_DELETE_WINDOW", lambda: (self.after_cancel(help_line_canvas.after_id) if help_line_canvas.after_id else None, help_box.destroy()))
+
+        self.wait_window(help_box)
 
     def contact_support(self):
         """Открывает почтовый клиент для связи с поддержкой."""
@@ -2095,7 +2189,7 @@ class ModPriorityGUI(tk.Tk):
         try:
             webbrowser.open_new_tab(mailto_url)
         except Exception as e:
-            self.log(f"Failed to open email client: {e}")
+            self.log(f"Failed to open URL: {e}")
             self.show_message(self.current_lang["priority_value_error_title"],
                               f"Could not open email client. Please contact {AUTHOR_EMAIL} directly.", "error")
 
