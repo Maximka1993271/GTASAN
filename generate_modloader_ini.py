@@ -1986,8 +1986,88 @@ class ModPriorityGUI(tk.Tk):
     #                 star_label.config(text=STAR_EMPTY, fg="#888888")
 
     def show_about(self):
-        """Показывает информацию о программе."""
-        self.show_message(self.current_lang["about_title"], self.current_lang["about_message"], "info")
+        """Показывает информацию о программе в кастомном окне."""
+        about_box = tk.Toplevel(self)
+        about_box.title(self.current_lang["about_title"])
+        about_box.transient(self)
+        about_box.grab_set()
+        about_box.focus_set()
+
+        self.update_idletasks()
+        parent_x = self.winfo_x()
+        parent_y = self.winfo_y()
+        parent_width = self.winfo_width()
+        parent_height = self.winfo_height()
+
+        about_width = 400
+        about_height = 250
+        x = parent_x + (parent_width // 2) - (about_width // 2)
+        y = parent_y + (parent_height // 2) - (about_height // 2)
+        about_box.geometry(f"{about_width}x{about_height}+{x}+{y}")
+        about_box.resizable(False, False)
+
+        about_box.config(bg=self.dialog_bg)
+
+        # Анимированная полоска сверху
+        about_line_canvas = tk.Canvas(about_box, height=5, bg=self.dialog_bg, highlightthickness=0)
+        about_line_canvas.pack(fill=tk.X, padx=10, pady=(10, 5))
+        about_line_canvas.hue_offset = 0.0 # Локальное смещение оттенка для этой полоски
+        about_line_canvas.segment_count = 50
+        about_line_canvas.animation_speed = 0.015 # Немного другая скорость
+        about_line_canvas.after_id = None # Для отмены анимации
+
+        def draw_about_line(event=None):
+            canvas = about_line_canvas
+            canvas.delete("all")
+            width = canvas.winfo_width()
+            height = canvas.winfo_height()
+            segment_width = width / canvas.segment_count
+            for i in range(canvas.segment_count):
+                hue = (canvas.hue_offset + i / canvas.segment_count * 0.5) % 1.0
+                r, g, b = colorsys.hls_to_rgb(hue, 0.5, 1.0)
+                color = f'#{int(r*255):02x}{int(g*255):02x}{int(b*255):02x}'
+                x1 = i * segment_width
+                x2 = (i + 1) * segment_width
+                canvas.create_rectangle(x1, 0, x2, height, fill=color, outline=color)
+            canvas.config(bg=self.dialog_bg) # Обновляем фон Canvas
+
+        def animate_about_line():
+            about_line_canvas.hue_offset = (about_line_canvas.hue_offset + about_line_canvas.animation_speed) % 1.0
+            draw_about_line()
+            about_line_canvas.after_id = self.after(20, animate_about_line) # Используем self.after
+
+        about_line_canvas.bind("<Configure>", draw_about_line)
+        animate_about_line()
+
+        # Заголовок программы
+        title_label = ttk.Label(about_box, text="GTA SA Modloader Priority Editor",
+                                background=self.dialog_bg, foreground=self.dialog_fg,
+                                font=("Segoe UI", 14, "bold"), justify=tk.CENTER)
+        title_label.pack(pady=(10, 5))
+
+        # Версия
+        version_label = ttk.Label(about_box, text=f"Версия {APP_VERSION}",
+                                  background=self.dialog_bg, foreground=self.dialog_fg,
+                                  font=("Segoe UI", 11), justify=tk.CENTER)
+        version_label.pack(pady=(0, 10))
+
+        # Описание
+        description_label = ttk.Label(about_box, text="Программа для управления приоритетами модов GTA San Andreas modloader.",
+                                      wraplength=about_width - 40,
+                                      background=self.dialog_bg, foreground=self.dialog_fg,
+                                      font=("Segoe UI", 10), justify=tk.CENTER)
+        description_label.pack(padx=20, pady=(0, 15))
+
+        # Кнопка "Закрыть"
+        close_button = tk.Button(about_box, text=self.current_lang["file_exit"], command=about_box.destroy,
+                                 bg=self.dialog_btn_bg, fg=self.dialog_btn_fg, relief=tk.FLAT)
+        close_button.pack(pady=(5, 10))
+        close_button.focus_set()
+
+        # При закрытии окна отменяем анимацию
+        about_box.protocol("WM_DELETE_WINDOW", lambda: (self.after_cancel(about_line_canvas.after_id) if about_line_canvas.after_id else None, about_box.destroy()))
+
+        self.wait_window(about_box)
 
     def show_author_info(self):
         """Показывает информацию об авторе."""
