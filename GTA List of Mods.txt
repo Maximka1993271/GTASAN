@@ -52,6 +52,7 @@ Cigarette and Antenna
 ClassicHud
 Cold Steam
 Disable Radar On Foot
+EdgeFX
 Enterable Hidden Interiors v4.3 Update 25.05.25
 Explosions
 Explosionsshake
