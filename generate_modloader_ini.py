@@ -275,7 +275,8 @@ LANG_EN = {
     "save_button": "Save",
     "edit_priority_title": "Edit Priority",
     "info_title": "Information",
-    "rate_program_label": "Rate this program:"
+    "rate_program_label": "Rate this program:",
+    "installed_mods_count": "Installed Mods: {0}" # New string for mod count
 }
 
 # Модуль для локализации
@@ -431,7 +432,8 @@ LANG_RU = {
     "save_button": "Сохранить",
     "edit_priority_title": "Редактировать Приоритет",
     "info_title": "Информация",
-    "rate_program_label": "Рейтинг Программы:"
+    "rate_program_label": "Рейтинг Программы:",
+    "installed_mods_count": "Установлено модов: {0}" # Новая строка для количества модов
 }
 
 # Создание экземпляра локализации
@@ -532,7 +534,8 @@ class ModPriorityGUI(tk.Tk):
         last_search_query = self.app_config.get("Search", "last_query", fallback="")
         self.search_var.set(last_search_query)
 
-        self.load_mods_and_assign_priorities() # Первая загрузка модов при старте приложения.
+        self.load_mods_and_assign_priorities()
+        self.update_mod_count_label()  # Обновляем счётчик после загрузки модов
         
         # Добавляем параметры для анимации полоски
         self.hue_offset = 0.0 # Смещение оттенка для анимации
@@ -711,6 +714,10 @@ class ModPriorityGUI(tk.Tk):
         # Обновляем текст для рейтинга
         if hasattr(self, 'rate_label'):
             self.rate_label.config(text=self.current_lang["rate_program_label"])
+
+        # Обновляем текст лейбла количества модов
+        self.update_mod_count_label()
+
 
     def create_menu(self):
         """
@@ -989,7 +996,30 @@ class ModPriorityGUI(tk.Tk):
         self.search_animation_speed = 0.02 # Немного быстрее анимация для рамки
         self.animate_search_border()
 
-        # --- Treeview для отображения модов и приоритетов ---
+        # --- Верхняя анимированная разноцветная полоска (новая) ---
+        self.super_top_colorful_line = tk.Canvas(self, height=5, bg=self.cget('bg'), highlightthickness=0)
+        self.super_top_colorful_line.pack(fill=tk.X, padx=10, pady=(5, 0))
+        self.super_top_color_segment_count = 50
+        self.super_top_color_hue_offset = 0.75 # Отличное смещение для новой полоски
+        self.animate_super_top_colorful_line()
+        self.super_top_colorful_line.bind("<Configure>", self.draw_super_top_colorful_line)
+
+
+        # --- Счётчик модов ---
+        self.mod_count_var = tk.StringVar()
+        self.mod_count_label = ttk.Label(self, textvariable=self.mod_count_var, font=self.font_main)
+        self.mod_count_label.pack(fill=tk.X, padx=10, pady=(0, 2))
+        self.update_mod_count_label()
+
+        # --- Верхняя анимированная разноцветная полоска (старая) ---
+        self.top_colorful_line = tk.Canvas(self, height=5, bg=self.cget('bg'), highlightthickness=0)
+        self.top_colorful_line.pack(fill=tk.X, padx=10, pady=(5, 0))
+        self.top_color_segment_count = 50
+        self.top_color_hue_offset = 0.0
+        self.animate_top_colorful_line()
+        self.top_colorful_line.bind("<Configure>", self.draw_top_colorful_line)
+
+        # --- Фрейм для таблицы модов ---
         self.tree_frame = ttk.Frame(self)
         self.tree_frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=10, pady=5)
 
@@ -1008,7 +1038,7 @@ class ModPriorityGUI(tk.Tk):
         self.tree.bind("<Double-1>", self.on_item_double_click) # Двойной клик для редактирования.
         self.tree.bind("<Delete>", lambda e: self.delete_selected_mods()) # Обработка клавиши Delete
 
-        # --- Разноцветная полоска ---
+        # --- Разноцветная полоска (нижняя) ---
         # Создаем Canvas для отрисовки полоски
         self.colorful_line = tk.Canvas(self, height=5, bg=self.cget('bg'), highlightthickness=0)
         self.colorful_line.pack(fill=tk.X, padx=10, pady=5)
@@ -2083,6 +2113,54 @@ class ModPriorityGUI(tk.Tk):
 # =============================================================================
 # --- Запуск приложения ---
 # =============================================================================
+
+    def draw_top_colorful_line(self, event=None):
+        """Отрисовывает верхнюю разноцветную полоску."""
+        canvas = self.top_colorful_line
+        canvas.delete("all")
+        width = canvas.winfo_width()
+        height = canvas.winfo_height()
+        segment_width = width / self.top_color_segment_count
+        for i in range(self.top_color_segment_count):
+            hue = (self.top_color_hue_offset + i / self.top_color_segment_count * 0.5) % 1.0
+            r, g, b = colorsys.hls_to_rgb(hue, 0.5, 1.0)
+            color = f'#{int(r*255):02x}{int(g*255):02x}{int(b*255):02x}'
+            x1 = i * segment_width
+            x2 = (i + 1) * segment_width
+            canvas.create_rectangle(x1, 0, x2, height, fill=color, outline=color)
+
+    def animate_top_colorful_line(self):
+        self.top_color_hue_offset = (self.top_color_hue_offset + 0.01) % 1.0
+        self.draw_top_colorful_line()
+        self.after(20, self.animate_top_colorful_line)
+
+    def draw_super_top_colorful_line(self, event=None):
+        """Отрисовывает самую верхнюю разноцветную полоску."""
+        canvas = self.super_top_colorful_line
+        canvas.delete("all")
+        width = canvas.winfo_width()
+        height = canvas.winfo_height()
+        segment_width = width / self.super_top_color_segment_count
+        for i in range(self.super_top_color_segment_count):
+            hue = (self.super_top_color_hue_offset + i / self.super_top_color_segment_count * 0.5) % 1.0
+            r, g, b = colorsys.hls_to_rgb(hue, 0.5, 1.0)
+            color = f'#{int(r*255):02x}{int(g*255):02x}{int(b*255):02x}'
+            x1 = i * segment_width
+            x2 = (i + 1) * segment_width
+            canvas.create_rectangle(x1, 0, x2, height, fill=color, outline=color)
+
+    def animate_super_top_colorful_line(self):
+        self.super_top_color_hue_offset = (self.super_top_color_hue_offset + 0.01) % 1.0
+        self.draw_super_top_colorful_line()
+        self.after(20, self.animate_super_top_colorful_line)
+
+
+    def update_mod_count_label(self):
+        """Обновляет текст с количеством модов."""
+        count = len(self.filtered_mods) if hasattr(self, 'filtered_mods') else 0
+        self.mod_count_var.set(self.current_lang["installed_mods_count"].format(count))
+
+
 if __name__ == "__main__":
     app = ModPriorityGUI()
     app.mainloop()
