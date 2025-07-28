@@ -8,12 +8,12 @@ VC  gta-vc.exe v1.0
 
 Essentials Pack
 
-Silent’s ASI Loader v1.4
-Ultimate ASI Loader v8.2.0
+Silent’s ASI Loader v1.5
+Ultimate ASI Loader v8.4.0
 CLEO v4.4.4
 CLEO+ v1.2.0
 NewOpcodes.cleo v2.1
-CrashInfo v1.2
+CrashInfo v1.2.1
 SCRLog v2020.3
 Fastman92 Limit Adjuster v7.6
 Open Limit Adjuster v1.5.9
@@ -171,6 +171,7 @@ Car Explodes In Huge Falls
 Car Get Dirty Slower
 Car Idle
 Car Mechanic Simulator
+Car Speed Dependent FOV
 Car Wash
 Carcols Fix
 CarCrashCameraEffect
