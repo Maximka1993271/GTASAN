@@ -433,7 +433,7 @@ LANG_RU = {
     "edit_priority_title": "Редактировать Приоритет",
     "info_title": "Информация",
     "rate_program_label": "Рейтинг Программы:",
-    "installed_mods_count": "Установлено модов: {0}" # Новая строка для количества модов
+    "installed_mods_count": "Установлено модов: {0}" # New string for mod count
 }
 
 # Создание экземпляра локализации
@@ -673,7 +673,7 @@ class ModPriorityGUI(tk.Tk):
             self.help_menu.entryconfig(1, label=self.current_lang["help_author"])
             self.help_menu.entryconfig(2, label=self.current_lang["help_updates"])
             self.help_menu.entryconfig(3, label=self.current_lang["help_help"])
-            self.help_menu.add_command(label=self.current_lang["help_contact"], command=self.contact_support)
+            self.help_menu.entryconfig(4, label=self.current_lang["help_contact"]) # Исправлено: используем entryconfig
 
         # Обновляем тексты виджетов
         self.search_label.config(text=self.current_lang["search_mod"])
@@ -798,14 +798,15 @@ class ModPriorityGUI(tk.Tk):
             self.style.theme_use("clam") # 'clam' - это хорошая база для темной темы
             bg_color = "#2e2e2e"
             fg_color = "#ffffff"
-            tree_bg = "#3c3c3c"
-            tree_fg = "#ffffff"
+            # Treeview (список модов) будет черным с белым текстом в темной теме
+            tree_bg = "#000000" 
+            tree_fg = "#ffffff" 
             tree_heading_bg = "#4a4a4a"
             tree_selected_bg = "#555555"
             tree_selected_fg = "#ffffff"
             input_bg = "#4a4a4a"
             input_fg = "#ffffff"
-            log_bg = "#1e1e1e"
+            log_bg = "#000000" # Лог теперь чисто черный
             log_fg = "#cccccc"
             button_bg = "#4a4a4a"
             button_fg = "#ffffff"
@@ -825,14 +826,15 @@ class ModPriorityGUI(tk.Tk):
             self.style.theme_use("clam") # 'clam' тоже подходит для светлой темы
             bg_color = "#f0f0f0"
             fg_color = "#000000"
-            tree_bg = "#ffffff"
-            tree_fg = "#000000"
+            # Treeview (список модов) будет белым с черным текстом в светлой теме
+            tree_bg = "#ffffff" 
+            tree_fg = "#000000" 
             tree_heading_bg = "#e0e0e0"
             tree_selected_bg = "#a8d8ff"
             tree_selected_fg = "#000000"
             input_bg = "#ffffff"
             input_fg = "#000000"
-            log_bg = "#ffffff"
+            log_bg = "#ffffff" # Лог белый в светлой теме
             log_fg = "#333333"
             button_bg = "#e0e0e0"
             button_fg = "#000000"
@@ -1123,11 +1125,6 @@ class ModPriorityGUI(tk.Tk):
             star_label = tk.Label(self.rating_inner_frame, text=STAR_EMPTY, font=("Segoe UI", 16)) # Удалены cursor и bind
             star_label.pack(side=tk.LEFT, padx=1)
             self.star_labels.append(star_label)
-            # Удалены привязки к событиям для неизменяемого рейтинга
-            # star_label.bind("<Button-1>", lambda e, rating=i+1: self.set_rating(rating))
-            # star_label.bind("<Enter>", lambda e, rating=i+1: self.hover_stars(rating))
-            # star_label.bind("<Leave>", lambda e: self.hover_stars(0)) # Reset on leave
-            self.star_labels.append(star_label)
 
         # Update star appearance initially
         self.update_stars() # Обновляем, чтобы показать 5 звезд сразу
@@ -1215,6 +1212,7 @@ class ModPriorityGUI(tk.Tk):
         color = f'#{int(r*255):02x}{int(g*255):02x}{int(b*255):02x}'
 
         # Рисуем прямоугольник, который покрывает всю область Canvas, действуя как рамка
+        border_width = 2 # Толщина анимированной рамки
         canvas.create_rectangle(
             border_width / 2, border_width / 2,
             canvas_width - border_width / 2, canvas_height - border_width / 2,
@@ -1401,21 +1399,31 @@ class ModPriorityGUI(tk.Tk):
         current_ini_priorities = self._read_ini_priorities(self.output_ini_path)
 
         found_mod_count = 0
-        for entry_name in os.listdir(self.modloader_dir):
-            entry_path = os.path.join(self.modloader_dir, entry_name)
+        # Используем os.walk для рекурсивного поиска папок модов
+        for root, dirs, files in os.walk(self.modloader_dir):
+            # Исключаем скрытые папки и папки, начинающиеся с '_'
+            dirs[:] = [d for d in dirs if not d.startswith(('_', '.'))] 
 
-            # Проверяем, является ли запись папкой и не начинается ли с символа игнорирования
-            if os.path.isdir(entry_path) and not entry_name.startswith(('_', '.')):
-                self.log(self.current_lang["found_mod_folder"].format(entry_name))
+            for dir_name in dirs:
+                mod_path = os.path.join(root, dir_name)
+                # Проверяем, что это не сама папка modloader и не ее непосредственные подпапки,
+                # если они не являются реальными модами (т.е. не содержат modname.ini или не имеют приоритета)
+                # Для простоты, будем считать любую не-игнорируемую папку модом.
+                # Если нужна более строгая логика (например, папка должна содержать .ini или .cs файл),
+                # то ее можно добавить здесь.
+
+                mod_name = dir_name # Имя мода - это имя папки
+
+                self.log(self.current_lang["found_mod_folder"].format(mod_name))
                 priority = None
 
                 # 1. Сначала пытаемся взять приоритет из modloader.ini
-                if entry_name in current_ini_priorities:
-                    priority = current_ini_priorities[entry_name]
-                    self.log(self.current_lang["priority_from_mod_ini"].format(priority, entry_name))
+                if mod_name in current_ini_priorities:
+                    priority = current_ini_priorities[mod_name]
+                    self.log(self.current_lang["priority_from_mod_ini"].format(priority, mod_name))
                 else:
                     # 2. Затем ищем modname.ini внутри папки мода
-                    mod_ini_path = os.path.join(entry_path, f"{entry_name}.ini")
+                    mod_ini_path = os.path.join(mod_path, f"{mod_name}.ini")
                     if os.path.exists(mod_ini_path):
                         mod_ini_config = configparser.ConfigParser()
                         try:
@@ -1424,33 +1432,29 @@ class ModPriorityGUI(tk.Tk):
                                 try:
                                     priority = int(mod_ini_config['modloader']['priority'])
                                     if not is_valid_priority(priority):
-                                        self.log(self.current_lang["invalid_priority_value"].format(entry_name, mod_ini_config['modloader']['priority']))
+                                        self.log(self.current_lang["invalid_priority_value"].format(mod_name, mod_ini_config['modloader']['priority']))
                                         priority = None # Сбрасываем, если невалидный
                                 except ValueError:
-                                    self.log(self.current_lang["invalid_priority_value"].format(entry_name, mod_ini_config['modloader']['priority']))
+                                    self.log(self.current_lang["invalid_priority_value"].format(mod_name, mod_ini_config['modloader']['priority']))
                                     priority = None
                                 if priority is not None:
-                                    self.log(self.current_lang["priority_from_mod_ini"].format(priority, entry_name))
+                                    self.log(self.current_lang["priority_from_mod_ini"].format(priority, mod_name))
                         except Exception as e:
-                            self.log(f"⚠️ Error reading mod INI for '{entry_name}': {e}")
+                            self.log(f"⚠️ Error reading mod INI for '{mod_name}': {e}")
 
                 # 3. Если приоритет не найден, используем пользовательские приоритеты
-                if priority is None and entry_name.lower() in custom_priorities:
-                    priority = custom_priorities[entry_name.lower()]
-                    self.log(self.current_lang["priority_auto_assigned"].format(priority, entry_name))
+                if priority is None and mod_name.lower() in custom_priorities:
+                    priority = custom_priorities[mod_name.lower()]
+                    self.log(self.current_lang["priority_auto_assigned"].format(priority, mod_name))
 
                 # 4. Если все еще нет приоритета, назначаем 0 (или любой другой дефолт)
                 if priority is None:
                     priority = 0
-                    self.log(self.current_lang["priority_auto_assigned"].format(priority, entry_name))
+                    self.log(self.current_lang["priority_auto_assigned"].format(priority, mod_name))
 
-
-                self.mods.append({"name": entry_name, "priority": priority})
+                self.mods.append({"name": mod_name, "priority": priority})
                 found_mod_count += 1
-            elif not entry_name.startswith(('_', '.')):
-                # Логируем только те записи, которые не являются папками и не начинаются с игнорируемых символов
-                self.log(self.current_lang["skipping_entry"].format(entry_name))
-
+            
         if not self.mods:
             self.log(self.current_lang["mods_not_found"].format(self.modloader_dir))
             self.log(self.current_lang["no_valid_mod_folders"])
@@ -1459,6 +1463,8 @@ class ModPriorityGUI(tk.Tk):
 
         self.apply_search_filter() # Применяем фильтр для отображения (или отображаем все, если фильтр пуст)
         self._check_priority_conflicts()
+        self.update_mod_count_label() # Обновляем счётчик после загрузки модов
+
 
     def _read_ini_priorities(self, ini_path):
         """
@@ -1932,6 +1938,7 @@ class ModPriorityGUI(tk.Tk):
             self.apply_search_filter() # Обновляем Treeview
             self._check_priority_conflicts()
             self.log(self.current_lang["mod_deleted_count"].format(len(mod_names_to_delete)))
+            self.update_mod_count_label() # Обновляем счётчик после удаления
 
     def delete_all_mods(self):
         """
@@ -1945,6 +1952,7 @@ class ModPriorityGUI(tk.Tk):
             self.mods.clear()
             self.apply_search_filter() # Обновляем Treeview
             self.log(self.current_lang["all_mods_deleted_log"])
+            self.update_mod_count_label() # Обновляем счётчик после удаления
 
     def set_rating(self, rating):
         """Устанавливает рейтинг и обновляет отображение звезд."""
@@ -2129,10 +2137,12 @@ class ModPriorityGUI(tk.Tk):
             x2 = (i + 1) * segment_width
             canvas.create_rectangle(x1, 0, x2, height, fill=color, outline=color)
 
+
     def animate_top_colorful_line(self):
         self.top_color_hue_offset = (self.top_color_hue_offset + 0.01) % 1.0
         self.draw_top_colorful_line()
         self.after(20, self.animate_top_colorful_line)
+
 
     def draw_super_top_colorful_line(self, event=None):
         """Отрисовывает самую верхнюю разноцветную полоску."""
@@ -2148,6 +2158,7 @@ class ModPriorityGUI(tk.Tk):
             x1 = i * segment_width
             x2 = (i + 1) * segment_width
             canvas.create_rectangle(x1, 0, x2, height, fill=color, outline=color)
+
 
     def animate_super_top_colorful_line(self):
         self.super_top_color_hue_offset = (self.super_top_color_hue_offset + 0.01) % 1.0
