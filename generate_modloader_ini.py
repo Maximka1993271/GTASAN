@@ -612,7 +612,7 @@ class ModPriorityGUI(tk.Tk):
     def set_language(self, lang_code, initial_setup=False):
         """
         Устанавливает текущий язык интерфейса.
-        :param lang_code: Код языка ("en" для английского, "ru" для русского).
+        :param lang_code: Код языка (например, "en", "ru").
         :param initial_setup: Если True, то функция вызывается при первом запуске,
                               и сообщения в лог не будут записываться, чтобы избежать ошибок.
         """
@@ -1399,20 +1399,20 @@ class ModPriorityGUI(tk.Tk):
         current_ini_priorities = self._read_ini_priorities(self.output_ini_path)
 
         found_mod_count = 0
-        # Используем os.walk для рекурсивного поиска папок модов
-        for root, dirs, files in os.walk(self.modloader_dir):
-            # Исключаем скрытые папки и папки, начинающиеся с '_'
-            dirs[:] = [d for d in dirs if not d.startswith(('_', '.'))] 
+        
+        # Получаем список только непосредственных подпапок в self.modloader_dir
+        try:
+            entries = os.listdir(self.modloader_dir)
+        except OSError as e:
+            self.log(f"❌ Ошибка при доступе к папке modloader: {e}")
+            return
 
-            for dir_name in dirs:
-                mod_path = os.path.join(root, dir_name)
-                # Проверяем, что это не сама папка modloader и не ее непосредственные подпапки,
-                # если они не являются реальными модами (т.е. не содержат modname.ini или не имеют приоритета)
-                # Для простоты, будем считать любую не-игнорируемую папку модом.
-                # Если нужна более строгая логика (например, папка должна содержать .ini или .cs файл),
-                # то ее можно добавить здесь.
-
-                mod_name = dir_name # Имя мода - это имя папки
+        for entry_name in entries:
+            mod_path = os.path.join(self.modloader_dir, entry_name)
+            
+            # Проверяем, является ли запись папкой и не начинается ли с '_' или '.'
+            if os.path.isdir(mod_path) and not entry_name.startswith(('_', '.')):
+                mod_name = entry_name # Имя мода - это имя папки
 
                 self.log(self.current_lang["found_mod_folder"].format(mod_name))
                 priority = None
@@ -1454,6 +1454,8 @@ class ModPriorityGUI(tk.Tk):
 
                 self.mods.append({"name": mod_name, "priority": priority})
                 found_mod_count += 1
+            else:
+                self.log(self.current_lang["skipping_entry"].format(entry_name))
             
         if not self.mods:
             self.log(self.current_lang["mods_not_found"].format(self.modloader_dir))
