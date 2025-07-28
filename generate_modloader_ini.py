@@ -171,6 +171,7 @@ LANG_EN = {
     "clear_log": "Clear Log",
     "select_all_log": "Select All",
     "copy_all_log": "Copy All",
+    "logs_cleared": "Logs cleared.", # New string for logs cleared
     
     # Автор
     "author_label": "Author: Maxim Melnikov",
@@ -355,6 +356,7 @@ LANG_RU = {
     "priority_column": "Приоритет",
     "log_label": "Лог:",
     "clear_log": "Очистить лог",
+    "logs_cleared": "Логи очищены.", # Новая строка для очищенных логов
     "select_all_log": "Выделить всё",
     "copy_all_log": "Копировать всё",
     "author_label": "Автор: Максим Мельников",
@@ -1305,11 +1307,13 @@ class ModPriorityGUI(tk.Tk):
         self.log_text.config(state='disabled') # Выключаем режим редактирования.
 
     def clear_log(self):
-        """Очищает содержимое лог-окна."""
-        self.log_text.config(state='normal')
-        self.log_text.delete(1.0, tk.END)
-        self.log_text.config(state='disabled')
-        self.log(self.current_lang["clear_log"], add_timestamp=False) # Сообщение об очистке
+        """
+        Очищает текстовое поле лога и добавляет сообщение об очистке.
+        """
+        self.log_text.config(state="normal")
+        self.log_text.delete(1.0, "end")
+        self.log_text.config(state="disabled")
+        self.log(self.current_lang["logs_cleared"], add_timestamp=False) # Используем новую строку
 
     def select_all_log(self):
         """Выделяет весь текст в лог-окне."""
