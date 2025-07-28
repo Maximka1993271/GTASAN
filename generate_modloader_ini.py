@@ -930,6 +930,13 @@ class ModPriorityGUI(tk.Tk):
                 star_label.config(bg=bg_color)
             self.update_stars() # Обновляем цвета и заполнение звезд
 
+        # Обновляем цвета для новых полосок лога
+        if hasattr(self, 'log_top_colorful_line'):
+            self.log_top_colorful_line.config(bg=bg_color)
+        if hasattr(self, 'log_bottom_colorful_line'):
+            self.log_bottom_colorful_line.config(bg=bg_color)
+
+
         # Сообщение о смене темы
         if selected_theme == "dark":
             theme_name = self.current_lang["theme_dark"]
@@ -1064,6 +1071,15 @@ class ModPriorityGUI(tk.Tk):
         self.log_label = ttk.Label(self.log_frame, text=self.current_lang["log_label"], font=self.font_main)
         self.log_label.pack(side=tk.TOP, anchor=tk.W)
 
+        # --- Новая полоска под словом "Лог:" ---
+        self.log_top_colorful_line = tk.Canvas(self.log_frame, height=3, bg=self.cget('bg'), highlightthickness=0)
+        self.log_top_colorful_line.pack(fill=tk.X, pady=(0, 5))
+        self.log_top_color_segment_count = 30
+        self.log_top_color_hue_offset = 0.25 # Отличное смещение для новой полоски
+        self.animate_log_top_colorful_line()
+        self.log_top_colorful_line.bind("<Configure>", self.draw_log_top_colorful_line)
+
+
         # Создаем контейнер для tk.Text и его ttk.Scrollbar
         self.log_text_container = ttk.Frame(self.log_frame)
         self.log_text_container.pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=(5, 0))
@@ -1114,6 +1130,15 @@ class ModPriorityGUI(tk.Tk):
             self.current_lang["select_all_log"]
         )
         self.select_all_log_button_frame.pack(side=tk.RIGHT, padx=(0, 5))
+
+        # --- Новая полоска под кнопками управления логом ---
+        self.log_bottom_colorful_line = tk.Canvas(self.log_frame, height=3, bg=self.cget('bg'), highlightthickness=0)
+        self.log_bottom_colorful_line.pack(fill=tk.X, pady=(5, 0))
+        self.log_bottom_color_segment_count = 30
+        self.log_bottom_color_hue_offset = 0.5 # Отличное смещение для новой полоски
+        self.animate_log_bottom_colorful_line()
+        self.log_bottom_colorful_line.bind("<Configure>", self.draw_log_bottom_colorful_line)
+
 
         # --- Фрейм для рейтинга (внутри bottom_section_frame, после log_frame) ---
         self.rating_frame = ttk.Frame(self.bottom_section_frame)
@@ -2341,6 +2366,47 @@ class ModPriorityGUI(tk.Tk):
         self.draw_super_top_colorful_line()
         self.after(20, self.animate_super_top_colorful_line)
 
+    def draw_log_top_colorful_line(self, event=None):
+        """Отрисовывает верхнюю разноцветную полоску в секции лога."""
+        canvas = self.log_top_colorful_line
+        canvas.delete("all")
+        width = canvas.winfo_width()
+        height = canvas.winfo_height()
+        segment_width = width / self.log_top_color_segment_count
+        for i in range(self.log_top_color_segment_count):
+            hue = (self.log_top_color_hue_offset + i / self.log_top_color_segment_count * 0.5) % 1.0
+            r, g, b = colorsys.hls_to_rgb(hue, 0.5, 1.0)
+            color = f'#{int(r*255):02x}{int(g*255):02x}{int(b*255):02x}'
+            x1 = i * segment_width
+            x2 = (i + 1) * segment_width
+            canvas.create_rectangle(x1, 0, x2, height, fill=color, outline=color)
+
+    def animate_log_top_colorful_line(self):
+        """Анимирует верхнюю разноцветную полоску в секции лога."""
+        self.log_top_color_hue_offset = (self.log_top_color_hue_offset + 0.01) % 1.0
+        self.draw_log_top_colorful_line()
+        self.after(20, self.animate_log_top_colorful_line)
+
+    def draw_log_bottom_colorful_line(self, event=None):
+        """Отрисовывает нижнюю разноцветную полоску в секции лога."""
+        canvas = self.log_bottom_colorful_line
+        canvas.delete("all")
+        width = canvas.winfo_width()
+        height = canvas.winfo_height()
+        segment_width = width / self.log_bottom_color_segment_count
+        for i in range(self.log_bottom_color_segment_count):
+            hue = (self.log_bottom_color_hue_offset + i / self.log_bottom_color_segment_count * 0.5) % 1.0
+            r, g, b = colorsys.hls_to_rgb(hue, 0.5, 1.0)
+            color = f'#{int(r*255):02x}{int(g*255):02x}{int(b*255):02x}'
+            x1 = i * segment_width
+            x2 = (i + 1) * segment_width
+            canvas.create_rectangle(x1, 0, x2, height, fill=color, outline=color)
+
+    def animate_log_bottom_colorful_line(self):
+        """Анимирует нижнюю разноцветную полоску в секции лога."""
+        self.log_bottom_color_hue_offset = (self.log_bottom_color_hue_offset + 0.01) % 1.0
+        self.draw_log_bottom_colorful_line()
+        self.after(20, self.animate_log_bottom_colorful_line)
 
     def update_mod_count_label(self):
         """Обновляет текст с количеством модов."""
