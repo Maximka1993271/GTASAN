@@ -647,6 +647,8 @@ class ModPriorityGUI(tk.Tk):
         self.check_updates_on_startup_var = tk.BooleanVar(value=self.app_config.getboolean("Settings", "check_updates_on_startup", fallback=False))
         self.always_on_top_var = tk.BooleanVar(value=self.app_config.getboolean("Settings", "always_on_top", fallback=False))
 
+        # Переменная для отслеживания состояния плейсхолдера в поле поиска
+        self.is_placeholder_active = True
 
         # Инициализируем шрифты СРАЗУ, чтобы они были доступны при создании виджетов.
         self.font_main = ("Segoe UI", 11)
@@ -665,6 +667,9 @@ class ModPriorityGUI(tk.Tk):
         self.dialog_error_fg = "#FF0000"
         self.log_current_bg = "#FFFFFF"
         self.log_current_fg = "#222222"
+        # Цвета для плейсхолдера
+        self.placeholder_fg = "#AAAAAA"
+        self.normal_fg = "#222222"
 
         # Переменная для хранения рейтинга, инициализируем с 5 звездами
         self.rating_var = tk.IntVar(value=5) # Инициализация rating_var ПЕРЕД create_widgets()
@@ -702,7 +707,15 @@ class ModPriorityGUI(tk.Tk):
 
         # Загружаем последний поисковый запрос из конфига.
         last_search_query = self.app_config.get("Search", "last_query", fallback="")
-        self.search_var.set(last_search_query)
+        # Если есть сохраненный запрос, это не плейсхолдер
+        if last_search_query:
+            self.search_var.set(last_search_query)
+            self.is_placeholder_active = False
+        else:
+            # Иначе устанавливаем плейсхолдер
+            self.search_var.set(f"🔍 {self.current_lang['search_mod']}")
+            self.is_placeholder_active = True
+
 
         self.load_mods_and_assign_priorities()
         self.update_mod_count_label()  # Обновляем счётчик после загрузки модов
@@ -787,7 +800,12 @@ class ModPriorityGUI(tk.Tk):
         Сохраняет настройки приложения в файл config.ini.
         """
         # Сохраняем последний поисковый запрос перед сохранением конфига.
-        self.app_config.set("Search", "last_query", self.search_var.get())
+        # Если плейсхолдер активен, сохраняем пустую строку, иначе - текущее значение.
+        if self.is_placeholder_active:
+            self.app_config.set("Search", "last_query", "")
+        else:
+            self.app_config.set("Search", "last_query", self.search_var.get())
+        
         # Сохраняем настройки темы и языка.
         self.app_config.set("Theme", "mode", self.theme_mode.get())
         self.app_config.set("Language", "mode", self.language_mode.get())
@@ -835,7 +853,7 @@ class ModPriorityGUI(tk.Tk):
         self.update_idletasks() 
         
         # Обновление текстов виджетов
-        self.search_label.config(text=self.current_lang["search_mod"])
+        # self.search_label.config(text=self.current_lang["search_mod"]) # Удалено, так как текст теперь в плейсхолдере
         self.update_mod_list_button.config(text=self.current_lang["update_mod_list"])
         self.generate_ini_button.config(text=self.current_lang["generate_ini"])
         # Correctly update the text of the LabelFrame
@@ -857,6 +875,14 @@ class ModPriorityGUI(tk.Tk):
         ToolTip(self.clear_log_button, self.current_lang["clear_log"])
         ToolTip(self.select_all_log_button, self.current_lang["select_all_log"])
         ToolTip(self.copy_all_log_button, self.current_lang["copy_all_log"])
+
+        # Обновляем плейсхолдер, если он активен
+        if self.is_placeholder_active:
+            self.search_var.set(f"🔍 {self.current_lang['search_mod']}")
+            self.search_entry.config(foreground=self.placeholder_fg)
+        else:
+            self.search_entry.config(foreground=self.normal_fg)
+
 
         # Обновляем счетчик модов
         self.update_mod_count_label()
@@ -946,20 +972,23 @@ class ModPriorityGUI(tk.Tk):
         top_frame = ttk.Frame(self.content_frame) # Изменено на self.content_frame
         top_frame.pack(fill="x", pady=(0, 10))
 
-        # Добавляем значок лупы перед текстом "Search Mod:"
-        # Если значок лупы не отображается, это может быть связано с тем, что
-        # используемый шрифт в вашей системе не поддерживает этот символ эмодзи.
-        # На Windows, убедитесь, что у вас установлен шрифт "Segoe UI Emoji".
-        self.search_icon_label = ttk.Label(top_frame, text="🔍", font=self.font_main) 
-        self.search_icon_label.pack(side="left", padx=(0, 2)) # Небольшой отступ от иконки до текста
-
-        self.search_label = ttk.Label(top_frame, text=self.current_lang["search_mod"], font=self.font_main)
-        self.search_label.pack(side="left", padx=(0, 5))
+        # Удален self.search_label, так как текст теперь в плейсхолдере
+        # self.search_label = ttk.Label(top_frame, text=self.current_lang["search_mod"], font=self.font_main)
+        # self.search_label.pack(side="left", padx=(0, 5))
 
         self.search_var = tk.StringVar()
+        # Инициализируем search_var с плейсхолдером при создании
+        self.search_var.set(f"🔍 {self.current_lang['search_mod']}")
+        
         self.search_entry = ttk.Entry(top_frame, textvariable=self.search_var, width=50, font=self.font_main)
-        self.search_entry.pack(side="left", expand=True, fill="x", padx=(0, 10))
+        self.search_entry.pack(side="left", expand=True, fill="x", padx=(5, 10)) # Изменен padx
         ToolTip(self.search_entry, self.current_lang["search_syntax_help"])
+
+        # Привязываем события фокуса для реализации плейсхолдера
+        self.search_entry.bind("<FocusIn>", self._on_search_entry_focus_in)
+        self.search_entry.bind("<FocusOut>", self._on_search_entry_focus_out)
+        # Добавляем привязку для интерактивного поиска
+        self.search_entry.bind("<KeyRelease>", lambda event: self.apply_search_filter())
 
         self.update_mod_list_button = ttk.Button(top_frame, text=self.current_lang["update_mod_list"], command=self.load_mods_and_assign_priorities)
         self.update_mod_list_button.pack(side="left", padx=(0, 5))
@@ -1320,42 +1349,65 @@ class ModPriorityGUI(tk.Tk):
         self.filtered_mods = []
         self.mod_tree.delete(*self.mod_tree.get_children())
 
-        if not query:
-            self.filtered_mods = list(self.mods) # Если запрос пуст, показываем все моды
+        # Если плейсхолдер активен или запрос пуст, показываем все моды
+        if self.is_placeholder_active or not query or query == f"🔍 {self.current_lang['search_mod'].lower()}":
+            self.filtered_mods = list(self.mods)
         else:
             try:
-                # Разбираем запрос на части: OR-условия, NOT-условия, приоритетные условия
-                or_parts = query.split('|')
-                
-                for mod_name, priority in self.mods:
-                    mod_matches = False
-                    
-                    # Проверяем OR-условия
-                    for or_part in or_parts:
-                        or_part = or_part.strip()
-                        if not or_part:
-                            continue
+                # Разделяем запрос на блоки по оператору ИЛИ ('|')
+                or_blocks = [block.strip() for block in query.split('|') if block.strip()]
 
-                        # Проверяем NOT-условия внутри OR-части
-                        if or_part.startswith('-'):
-                            not_term = or_part[1:].strip()
-                            if not_term and not_term in mod_name.lower():
-                                mod_matches = False # Если нашли NOT-термин, то этот мод не подходит
-                                break # Выходим из цикла OR-частей, так как мод не подходит
+                for mod_name, priority in self.mods:
+                    mod_name_lower = mod_name.lower()
+                    mod_matches_any_or_block = False
+
+                    for or_block in or_blocks:
+                        current_block_matches = True
+                        
+                        # Разделяем каждый OR-блок на отдельные термины
+                        terms = [term.strip() for term in or_block.split(' ') if term.strip()]
+
+                        positive_terms = []
+                        negative_terms = []
+                        priority_terms = []
+
+                        for term in terms:
+                            if term.startswith('-'):
+                                negative_terms.append(term[1:])
+                            elif term.startswith('p:'):
+                                priority_terms.append(term[2:])
                             else:
-                                mod_matches = True # Если NOT-термин не найден, то пока считаем, что подходит
-                        elif or_part.startswith('p:'):
-                            # Обработка приоритетного фильтра
-                            p_query = or_part[2:].strip()
-                            if self._match_priority(priority, p_query):
-                                mod_matches = True
-                                break # Если приоритет совпал, то этот мод подходит
-                        elif or_part in mod_name.lower():
-                            mod_matches = True
-                            break # Если нашли обычный термин, то то этот мод подходит
-                    
-                    if mod_matches:
-                        # После проверки всех OR-условий, если мод все еще подходит, добавляем его
+                                positive_terms.append(term)
+                        
+                        # Проверяем положительные термины (логическое И)
+                        for p_term in positive_terms:
+                            if p_term not in mod_name_lower:
+                                current_block_matches = False
+                                break # Если хоть один положительный термин не найден, блок не совпадает
+                        
+                        if not current_block_matches:
+                            continue # Переходим к следующему OR-блоку, если текущий уже не совпал
+
+                        # Проверяем отрицательные термины (логическое И для НЕ)
+                        for n_term in negative_terms:
+                            if n_term in mod_name_lower:
+                                current_block_matches = False
+                                break # Если хоть один отрицательный термин найден, блок не совпадает
+                        
+                        if not current_block_matches:
+                            continue # Переходим к следующему OR-блоку
+
+                        # Проверяем приоритетные термины (логическое И)
+                        for pr_term_query in priority_terms:
+                            if not self._match_priority(priority, pr_term_query):
+                                current_block_matches = False
+                                break # Если хоть один приоритетный термин не совпал, блок не совпадает
+
+                        if current_block_matches:
+                            mod_matches_any_or_block = True
+                            break # Если текущий OR-блок совпал, то мод подходит, можно выйти из цикла OR-блоков
+
+                    if mod_matches_any_or_block:
                         self.filtered_mods.append((mod_name, priority))
 
             except Exception as e:
@@ -1366,7 +1418,12 @@ class ModPriorityGUI(tk.Tk):
         for mod_name, priority in self.filtered_mods:
             self.mod_tree.insert("", "end", values=(mod_name, priority))
         
-        self.log(self.current_lang["search_applied"].format(query, len(self.filtered_mods)), tag="info")
+        # Только логируем, если запрос не является плейсхолдером
+        if not self.is_placeholder_active and query and query != f"🔍 {self.current_lang['search_mod'].lower()}":
+            self.log(self.current_lang["search_applied"].format(query, len(self.filtered_mods)), tag="info")
+        elif not self.is_placeholder_active and not query:
+            self.log(self.current_lang["search_applied"].format("'' (пустой запрос)", len(self.filtered_mods)), tag="info")
+
 
     def _match_priority(self, mod_priority, p_query):
         """
@@ -1393,6 +1450,33 @@ class ModPriorityGUI(tk.Tk):
             return False # Неверное числовое значение в запросе приоритета
         except Exception:
             return False # Другие ошибки парсинга
+
+    def _on_search_entry_focus_in(self, event):
+        """
+        Обработчик события FocusIn для поля поиска.
+        Очищает текст плейсхолдера и меняет цвет шрифта на обычный.
+        """
+        if self.is_placeholder_active:
+            self.search_var.set("")
+            self.search_entry.config(foreground=self.normal_fg)
+            self.is_placeholder_active = False
+            self.apply_search_filter() # Применяем фильтр сразу после фокуса
+
+    def _on_search_entry_focus_out(self, event):
+        """
+        Обработчик события FocusOut для поля поиска.
+        Восстанавливает текст плейсхолдера, если поле пустое, и меняет цвет шрифта на плейсхолдер.
+        """
+        if not self.search_var.get():
+            self.search_var.set(f"🔍 {self.current_lang['search_mod']}")
+            self.search_entry.config(foreground=self.placeholder_fg)
+            self.is_placeholder_active = True
+            self.apply_search_filter() # Применяем фильтр, чтобы показать все моды, если поле пустое
+        # Если поле не пустое, но плейсхолдер был активен (например, пользователь ввел что-то, а потом очистил),
+        # то мы уже установили normal_fg при FocusIn. Здесь ничего не меняем.
+        elif not self.is_placeholder_active:
+            self.search_entry.config(foreground=self.normal_fg)
+
 
     def edit_priority(self, event):
         """
@@ -1914,7 +1998,8 @@ class ModPriorityGUI(tk.Tk):
             self.style.map("TButton", background=[("active", "#333333"), ("pressed", "#0a0a0a")])
             self.style.configure("TEntry", fieldbackground="#1a1a1a", foreground="#E0E0E0", borderwidth=1, relief="solid")
             self.style.configure("TCombobox", fieldbackground="#1a1a1a", foreground="#E0E0E0", selectbackground="#333333", selectforeground="#E0E0E0")
-            self.style.configure("Treeview", background="#1a1a1a", foreground="#E0E0E0", fieldbackground="#1a1a1a")
+            # ИЗМЕНЕНИЕ: Установка фона Treeview на чисто черный
+            self.style.configure("Treeview", background="#000000", foreground="#E0E0E0", fieldbackground="#000000")
             self.style.map("Treeview", background=[("selected", "#333333")], foreground=[("selected", "#E0E0E0")])
             self.style.configure("Treeview.Heading", background="#1a1a1a", foreground="#E0E0E0", font=("Segoe UI", 11, "bold"))
             self.style.map("Treeview.Heading", background=[("active", "#333333")])
@@ -1931,6 +2016,9 @@ class ModPriorityGUI(tk.Tk):
             self.dialog_error_fg = "#FF6B6B"
             self.log_current_bg = "#1a1a1a"
             self.log_current_fg = "#E0E0E0"
+            # Цвета для плейсхолдера
+            self.placeholder_fg = "#777777" # Темно-серый для темной темы
+            self.normal_fg = "#E0E0E0" # Светлый для темной темы
             
             # Настройка кнопок диалога
             self.style.configure("DialogButton.TButton", background=self.dialog_btn_bg, foreground=self.dialog_btn_fg)
@@ -1965,6 +2053,9 @@ class ModPriorityGUI(tk.Tk):
             self.dialog_error_fg = "#D62828"
             self.log_current_bg = "#FFFFFF"
             self.log_current_fg = "#222222"
+            # Цвета для плейсхолдера
+            self.placeholder_fg = "#AAAAAA" # Серый для светлой темы
+            self.normal_fg = "#222222" # Темный для светлой темы
 
             # Настройка кнопок диалога
             self.style.configure("DialogButton.TButton", background=self.dialog_btn_bg, foreground=self.dialog_btn_fg)
@@ -1988,6 +2079,12 @@ class ModPriorityGUI(tk.Tk):
         for tag_name in ["error", "warning", "info"]:
             self.log_text.tag_config(tag_name, foreground=self.get_log_tag_color(tag_name))
         
+        # Обновляем цвет текста в поле поиска в соответствии с состоянием плейсхолдера
+        if self.is_placeholder_active:
+            self.search_entry.config(foreground=self.placeholder_fg)
+        else:
+            self.search_entry.config(foreground=self.normal_fg)
+
         # Сохраняем выбранную тему в конфиг
         self.app_config.set("Theme", "mode", self.theme_mode.get())
         self.save_app_config()
@@ -2013,7 +2110,8 @@ class ModPriorityGUI(tk.Tk):
             # Вычисляем оттенок для каждого сегмента
             hue = (self.hue_offset + (i / self.segment_count)) % 1.0
             # Преобразуем HLS в RGB
-            r, g, b = colorsys.hls_to_rgb(hue, 0.6, 1.0) # L=0.6 (немного выше яркость), S=1.0 (насыщенность)
+            # Увеличена насыщенность (S=1.0) и немного уменьшена яркость (L=0.5) для более ярких цветов
+            r, g, b = colorsys.hls_to_rgb(hue, 0.5, 1.0) 
             # Преобразуем RGB в шестнадцатеричный формат
             color = f"#{int(r*255):02x}{int(g*255):02x}{int(b*255):02x}"
             
