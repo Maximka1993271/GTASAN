@@ -130,6 +130,7 @@ LANG_EN = {
     "file_open": "Open...",
     "file_save": "Save",
     "file_save_as": "Save As...",
+    "file_save_log_as": "Save Log As...", # NEW
     "file_exit": "Exit",
     "recent_files_menu": "Recent Files",
     
@@ -143,6 +144,8 @@ LANG_EN = {
     "edit_select_all": "Select All", # New
     "edit_deselect_all": "Deselect All", # New
     "edit_invert_selection": "Invert Selection", # New
+    "delete_all_mods_from_modloader_folder": "Delete All Mods from modloader Folder",
+    "restore_all_mods_to_modloader_folder": "Restore All Mods to modloader Folder",  # NEW
     
     "settings_menu": "Settings",
     "theme_menu": "Theme",
@@ -338,6 +341,7 @@ LANG_RU = {
     "file_open": "Открыть...",
     "file_save": "Сохранить",
     "file_save_as": "Сохранить как...",
+    "file_save_log_as": "Сохранить лог как...", # NEW
     "file_exit": "Выход",
     "recent_files_menu": "Последние файлы", # New
     "edit_menu": "Правка",
@@ -350,6 +354,8 @@ LANG_RU = {
     "edit_select_all": "Выделить все", # New
     "edit_deselect_all": "Снять выделение", # New
     "edit_invert_selection": "Инвертировать выделение", # New
+    "delete_all_mods_from_modloader_folder": "Удалить все моды из папки modloader",
+    "restore_all_mods_to_modloader_folder": "Восстановить все моды в папке modloader",  # NEW
     "settings_menu": "Настройки",
     "theme_menu": "Тема",
     "theme_system": "Системная тема",
@@ -465,6 +471,7 @@ LANG_UK = {
     "file_open": "Відкрити...",
     "file_save": "Зберегти",
     "file_save_as": "Зберегти як...",
+    "file_save_log_as": "Зберегти лог як...", # NEW
     "file_exit": "Вихід",
     "recent_files_menu": "Останні файли", # New
     "edit_menu": "Правка",
@@ -477,6 +484,8 @@ LANG_UK = {
     "edit_select_all": "Виділити все", # New
     "edit_deselect_all": "Зняти виділення", # New
     "edit_invert_selection": "Інвертувати виділення", # New
+    "delete_all_mods_from_modloader_folder": "Видалити всі моди з папки modloader",
+    "restore_all_mods_to_modloader_folder": "Відновити всі моди в папку modloader",  # NEW
     "settings_menu": "Налаштування",
     "theme_menu": "Тема",
     "theme_system": "Системна тема",
@@ -740,6 +749,52 @@ class ModPriorityGUI(tk.Tk):
         # УДАЛЕНО: Проверяем обновления при запуске, если опция включена
         # if self.check_updates_on_startup_var.get():
         #     self.check_for_updates()
+    def delete_all_mods_from_modloader_folder(self):
+        """Перемещает все моды из папки modloader в папку modloader_backup."""
+        backup_folder = os.path.join(self.modloader_dir, "modloader_backup")
+        os.makedirs(backup_folder, exist_ok=True)
+        moved_count = 0
+
+        for name in os.listdir(self.modloader_dir):
+            full_path = os.path.join(self.modloader_dir, name)
+            if os.path.isdir(full_path) and name.lower() != "modloader_backup":
+                try:
+                    shutil.move(full_path, os.path.join(backup_folder, name))
+                    moved_count += 1
+                except Exception as e:
+                    self.log(f"❌ {self.current_lang['file_save_error'].format(str(e))}", tag="error")
+
+        self.log(f"📦 {moved_count} мод(ов) перемещено в 'modloader_backup'.", tag="info")
+        self.load_mods_and_assign_priorities()
+
+    def restore_all_mods_to_modloader_folder(self):
+        """Восстанавливает все моды из modloader_backup в modloader."""
+        backup_folder = os.path.join(self.modloader_dir, "modloader_backup")
+        if not os.path.exists(backup_folder):
+            self.log("⚠️ Папка 'modloader_backup' не найдена.", tag="warning")
+            return
+
+        restored_count = 0
+        for name in os.listdir(backup_folder):
+            src = os.path.join(backup_folder, name)
+            dst = os.path.join(self.modloader_dir, name)
+            try:
+                shutil.move(src, dst)
+                restored_count += 1
+            except Exception as e:
+                self.log(f"❌ {self.current_lang['file_save_error'].format(str(e))}", tag="error")
+
+        self.log(f"♻️ Восстановлено модов: {restored_count}.", tag="info")
+        self.load_mods_and_assign_priorities()
+        # После восстановления — пробуем удалить папку, если она пуста
+        try:
+            if os.path.isdir(backup_folder) and not os.listdir(backup_folder):
+                os.rmdir(backup_folder)
+                self.log("🧹 Папка 'modloader_backup' удалена, так как она пуста.", tag="info")
+        except Exception as e:
+            self.log(f"⚠️ Не удалось удалить папку 'modloader_backup': {str(e)}", tag="warning")
+
+
 
     def _set_app_icon(self):
         """Устанавливает иконку приложения из файла icon.ico."""
@@ -765,6 +820,24 @@ class ModPriorityGUI(tk.Tk):
             
         if not icon_loaded:
             print("INFO: No 'icon.ico' found or could not be loaded. Running without custom icon.")
+
+
+    def save_log_as(self):
+        """Сохраняет содержимое лога в текстовый файл."""
+        file_path = filedialog.asksaveasfilename(
+            defaultextension=".txt",
+            filetypes=[("Text files", "*.txt"), ("All files", "*.*")],
+            title=self.current_lang["file_save_as"]
+        )
+        if file_path:
+            try:
+                log_content = self.log_text.get("1.0", tk.END)
+                with open(file_path, "w", encoding="utf-8") as f:
+                    f.write(log_content)
+                self.log(self.current_lang["file_saved_success"].format(file_path), tag="info")
+            except Exception as e:
+                self.log(self.current_lang["file_save_error"].format(str(e)), tag="error")
+
 
     def on_closing(self):
         """
@@ -901,6 +974,7 @@ class ModPriorityGUI(tk.Tk):
         self.file_menu.add_command(label=self.current_lang["file_open"], command=self.open_ini_file)
         self.file_menu.add_command(label=self.current_lang["file_save"], command=self.save_ini_file)
         self.file_menu.add_command(label=self.current_lang["file_save_as"], command=self.save_ini_file_as)
+        self.file_menu.add_command(label=self.current_lang["file_save_log_as"], command=self.save_log_as) # NEW: Use localized string
         self.file_menu.add_separator()
         
         # Подменю "Последние файлы"
@@ -926,6 +1000,10 @@ class ModPriorityGUI(tk.Tk):
         self.edit_menu.add_separator()
         self.edit_menu.add_command(label=self.current_lang["edit_delete_mod"], command=self.delete_selected_mods)
         self.edit_menu.add_command(label=self.current_lang["delete_all_mods"], command=self.delete_all_mods)
+        # NEW: Добавлена новая команда для восстановления всех модов из папки
+        self.edit_menu.add_separator()
+        self.edit_menu.add_command(label=self.current_lang["delete_all_mods_from_modloader_folder"], command=self.delete_all_mods_from_modloader_folder)
+        self.edit_menu.add_command(label=self.current_lang["restore_all_mods_to_modloader_folder"], command=self.restore_all_mods_to_modloader_folder)
 
         # Меню "Настройки"
         self.settings_menu = tk.Menu(self.menubar, tearoff=0)
@@ -1490,7 +1568,7 @@ class ModPriorityGUI(tk.Tk):
         Восстанавливает текст плейсхолдера, если поле пустое, и меняет цвет шрифта на плейсхолдер.
         """
         if not self.search_var.get():
-            self.search_var.set(f"🔍 {self.current_lang['search_mod']}")
+            self.search_var.set(f" {self.current_lang['search_mod']}")
             self.search_entry.config(foreground=self.placeholder_fg)
             self.is_placeholder_active = True
             self.apply_search_filter() # Применяем фильтр, чтобы показать все моды, если поле пустое
@@ -1697,8 +1775,8 @@ class ModPriorityGUI(tk.Tk):
     def save_ini_file_as(self):
         """Сохраняет текущие приоритеты в новый файл modloader.ini, выбранный пользователем."""
         file_path = filedialog.asksaveasfilename(
-            defaultextension=".ini",
-            filetypes=[("INI files", "*.ini")],
+            defaultextension=".csv",
+            filetypes=[("CSV files", "*.csv")],
             title=self.current_lang["file_save_as"]
         )
         if not file_path:
