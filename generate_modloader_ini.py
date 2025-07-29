@@ -144,7 +144,6 @@ LANG_EN = {
     "edit_select_all": "Select All", # New
     "edit_deselect_all": "Deselect All", # New
     "edit_invert_selection": "Invert Selection", # New
-    "restore_all_mods_from_folder": "Restore All Mods from Folder", # NEW
     
     "settings_menu": "Settings",
     "theme_menu": "Theme",
@@ -285,7 +284,9 @@ LANG_EN = {
     "rate_program_label": "Rate this program:",
     "installed_mods_count": "Installed Mods: {0}", # New string for mod count
     "new_file_confirm_title": "Confirm New File", # New
-    "new_file_confirm": "Are you sure you want to start a new file? Any unsaved changes will be lost." # New
+    "new_file_confirm": "Are you sure you want to start a new file? Any unsaved changes will be lost.",
+    "menu_delete_all_mods_from_disk": "Delete all mods from modloader folder",
+    "menu_restore_mods_from_backup": "Restore mods from backup_files folder", # New
 }
 
 # Модуль для локализации
@@ -353,7 +354,6 @@ LANG_RU = {
     "edit_select_all": "Выделить все", # New
     "edit_deselect_all": "Снять выделение", # New
     "edit_invert_selection": "Инвертировать выделение", # New
-    "restore_all_mods_from_folder": "Восстановить все моды из папки", # NEW
     "settings_menu": "Настройки",
     "theme_menu": "Тема",
     "theme_system": "Системная тема",
@@ -455,7 +455,9 @@ LANG_RU = {
     "rate_program_label": "Рейтинг Программы:",
     "installed_mods_count": "Установлено модов: {0}", # New string for mod count
     "new_file_confirm_title": "Подтверждение создания нового файла", # New
-    "new_file_confirm": "Вы уверены, что хотите создать новый файл? Все несохраненные изменения будут потеряны." # New
+    "new_file_confirm": "Вы уверены, что хотите создать новый файл? Все несохраненные изменения будут потеряны.",
+    "menu_delete_all_mods_from_disk": "Удалить все моды из папки modloader",
+    "menu_restore_mods_from_backup": "Восстановить моды из папки backup_files", # New
 }
 
 # =============================================================================
@@ -482,7 +484,6 @@ LANG_UK = {
     "edit_select_all": "Виділити все", # New
     "edit_deselect_all": "Зняти виділення", # New
     "edit_invert_selection": "Інвертувати виділення", # New
-    "restore_all_mods_from_folder": "Відновити всі моди з папки", # NEW
     "settings_menu": "Налаштування",
     "theme_menu": "Тема",
     "theme_system": "Системна тема",
@@ -583,7 +584,9 @@ LANG_UK = {
     "rate_program_label": "Оцініть цю програму:",
     "installed_mods_count": "Встановлено модів: {0}",
     "new_file_confirm_title": "Підтвердження створення нового файлу", # New
-    "new_file_confirm": "Ви впевнені, що хочете створити новий файл? Усі незбережені зміни буде втрачено." # New
+    "new_file_confirm": "Ви впевнені, що хочете створити новий файл? Усі незбережені зміни буде втрачено.",
+    "menu_delete_all_mods_from_disk": "Видалити всі моди з папки modloader",
+    "menu_restore_mods_from_backup": "Відновити моди з папки backup_files", # New
 }
 
 
@@ -958,10 +961,18 @@ class ModPriorityGUI(tk.Tk):
         self.edit_menu.add_command(label=self.current_lang["edit_reset_priorities"], command=self.reset_all_priorities)
         self.edit_menu.add_command(label=self.current_lang["edit_restore_defaults"], command=self.restore_default_priorities)
         self.edit_menu.add_separator()
+        self.edit_menu.add_command(
+            label=self.current_lang["menu_delete_all_mods_from_disk"],
+            command=self.delete_all_mods_to_backup_folder
+        )
+        self.edit_menu.add_command(
+            label=self.current_lang["menu_restore_mods_from_backup"],
+            command=self.restore_mods_from_backup_folder
+        )
+        self.edit_menu.add_separator()
         self.edit_menu.add_command(label=self.current_lang["edit_delete_mod"], command=self.delete_selected_mods)
         self.edit_menu.add_command(label=self.current_lang["delete_all_mods"], command=self.delete_all_mods)
         # NEW: Добавлена новая команда для восстановления всех модов из папки
-        self.edit_menu.add_command(label=self.current_lang["restore_all_mods_from_folder"], command=self.load_mods_and_assign_priorities)
 
         # Меню "Настройки"
         self.settings_menu = tk.Menu(self.menubar, tearoff=0)
@@ -995,6 +1006,72 @@ class ModPriorityGUI(tk.Tk):
         self.help_menu.add_command(label=self.current_lang["help_updates"], command=self.check_for_updates)
         self.help_menu.add_command(label=self.current_lang["help_help"], command=self.show_help)
         self.help_menu.add_command(label=self.current_lang["help_contact"], command=self.contact_support)
+
+    
+    def delete_all_mods_to_backup_folder(self):
+        """
+        Перемещает все моды из папки modloader в папку modloader/backup_files.
+        """
+        backup_dir = os.path.join(self.modloader_dir, "backup_files")
+        os.makedirs(backup_dir, exist_ok=True)
+
+        try:
+            mod_folders = [f for f in os.listdir(self.modloader_dir)
+                           if os.path.isdir(os.path.join(self.modloader_dir, f))
+                           and f != "backup_files"
+                           and not f.startswith(".")]
+
+            if not mod_folders:
+                self.log(self.current_lang["mods_not_found"].format(self.modloader_dir), tag="warning")
+                return
+
+            for mod in mod_folders:
+                src = os.path.join(self.modloader_dir, mod)
+                dst = os.path.join(backup_dir, mod)
+                shutil.move(src, dst)
+                self.log(f"✅ Мод '{mod}' перемещен в backup_files.", tag="info")
+
+            self.log(f"📦 Все моды перемещены в '{backup_dir}'", tag="info")
+            self.load_mods_and_assign_priorities()
+
+        except Exception as e:
+            self.log(f"❌ Ошибка при перемещении модов: {e}", tag="error")
+
+
+    def restore_mods_from_backup_folder(self):
+        """
+        Восстанавливает все моды из modloader/backup_files и удаляет папку backup_files.
+        """
+        backup_dir = os.path.join(self.modloader_dir, "backup_files")
+        if not os.path.exists(backup_dir):
+            self.log("❌ Папка backup_files не найдена. Восстановление невозможно.", tag="error")
+            return
+
+        try:
+            restored = 0
+            for mod in os.listdir(backup_dir):
+                src = os.path.join(backup_dir, mod)
+                dst = os.path.join(self.modloader_dir, mod)
+                if os.path.exists(dst):
+                    self.log(f"⚠️ Мод '{mod}' уже существует. Пропускаем.", tag="warning")
+                    continue
+                shutil.move(src, dst)
+                self.log(f"🔄 Мод '{mod}' восстановлен.", tag="info")
+                restored += 1
+
+            shutil.rmtree(backup_dir)
+            self.log("🗑 Папка 'backup_files' удалена.", tag="info")
+
+            if restored == 0:
+                self.log("⚠️ Ни один мод не был восстановлен.", tag="warning")
+            else:
+                self.log(f"✅ Восстановлено модов: {restored}", tag="info")
+
+            self.load_mods_and_assign_priorities()
+
+        except Exception as e:
+            self.log(f"❌ Ошибка при восстановлении модов: {e}", tag="error")
+
 
     def create_widgets(self):
         """
