@@ -10,6 +10,7 @@ import webbrowser
 import csv
 import re
 import colorsys # Добавлен для работы с цветовыми пространствами HLS
+import traceback # Добавлен для вывода полного стека ошибок
 
 # =============================================================================
 # --- Условные импорты и вспомогательные функции для Windows ---
@@ -559,7 +560,6 @@ LANG_UK = {
     "found_mod_folder": "Знайдено папку мода: {0}",
     "skipping_entry": "Пропуск запису (не папка або ігнорований префікс): {0}",
     "no_valid_mod_folders": "Дійсних папок модів не знайдено.",
-    "no_mods_to_export": "Немає модів для експорту. Список порожній.",
     "file_not_found": "Файл не знайдено: {0}",
     "invalid_priority_value": "Невірне значення пріоритету для мода '{0}' в INI: '{1}'. Пропущено.",
     "mod_deleted_count": "Видалено {0} мод(ів) зі списку.",
@@ -1260,48 +1260,70 @@ class ModPriorityGUI(tk.Tk):
                 self.log(self.current_lang["file_read_error"].format(e), tag="error")
 
         found_mod_folders = 0
-        for entry_name in os.listdir(self.modloader_dir):
-            entry_path = os.path.join(self.modloader_dir, entry_name) 
-            if os.path.isdir(entry_path) and not entry_name.startswith('.'): # Игнорируем скрытые папки
-                self.log(self.current_lang["found_mod_folder"].format(entry_name), tag="info")
-                found_mod_folders += 1
-                mod_priority = 0 # Приоритет по умолчанию
+        try:
+            all_entries = os.listdir(self.modloader_dir)
+            self.log(f"DEBUG: Найдено {len(all_entries)} записей в папке modloader.", tag="info") # Новое отладочное сообщение
+            if not all_entries: # Новая проверка
+                self.log(f"DEBUG: Папка modloader '{self.modloader_dir}' пуста.", tag="warning") # Новое отладочное сообщение
 
-                # 1. Приоритет из modloader.ini (если есть)
-                if entry_name.lower() in modloader_ini_priorities:
-                    mod_priority = modloader_ini_priorities[entry_name.lower()]
-                    self.log(self.current_lang["priority_from_mod_ini"].format(mod_priority, entry_name), tag="info")
-                else:
-                    # 2. Приоритет из mod.ini внутри папки мода
-                    mod_ini_path = os.path.join(entry_path, "mod.ini")
-                    if os.path.exists(mod_ini_path):
-                        mod_ini_config = configparser.ConfigParser()
-                        try:
-                            mod_ini_config.read(mod_ini_path, encoding='utf-8')
-                            if mod_ini_config.has_section("Mod") and mod_ini_config.has_option("Mod", "Priority"):
-                                try:
-                                    mod_priority = int(mod_ini_config.get("Mod", "Priority"))
-                                    self.log(self.current_lang["priority_from_mod_ini"].format(mod_priority, entry_name), tag="info")
-                                except ValueError:
-                                    self.log(self.current_lang["invalid_priority_value"].format(entry_name, mod_ini_config.get("Mod", "Priority")), tag="warning")
-                        except Exception as e:
-                            self.log(f"⚠️ Ошибка чтения mod.ini для '{entry_name}': {e}", tag="warning")
+            for entry_name in all_entries: # Итерируем по всем записям
+                entry_path = os.path.join(self.modloader_dir, entry_name) 
+                self.log(f"DEBUG: Обработка записи: {entry_name}", tag="info") # Новое отладочное сообщение
+                if os.path.isdir(entry_path) and not entry_name.startswith('.'): # Игнорируем скрытые папки
+                    self.log(self.current_lang["found_mod_folder"].format(entry_name), tag="info")
+                    found_mod_folders += 1
+                    mod_priority = 0 # Приоритет по умолчанию
+
+                    # 1. Приоритет из modloader.ini (если есть)
+                    if entry_name.lower() in modloader_ini_priorities:
+                        mod_priority = modloader_ini_priorities[entry_name.lower()]
+                        self.log(self.current_lang["priority_from_mod_ini"].format(mod_priority, entry_name), tag="info")
+                    else:
+                        # 2. Приоритет из mod.ini внутри папки мода
+                        mod_ini_path = os.path.join(entry_path, "mod.ini")
+                        if os.path.exists(mod_ini_path):
+                            mod_ini_config = configparser.ConfigParser()
+                            try:
+                                mod_ini_config.read(mod_ini_path, encoding='utf-8')
+                                if mod_ini_config.has_section("Mod") and mod_ini_config.has_option("Mod", "Priority"):
+                                    try:
+                                        mod_priority = int(mod_ini_config.get("Mod", "Priority"))
+                                        self.log(self.current_lang["priority_from_mod_ini"].format(mod_priority, entry_name), tag="info")
+                                    except ValueError:
+                                        self.log(self.current_lang["invalid_priority_value"].format(entry_name, mod_ini_config.get("Mod", "Priority")), tag="warning")
+                            except Exception as e:
+                                self.log(f"⚠️ Ошибка чтения mod.ini для '{entry_name}': {e}", tag="warning")
 
                     # 3. Приоритет из custom_priorities (переопределяет mod.ini, если совпадает)
                     if entry_name.lower() in custom_priorities:
-                        mod_priority = custom_priorities.get(mod_name.lower()) # Используем .get() для безопасного доступа
-                        if mod_priority is None: # Если ключ не найден, устанавливаем 0
-                            mod_priority = 0
+                        mod_priority = custom_priorities[entry_name.lower()] 
                         self.log(self.current_lang["priority_auto_assigned"].format(mod_priority, entry_name), tag="info")
 
-                # Убедимся, что приоритет в допустимом диапазоне
-                if not is_valid_priority(mod_priority):
-                    mod_priority = 0 # Сбрасываем на 0, если невалидный
-                    self.log(self.current_lang["invalid_priority_value"].format(entry_name, mod_priority) + " Сброшен на 0.", tag="warning")
+                    # Убедимся, что приоритет в допустимом диапазоне
+                    if not is_valid_priority(mod_priority):
+                        mod_priority = 0 # Сбрасываем на 0, если невалидный
+                        self.log(self.current_lang["invalid_priority_value"].format(entry_name, mod_priority) + " Сброшен на 0.", tag="warning")
 
-                self.mods.append((entry_name, mod_priority))
-            else:
-                self.log(self.current_lang["skipping_entry"].format(entry_name), tag="info")
+                    self.mods.append((entry_name, mod_priority)) # ЭТА СТРОКА БЫЛА ПЕРЕМЕЩЕНА ВНУТРЬ БЛОКА IF
+                else:
+                    # Более конкретная причина пропуска
+                    if not os.path.isdir(entry_path):
+                        self.log(f"DEBUG: Пропуск '{entry_name}', так как это не директория.", tag="info")
+                    elif entry_name.startswith('.'):
+                        self.log(f"DEBUG: Пропуск '{entry_name}', так как это скрытая папка.", tag="info")
+                    else:
+                        self.log(self.current_lang["skipping_entry"].format(entry_name), tag="info") # Оригинальный общий лог пропуска
+        except (FileNotFoundError, PermissionError) as e:
+            self.log(self.current_lang["modloader_folder_not_found"].format(self.modloader_dir) + f" Details: {e}", tag="error")
+            print(f"ERROR: Could not list modloader directory '{self.modloader_dir}': {e}") # Also print to console
+            self.update_mod_count_label()
+            return
+        except Exception as e:
+            self.log(f"An unexpected error occurred while scanning modloader folder: {e}", tag="error")
+            print(f"ERROR: Unexpected error during modloader scan: {e}") # Also print to console
+            self.update_mod_count_label()
+            return
+
 
         if not self.mods:
             self.log(self.current_lang["mods_not_found"].format(self.modloader_dir), tag="warning")
@@ -2129,5 +2151,16 @@ class ModPriorityGUI(tk.Tk):
 # --- Запуск приложения ---
 # =============================================================================
 if __name__ == "__main__":
-    app = ModPriorityGUI()
-    app.mainloop()
+    try:
+        app = ModPriorityGUI()
+        app.mainloop()
+    except Exception as e:
+        # Этот блок перехватывает любые необработанные исключения во время инициализации GUI или mainloop
+        # и выводит их в консоль, что является единственным способом получить обратную связь,
+        # если GUI полностью не запускается.
+        print(f"FATAL ERROR: Application failed to launch due to an unhandled exception: {e}")
+        traceback.print_exc()
+        # Дополнительно, записываем в файл журнала, если вывод в консоль недостаточен
+        with open("crash_log.txt", "a", encoding="utf-8") as f:
+            f.write(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] FATAL ERROR: {e}\n")
+            traceback.print_exc(file=f)
