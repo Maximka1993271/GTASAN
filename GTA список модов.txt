@@ -291,7 +291,7 @@ Unflip Your Cars Like in GTA V
 Universal Vehicle Lights
 Unlock Car Door
 VCStuffSA.SA
-VehDeform v1.3b
+VehDeform v1.3c
 VehFuncs
 Vehicle Collision Cam Shake
 Vehicle Collision Shake
@@ -376,6 +376,7 @@ Ear Ringing Simple
 EchoWeapons
 Engine Volume
 Enhanced Jetpack
+Fancy Trunk Store Weapons 0.5 (BETA)
 Faster animation of sellers
 Fireman Fireproof Fix
 Fix Handle By Orion SR
