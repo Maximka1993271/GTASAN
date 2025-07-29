@@ -144,8 +144,7 @@ LANG_EN = {
     "edit_select_all": "Select All", # New
     "edit_deselect_all": "Deselect All", # New
     "edit_invert_selection": "Invert Selection", # New
-    "delete_all_mods_from_modloader_folder": "Delete All Mods from modloader Folder",
-    "restore_all_mods_to_modloader_folder": "Restore All Mods to modloader Folder",  # NEW
+    "restore_all_mods_from_folder": "Restore All Mods from Folder", # NEW
     
     "settings_menu": "Settings",
     "theme_menu": "Theme",
@@ -354,8 +353,7 @@ LANG_RU = {
     "edit_select_all": "Выделить все", # New
     "edit_deselect_all": "Снять выделение", # New
     "edit_invert_selection": "Инвертировать выделение", # New
-    "delete_all_mods_from_modloader_folder": "Удалить все моды из папки modloader",
-    "restore_all_mods_to_modloader_folder": "Восстановить все моды в папке modloader",  # NEW
+    "restore_all_mods_from_folder": "Восстановить все моды из папки", # NEW
     "settings_menu": "Настройки",
     "theme_menu": "Тема",
     "theme_system": "Системная тема",
@@ -484,8 +482,7 @@ LANG_UK = {
     "edit_select_all": "Виділити все", # New
     "edit_deselect_all": "Зняти виділення", # New
     "edit_invert_selection": "Інвертувати виділення", # New
-    "delete_all_mods_from_modloader_folder": "Видалити всі моди з папки modloader",
-    "restore_all_mods_to_modloader_folder": "Відновити всі моди в папку modloader",  # NEW
+    "restore_all_mods_from_folder": "Відновити всі моди з папки", # NEW
     "settings_menu": "Налаштування",
     "theme_menu": "Тема",
     "theme_system": "Системна тема",
@@ -749,52 +746,6 @@ class ModPriorityGUI(tk.Tk):
         # УДАЛЕНО: Проверяем обновления при запуске, если опция включена
         # if self.check_updates_on_startup_var.get():
         #     self.check_for_updates()
-    def delete_all_mods_from_modloader_folder(self):
-        """Перемещает все моды из папки modloader в папку modloader_backup."""
-        backup_folder = os.path.join(self.modloader_dir, "modloader_backup")
-        os.makedirs(backup_folder, exist_ok=True)
-        moved_count = 0
-
-        for name in os.listdir(self.modloader_dir):
-            full_path = os.path.join(self.modloader_dir, name)
-            if os.path.isdir(full_path) and name.lower() != "modloader_backup":
-                try:
-                    shutil.move(full_path, os.path.join(backup_folder, name))
-                    moved_count += 1
-                except Exception as e:
-                    self.log(f"❌ {self.current_lang['file_save_error'].format(str(e))}", tag="error")
-
-        self.log(f"📦 {moved_count} мод(ов) перемещено в 'modloader_backup'.", tag="info")
-        self.load_mods_and_assign_priorities()
-
-    def restore_all_mods_to_modloader_folder(self):
-        """Восстанавливает все моды из modloader_backup в modloader."""
-        backup_folder = os.path.join(self.modloader_dir, "modloader_backup")
-        if not os.path.exists(backup_folder):
-            self.log("⚠️ Папка 'modloader_backup' не найдена.", tag="warning")
-            return
-
-        restored_count = 0
-        for name in os.listdir(backup_folder):
-            src = os.path.join(backup_folder, name)
-            dst = os.path.join(self.modloader_dir, name)
-            try:
-                shutil.move(src, dst)
-                restored_count += 1
-            except Exception as e:
-                self.log(f"❌ {self.current_lang['file_save_error'].format(str(e))}", tag="error")
-
-        self.log(f"♻️ Восстановлено модов: {restored_count}.", tag="info")
-        self.load_mods_and_assign_priorities()
-        # После восстановления — пробуем удалить папку, если она пуста
-        try:
-            if os.path.isdir(backup_folder) and not os.listdir(backup_folder):
-                os.rmdir(backup_folder)
-                self.log("🧹 Папка 'modloader_backup' удалена, так как она пуста.", tag="info")
-        except Exception as e:
-            self.log(f"⚠️ Не удалось удалить папку 'modloader_backup': {str(e)}", tag="warning")
-
-
 
     def _set_app_icon(self):
         """Устанавливает иконку приложения из файла icon.ico."""
@@ -922,6 +873,15 @@ class ModPriorityGUI(tk.Tk):
             self.menubar.destroy()
         self.create_menu() # Recreate the menu with new language texts
         
+        # Destroy and recreate the Treeview context menu
+        if hasattr(self, 'mod_tree_context_menu') and self.mod_tree_context_menu is not None:
+            self.mod_tree_context_menu.destroy()
+        self.mod_tree_context_menu = tk.Menu(self, tearoff=0)
+        self.mod_tree_context_menu.add_command(label=self.current_lang["edit_delete_mod"], command=self.delete_selected_mods)
+        # Re-bind the context menu to the Treeview
+        self.mod_tree.bind("<Button-3>", self.show_mod_tree_context_menu)
+
+
         # Ensure all pending GUI updates are processed before configuring other widgets
         self.update_idletasks() 
         
@@ -1001,9 +961,7 @@ class ModPriorityGUI(tk.Tk):
         self.edit_menu.add_command(label=self.current_lang["edit_delete_mod"], command=self.delete_selected_mods)
         self.edit_menu.add_command(label=self.current_lang["delete_all_mods"], command=self.delete_all_mods)
         # NEW: Добавлена новая команда для восстановления всех модов из папки
-        self.edit_menu.add_separator()
-        self.edit_menu.add_command(label=self.current_lang["delete_all_mods_from_modloader_folder"], command=self.delete_all_mods_from_modloader_folder)
-        self.edit_menu.add_command(label=self.current_lang["restore_all_mods_to_modloader_folder"], command=self.restore_all_mods_to_modloader_folder)
+        self.edit_menu.add_command(label=self.current_lang["restore_all_mods_from_folder"], command=self.load_mods_and_assign_priorities)
 
         # Меню "Настройки"
         self.settings_menu = tk.Menu(self.menubar, tearoff=0)
@@ -1568,7 +1526,7 @@ class ModPriorityGUI(tk.Tk):
         Восстанавливает текст плейсхолдера, если поле пустое, и меняет цвет шрифта на плейсхолдер.
         """
         if not self.search_var.get():
-            self.search_var.set(f" {self.current_lang['search_mod']}")
+            self.search_var.set(f"🔍 {self.current_lang['search_mod']}")
             self.search_entry.config(foreground=self.placeholder_fg)
             self.is_placeholder_active = True
             self.apply_search_filter() # Применяем фильтр, чтобы показать все моды, если поле пустое
