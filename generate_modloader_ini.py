@@ -122,6 +122,7 @@ custom_priorities = {
 # Содержат все текстовые строки, используемые в интерфейсе, на английском и русском языках.
 # =============================================================================
 LANG_EN = {
+    "run_game": "Run Game",
     "app_title": "GTA SA Modloader Priority Editor 2.0",
     
     # Меню
@@ -335,6 +336,7 @@ class Localization:
 # Содержат все текстовые строки, используемые в интерфейсе, на русском языке.
 # =============================================================================
 LANG_RU = {
+    "run_game": "Запустить игру",
     "app_title": "GTA SA Modloader Priority Editor 2.0",
     "file_menu": "Файл",
     "file_new": "Новый файл", # New
@@ -465,6 +467,7 @@ LANG_RU = {
 # Содержат все текстовые строки, используемые в интерфейсе, на украинском языке.
 # =============================================================================
 LANG_UK = {
+    "run_game": "Запустити гру",
     "app_title": "Редактор пріоритетів GTA SA Modloader 2.0",
     "file_menu": "Файл",
     "file_new": "Новий файл", # New
@@ -808,7 +811,7 @@ class ModPriorityGUI(tk.Tk):
         """
         if os.path.exists(self.config_file):
             try:
-                self.app_config.read(self.config_file, encoding='utf-8')
+                self.app_config.read(self.config_file, encoding="utf-8-sig")
             except Exception as e:
                 # В случае ошибки чтения, записываем в консоль, так как лог еще может быть не инициализирован.
                 print(f"⚠️ Ошибка чтения файла конфигурации: {e}")
@@ -863,6 +866,7 @@ class ModPriorityGUI(tk.Tk):
         # и только если это не первоначальная настройка.
         if hasattr(self, 'log_text') and not initial_setup:
             self.log(f"{self.current_lang['language_menu']}: {self.current_lang[f'language_{lang_code}']}", add_timestamp=False)
+            self.run_game_button.config(text=f"🎮 {self.current_lang['run_game']}")
 
     def update_ui_texts(self):
         """
@@ -1109,6 +1113,8 @@ class ModPriorityGUI(tk.Tk):
 
         self.generate_ini_button = ttk.Button(top_frame, text=self.current_lang["generate_ini"], command=self.generate_modloader_ini)
         self.generate_ini_button.pack(side="left")
+        self.run_game_button = ttk.Button(top_frame, text=f"🎮 {self.current_lang['run_game']}", command=self.launch_game)
+        self.run_game_button.pack(side="left", padx=(10, 0))
         ToolTip(self.generate_ini_button, self.current_lang["generate_ini"])
 
         # Canvas для анимированной цветной полоски
@@ -2263,6 +2269,44 @@ class ModPriorityGUI(tk.Tk):
 # =============================================================================
 # --- Запуск приложения ---
 # =============================================================================
+
+
+    
+
+    def launch_game(self):
+        """
+        Пытается запустить GTA San Andreas. Если gta_sa.exe не найден, предлагает выбрать вручную.
+        """
+        gta_path = self.app_config.get("Paths", "gta_path", fallback=None)
+
+        if not gta_path or not os.path.exists(gta_path):
+            default_path = os.path.join(os.path.dirname(self.modloader_dir), "gta_sa.exe")
+            if os.path.exists(default_path):
+                gta_path = default_path
+            else:
+                from tkinter import filedialog
+                self.log("❓ Не удалось найти gta_sa.exe автоматически. Выберите вручную...", tag="info")
+                selected = filedialog.askopenfilename(
+                    title="Выберите файл gta_sa.exe",
+                    filetypes=[("GTA San Andreas Executable (gta_sa.exe)", "gta_sa.exe")])
+                if selected and os.path.basename(selected).lower() == "gta_sa.exe":
+                    gta_path = selected
+                    if not self.app_config.has_section("Paths"):
+                        self.app_config.add_section("Paths")
+                    self.app_config.set("Paths", "gta_path", gta_path)
+                    with open(self.config_file, "w", encoding="utf-8") as configfile:
+                        self.app_config.write(configfile)
+                    self.log("💾 Путь к gta_sa.exe сохранён в config.ini.", tag="info")
+                else:
+                    self.log("❌ gta_sa.exe не выбран. Запуск отменён.", tag="error")
+                    return
+
+        try:
+            os.startfile(gta_path)
+            self.log("🚀 Игра GTA San Andreas запущена.", tag="info")
+        except Exception as e:
+            self.log(f"❌ Не удалось запустить игру: {e}", tag="error")
+
 if __name__ == "__main__":
     try:
         app = ModPriorityGUI()
