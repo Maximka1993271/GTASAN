@@ -156,6 +156,7 @@ Bike Flip Fix
 Bike Lean
 Bike Shop
 Bike Spin
+Bike Stand
 Burnout 360 Fix
 Call TowTruck
 CamShake
