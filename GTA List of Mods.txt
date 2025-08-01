@@ -214,6 +214,7 @@ Gear Control
 GPS Redux v1.4.6
 GTA V to SA Burnout RRMS Edition
 Handbrake Mod
+HandbrakeCam
 Headlight Destroyer
 Helmet Mod
 Improved Change Gear Anim
