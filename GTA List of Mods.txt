@@ -363,7 +363,7 @@ Create Pickups Mod
 Damage mark on the screen
 Dealer Weapons
 Death animations Ragdoll Style
-DeathAnimsMod v2.0 (13.01.2025)
+DeathAnimsMod v2.0 Update 10.08.2025
 Difficult Move In Water
 Disable jetpack heat effect
 Diving Mod
