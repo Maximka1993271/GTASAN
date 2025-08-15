@@ -693,5 +693,5 @@ Updated TimeCycle (24h TimeCycle)
 Textures
 
 Proper Fixes v1.5
-RoSA Project Evolved - May
+RoSA Project Evolved - June
 Revamped Vehicle Project
