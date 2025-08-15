@@ -60,7 +60,7 @@ Extended Gang Wars
 FastLoader v1.2
 Fires & flames
 Fires and lights
-First Person Mod
+First Person Mod v3.0 Fixed
 Fix Damage From Explosions Through Walls v1.0
 Fixed dialogues with gangs
 Fixed Mouse Flight
