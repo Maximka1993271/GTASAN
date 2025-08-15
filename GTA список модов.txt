@@ -378,7 +378,7 @@ Ear Ringing Simple
 EchoWeapons
 Engine Volume
 Enhanced Jetpack
-Fancy Trunk Store Weapons 0.5 (BETA)
+Fancy Trunk Store Weapons v0.07
 Faster animation of sellers
 Fireman Fireproof Fix
 Fix Handle By Orion SR
