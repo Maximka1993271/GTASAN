@@ -69,7 +69,7 @@ Friendly Triads And Los Aztecas Fix
 Full Stream Radar
 Functional Components
 GInput
-Glowing Pickups
+Glowing Pickups v1.0.3
 Graffiti Anywhere
 Pager from GTA 3 v1.0
 HeliFix
