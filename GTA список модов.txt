@@ -564,16 +564,22 @@ FxsFuncs v1.2
 Graphics Tweaker v1.3.1
 IMFX v17.11.2017t
 Improved Streaming v1.0.1
-Mobile Font Fixed v1.0.1
 NextGen and Combat FX Plus
 Project2DFX v4.4
 Real Skybox v1.3.4
 ReShade v6.5.1
 RGGSA2.0 ENB
-SA Mobile Hud v2.01.1
 Shadows Settings Extender v2.1.2
 SkyGfx Extended v1.7
 SkyGrad
+
+
+
+Interface
+
+HUDcolors
+SA Mobile Hud v2.01.1
+Mobile Font Fixed v1.0.1
 
 
 
