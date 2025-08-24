@@ -248,6 +248,7 @@ No Aggressive Drivers
 No Radio Auto Change
 No Rhino
 NoRadio v2
+NPC Health Bar
 NPC Lowrider
 NPC Tuning
 Oil Leaking
