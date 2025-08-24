@@ -573,12 +573,12 @@ SkyGrad
 
 Interface
 
-ClassicHud
+ClassicHud v2.2
 Hud Definitive Edition
 HUDcolors
 Mobile Font Fixed v1.0.1
 SA Mobile Hud v2.01.1
-VHud
+VHud v0.944
 
 
 
