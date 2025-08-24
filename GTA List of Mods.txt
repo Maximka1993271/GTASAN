@@ -421,7 +421,6 @@ Hit the Entity Fix
 Hood Fellas Greeting You
 Hospital Health Pickups
 HS missiles for Hunter
-HUD Colors
 Improved Barber
 Improved Club
 Improved Gangs War v1.1
