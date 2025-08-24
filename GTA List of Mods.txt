@@ -574,6 +574,7 @@ SkyGrad
 Interface
 
 ClassicHud v2.2
+GTA V HUD by DK22Pac
 Hud Definitive Edition
 HUDcolors
 Mobile Font Fixed v1.0.1
