@@ -574,12 +574,14 @@ SkyGrad
 Interface
 
 ClassicHud v2.2
+GTA IV HUD by AG v1.3 (+ SA style)
 GTA V HUD by DK22Pac
 Hud Definitive Edition
 HUDcolors
 Mobile Font Fixed v1.0.1
 SA Mobile Hud v2.01.1
 VHud v0.944
+WD2 Interface
 
 
 
