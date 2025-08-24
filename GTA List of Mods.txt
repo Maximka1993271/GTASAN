@@ -49,7 +49,6 @@ Camera Point Fix
 Camera shaking at high speeds v1.1
 Cheat Menu v3.52
 Cigarette and Antenna
-ClassicHud
 Cold Steam
 Disable Radar On Foot
 EdgeFX
@@ -73,7 +72,6 @@ Glowing Pickups v1.0.3
 Graffiti Anywhere
 Pager from GTA 3 v1.0
 HeliFix
-Hud Definitive Edition
 III.VC.SA.SaveLoader v2.7
 Improved Lamppost Lights
 ImprovedMove
@@ -117,7 +115,6 @@ VCBulletTrails v1.2
 VCMarkersSA
 VCParticles v1.0.2
 VCStuffSA
-VHud
 Weapon Icons TXD
 WeaponRecoilRE
 Wheel Cam from VC v1.0
@@ -576,9 +573,12 @@ SkyGrad
 
 Interface
 
+ClassicHud
+Hud Definitive Edition
 HUDcolors
-SA Mobile Hud v2.01.1
 Mobile Font Fixed v1.0.1
+SA Mobile Hud v2.01.1
+VHud
 
 
 
