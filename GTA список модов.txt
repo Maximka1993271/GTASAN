@@ -368,8 +368,7 @@ CoverMod
 Create Pickups Mod
 Damage mark on the screen
 Dealer Weapons
-Death animations Ragdoll Style
-DeathAnimsMod v2.0 (27.08.2025)
+Death animations Ragdoll Style v2.0
 Difficult Move In Water
 Disable jetpack heat effect
 Diving Mod
