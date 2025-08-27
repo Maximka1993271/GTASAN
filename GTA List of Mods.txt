@@ -197,7 +197,7 @@ Death In Car
 Destructive Rhino Mod
 Detach Trailer
 Diesel
-DohertyGarage v1.4.6
+DohertyGarage v1.5b
 DrIVe Mod v2.0 (04.07.2025)
 Dynamic motorway traffic
 Emergency Lights Mod
@@ -369,7 +369,7 @@ Create Pickups Mod
 Damage mark on the screen
 Dealer Weapons
 Death animations Ragdoll Style
-DeathAnimsMod v2.0 Update 10.08.2025
+DeathAnimsMod v2.0 (27.08.2025)
 Difficult Move In Water
 Disable jetpack heat effect
 Diving Mod
@@ -468,6 +468,7 @@ Planes Inertia
 Planning Department
 Player Move Head
 Police Dept Fix
+PoliceMod v1.0.1
 Properties Plus, Buy Properties mod v1.2.1
 Quick Map
 Quick Weapon Draw
@@ -478,7 +479,7 @@ Rain Mods
 Rampage Fury Missions
 Random Events Project
 Random Train Drivers
-Rats at the trash can
+Rats at the trash can v1.1
 Real Multiple Protagonists 2.0
 Real Time
 Real Weapons Names
