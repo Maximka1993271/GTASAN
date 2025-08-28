@@ -441,7 +441,7 @@ Lampposts FX v1.1
 Leviathan
 Light Destroyer
 Lighted barriers
-Lighthouse & Pyramid Fix
+Lighthouse & Pyramid Fix v1.0.3
 Long Trains
 Manhunt Sneak Kills
 Mission Balancing Tool Update v.25.05.22
