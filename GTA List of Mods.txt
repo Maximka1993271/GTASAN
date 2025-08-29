@@ -553,7 +553,7 @@ Weapon Dealer
 Weapon Detaills Update v3.2
 Weapon pickup
 Weapon Pickup Maker Update (4/4/2025)
-Weapon Zoom Unlimited Update v.25.06.05
+Weapon Zoom Unlimited Update v.25.08.29
 WeaponRecoilAuto
 WeaponTweaks
 Weather Forecast
