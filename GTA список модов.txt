@@ -100,7 +100,6 @@ Roadsign Font HD
 Rubbish
 SA H-Optimize
 SA Rampages
-SAMP Adjustments v1.3
 Save License Plate
 Script Fixes
 Spread Fix
@@ -498,7 +497,7 @@ SA Sonic Adventure 2
 SA switch weapon v1.2
 SACamFX
 SAFighting Extended
-SAMP Adjustments
+SAMP Adjustments v1.3
 Sawn Off Dual Wield Fix
 Searchlights
 Securicar Drop Money
