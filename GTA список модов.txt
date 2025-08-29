@@ -437,7 +437,7 @@ Inventory System
 JetPack Adjuster
 Kill Cam
 Lamppost Insects
-Lampposts FX v1.1
+Lampposts FX v1.2
 Leviathan
 Light Destroyer
 Lighted barriers
