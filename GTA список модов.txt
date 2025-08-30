@@ -467,7 +467,7 @@ Planes Inertia
 Planning Department
 Player Move Head
 Police Dept Fix
-PoliceMod v1.0.1
+PoliceMod v1.0.2
 Properties Plus, Buy Properties mod v1.2.1
 Quick Map
 Quick Weapon Draw
@@ -581,6 +581,7 @@ SkyGrad
 
 Interface
 
+Brema HUD Preset
 ClassicHud v2.2
 GTA IV HUD by AG v1.3 (+ SA style)
 GTA V HUD by DK22Pac
