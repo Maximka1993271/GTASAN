@@ -457,6 +457,7 @@ NPC Health Indicator
 One Wanted Star Melee Fix
 Original Drug Dealers
 Ovens Catch On Fire
+Paramedic Mod
 PerPixel Lighting Mod
 Phone Mod
 Pickups Mod
