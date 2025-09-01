@@ -300,7 +300,7 @@ Universal Vehicle Lights
 Unlock Car Door
 VCStuffSA.SA
 VehDeform v1.3c
-VehFuncs
+VehFuncs v2.5
 Vehicle Collision Cam Shake
 Vehicle Collision Shake
 Vehicle Door Unlocker
