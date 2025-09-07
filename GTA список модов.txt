@@ -130,7 +130,6 @@ Beta Mulholland Safehouse
 
 IPL Files
 
-Fix Project Props v.2.2 (18.04.25)
 Improved Models
 Lando Propos - Objects in Map
 Parked Binary IPL Fixes
