@@ -134,7 +134,7 @@ Fix Project Props v.2.2 (18.04.25)
 Improved Models
 Lando Propos - Objects in Map
 Parked Binary IPL Fixes
-Project Props 3 Community
+Project Props 3.1 Community Edition
 Traincross Fix
 
 
