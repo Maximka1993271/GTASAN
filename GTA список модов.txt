@@ -194,7 +194,7 @@ Death In Car
 Destructive Rhino Mod
 Detach Trailer
 Diesel
-DohertyGarage v1.5b
+DohertyGarage v1.50beta
 DrIVe Mod v2.0 (04.07.2025)
 Dynamic motorway traffic
 Emergency Lights Mod
@@ -484,6 +484,7 @@ Real Weapons Names
 Realistic Beach
 Realistic Weapons Settings
 Reload Mod
+Resident Evil 5 Animation v2.7
 Restore Original Mouse Sensibility
 Restore Stealth Voices
 Restored Icons
