@@ -183,6 +183,7 @@ Cars Driving To The Challenge
 Cars On Dirt Roads
 Cars On Platforms
 Change Gear Anim
+CJ Pushes Pedal (cruise control) v1.0
 Collision Tweaker
 Cop Cars Unlocked
 CopVehCoronas
