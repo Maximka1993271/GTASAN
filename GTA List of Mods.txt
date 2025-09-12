@@ -549,6 +549,7 @@ Walk Targeting Fix
 Wanted Music
 Wanted Radar Warning
 Water Hurt
+Weapon Change Anim Fixed
 Weapon dat Professional Killer
 Weapon Dealer
 Weapon Detaills Update v3.2
