@@ -56,7 +56,7 @@ Enterable Hidden Interiors v4.3 Update 25.05.25
 Explosions
 Explosionsshake
 Extended Gang Wars
-FastLoader 1.2.2
+Fastloader.1.2.3
 Fires & flames
 Fires and lights
 First Person Mod v3.0 Fixed
