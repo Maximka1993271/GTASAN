@@ -150,7 +150,7 @@ Arrange Cars
 Attach Vehicle
 Attach Vehicles to Packer
 Auto Car Lock
-Autodrive
+AutoDriver v2.5
 Back Fire Low Speed
 Backfire with light
 Bike Customization
@@ -500,7 +500,7 @@ SA switch weapon v1.2
 SACamFX
 SAFighting Extended
 SAMP Adjustments v1.3
-Sawn Off Dual Wield Fix
+Sawn Off Dual Wield Fix v1.1
 Searchlights
 Securicar Drop Money
 Security Van Heist
