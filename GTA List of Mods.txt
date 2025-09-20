@@ -537,7 +537,7 @@ SWAT Helicopter with 5 stars Plus
 Swat Pos
 Teargas Fix
 The holster on the cops
-The Weapon Is On The Player
+The Weapon Is On The Player v1.1
 Throw Rotate Fix
 Time Payn Spray
 Tiring Sounds
