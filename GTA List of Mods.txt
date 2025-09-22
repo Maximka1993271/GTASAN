@@ -553,7 +553,7 @@ Water Hurt
 Weapon Change Anim Fixed v1.1
 Weapon dat Professional Killer
 Weapon Dealer
-Weapon Detaills Update v3.2
+Weapon Detaills v3.0
 Weapon pickup
 Weapon Pickup Maker Update (4/4/2025)
 Weapon Zoom Unlimited Update v.25.08.29
