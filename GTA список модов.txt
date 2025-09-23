@@ -183,6 +183,7 @@ CarHP
 Cars Driving To The Challenge
 Cars On Dirt Roads
 Cars On Platforms
+CarThief
 Change Gear Anim
 CJ Pushes Pedal (cruise control) v1.0
 Collision Tweaker
