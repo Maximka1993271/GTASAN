@@ -288,6 +288,7 @@ Stop Lights For Trailers
 Taxi Ride Mod
 Taxi77
 Traffic Light
+Traffic Lights Patch
 Traffic Path Fix
 Trailer Lights v1
 Trailers Lights Fix
