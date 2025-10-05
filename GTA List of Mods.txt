@@ -50,6 +50,7 @@ Camera shaking at high speeds v1.1
 Cheat Menu v3.52
 Cigarette and Antenna
 Cold Steam
+Cop N Threat Radar
 Disable Radar On Foot
 EdgeFX
 Enterable Hidden Interiors v4.3 Update 25.05.25
@@ -364,7 +365,6 @@ Clube Front Noise
 Colored Crosshair
 Combat improvement and Melee overhaul
 Commercial Mod
-Cop N Threat Radar
 Cops bulletproof
 Cops Faster and Climbing
 CoverMod
