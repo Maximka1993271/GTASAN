@@ -354,7 +354,7 @@ Boat Radar
 Body Stats Fix
 BrBa & BCS Cartel Event
 Burnout With Space
-Camera Settings
+Camera Settings v1.1
 Ceiling Bird Chirp
 Chainsaw Smoke
 Changeable health bar colors (depending on health %)
