@@ -438,6 +438,7 @@ Insects Mod
 Instakill
 Inventory System
 JetPack Adjuster
+Job DeliveryGroccery
 Kill Cam
 Lamppost Insects
 Lampposts FX v1.2
