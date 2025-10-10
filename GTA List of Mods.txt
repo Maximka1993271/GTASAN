@@ -257,6 +257,7 @@ Oil Leaking
 Open Doors
 Open Trunk And Hood
 Packer With Cars
+Palette Switcher
 Park Car
 Parking Save Garages Extended
 Pay ‘N’ Spray Select Color
