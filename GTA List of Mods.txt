@@ -542,7 +542,7 @@ SWAT Helicopter
 SWAT Helicopter with 5 stars Plus
 Swat Pos
 Teargas Fix
-The holster on the cops
+The holster on the cops v1.2
 The Weapon Is On The Player v2.0
 Throw Rotate Fix
 Time Payn Spray
