@@ -308,6 +308,7 @@ VehDeform v1.3c
 VehFuncs v2.5.1
 Vehicle Collision Cam Shake
 Vehicle Collision Shake
+Vehicle Color Randomizer
 Vehicle Door Unlocker
 Vehicle Flags Changer
 Vehicle Immunities
