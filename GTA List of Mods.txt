@@ -199,7 +199,7 @@ Death In Car
 Destructive Rhino Mod
 Detach Trailer
 Diesel
-DohertyGarage v1.50beta
+DohertyGarage v1.60
 DrIVe Mod v2.3
 Dynamic motorway traffic
 Emergency Lights Mod
@@ -312,7 +312,7 @@ Vehicle Color Randomizer
 Vehicle Door Unlocker
 Vehicle Flags Changer
 Vehicle Immunities
-Void Radio Wheel v0.6
+Void Radio Wheel v0.7
 Voodoo Physics Fix
 Wheel bump sound v1.0
 Wheel Detach
@@ -551,7 +551,7 @@ Tiring Sounds
 TweaksSAv95
 Unlimited Camera Ammo
 VCS&LCS Side Missions
-Void Weapon Wheel v1.3
+Void Weapon Wheel v1.4
 Wagon Detach
 Walk Targeting Fix
 Wanted Music
