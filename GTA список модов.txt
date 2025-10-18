@@ -685,6 +685,7 @@ Real Peds
 Realistic Population
 Restored Unused Peds
 Revamped Peds.ide
+Rob Pedestrians with a Gun
 Star For Attack Dead Ped
 Street Cleaners
 Street musicians
