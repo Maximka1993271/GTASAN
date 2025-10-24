@@ -199,7 +199,7 @@ Death In Car
 Destructive Rhino Mod
 Detach Trailer
 Diesel
-DohertyGarage v1.60
+DohertyGarage v1.6.1
 DrIVe Mod v2.3
 Dynamic motorway traffic
 Emergency Lights Mod
