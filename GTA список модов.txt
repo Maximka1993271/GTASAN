@@ -237,7 +237,7 @@ Lean On The Bike
 Lock And Park
 Lock Car Doors
 Luxury Cars Attract The Attention Of Pedestrians
-Manual Driveby Refixed Update v.25.10.14
+Manual Driveby Refixed Update v.25.10.28
 Manual DriveBy Remake
 Mid Air Car Control
 Minimalist Speedometer
@@ -563,7 +563,7 @@ Weapon Dealer
 Weapon Detaills v3.0
 Weapon pickup
 Weapon Pickup Maker Update (4/4/2025)
-Weapon Zoom Unlimited Update v.25.08.29
+Weapon Zoom Unlimited Update v.25.10.27
 WeaponRecoilAuto
 WeaponTweaks
 Weather Forecast
