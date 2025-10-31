@@ -320,6 +320,7 @@ Winch Taking Cars
 Wind noise at high speeds
 WorkingHorn
 Worn Brake Pad Sound
+xNOS
 Zero's RC
 
 
@@ -567,6 +568,7 @@ Weapon Zoom Unlimited Update v.25.10.27
 WeaponRecoilAuto
 WeaponTweaks
 Weather Forecast
+xCAM
 
 
 
