@@ -200,7 +200,7 @@ Destructive Rhino Mod
 Detach Trailer
 Diesel
 DohertyGarage v1.6.1
-DrIVe Mod v2.3
+DrIVe Mod v2.4
 Dynamic motorway traffic
 Emergency Lights Mod
 Engine Off On Vehicle Exit
@@ -357,7 +357,7 @@ Boat Radar
 Body Stats Fix
 BrBa & BCS Cartel Event
 Burnout With Space
-Camera Settings v1.1
+Camera Settings v1.2
 Ceiling Bird Chirp
 Chainsaw Smoke
 Changeable health bar colors (depending on health %)
