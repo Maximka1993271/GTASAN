@@ -383,7 +383,7 @@ DriveByOnOff
 Driver
 Drop Weapons Like In GTA IV v3.2
 Drug Dealer Fix
-Dynamic FOV
+Dynamic FOV Fixed v1.2
 Dyom Сleo Fix
 Ear Ringing Simple
 EchoWeapons
