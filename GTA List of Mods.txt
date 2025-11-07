@@ -634,7 +634,7 @@ All Pedestrians
 Animation Fix
 Assaltar pedestres com uma arma
 Burned Peds
-Busy Pedestrians (Peds Events Project) Update 14.09.2025
+Busy Pedestrians (Peds Events Project) Update 07.11.2025
 Busy Pedestrians mod
 ChatWithPeds
 Communication Repairers
