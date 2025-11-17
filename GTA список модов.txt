@@ -218,7 +218,7 @@ Fuel System v1.0
 Fuel+
 Full Radio Control
 Functional firefighter ladder
-Gasoline Mod v2.7
+Gasoline Mod v2.8 (17.11.2025)
 Gear Control
 GPS Redux v1.4.6
 GTA V to SA Burnout RRMS Edition
