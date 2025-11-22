@@ -188,7 +188,7 @@ Cars On Platforms
 CarThief
 Change Gear Anim
 CJ Pushes Pedal (cruise control) v1.0
-Collision Tweaker
+Collision Tweaker v1.2
 Cop Cars Unlocked
 CopVehCoronas
 Cruise Control
