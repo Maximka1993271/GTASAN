@@ -496,6 +496,7 @@ Real Weapons Names
 Realistic Beach
 Realistic Weapons Settings
 Reload Mod
+Reloading Display v1.0
 Resident Evil 5 Animation v2.7
 Restore Original Mouse Sensibility
 Restore Stealth Voices
