@@ -30,7 +30,7 @@ RunDLL32.exe Fix
 SA GInput v1.11
 SilentPatch v1.1
 Widescreen Fix
-Windowed Mode
+Windowed Mode v2.0
 
 
 
