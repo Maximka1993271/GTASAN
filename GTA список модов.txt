@@ -384,6 +384,7 @@ Driver
 Drop Weapons Like In GTA IV v3.2
 Drug Dealer Fix
 Dynamic FOV Fixed v1.2
+Dynamic Home Ambush Mod
 Dyom Сleo Fix
 Ear Ringing Simple
 EchoWeapons
@@ -441,7 +442,7 @@ Insects Mod
 Instakill
 Inventory System
 JetPack Adjuster
-Jetpack Attention
+Jetpack Reactio v1.2
 Job DeliveryGroccery v0.6
 Kill Cam
 Lamppost Insects
