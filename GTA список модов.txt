@@ -599,6 +599,7 @@ Interface
 
 Brema HUD Preset
 ClassicHud v2.2
+Customizable HUD
 GTA IV HUD by AG v1.3 (+ SA style)
 GTA V HUD by DK22Pac
 Hud Definitive Edition
