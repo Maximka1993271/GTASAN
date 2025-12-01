@@ -322,6 +322,7 @@ WorkingHorn
 Worn Brake Pad Sound
 xNOS
 Zero's RC
+ZR-350 Lights
 
 
 
