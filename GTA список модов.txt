@@ -201,6 +201,7 @@ Detach Trailer
 Diesel
 DohertyGarage v1.6.1
 DrIVe Mod v2.4
+Driving Focus Mod
 Dynamic motorway traffic
 Emergency Lights Mod
 Engine Off On Vehicle Exit
