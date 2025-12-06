@@ -480,7 +480,7 @@ Planes Inertia
 Planning Department
 Player Move Head
 Police Dept Fix
-PoliceMod v1.1.01
+PoliceMod v1.2
 Properties Plus, Buy Properties mod v1.2.1
 Quick Map
 Quick Map Marker Update (7/11/2025)
@@ -555,7 +555,7 @@ The Weapon Is On The Player v2.0
 Throw Rotate Fix
 Time Payn Spray
 Tiring Sounds
-TweaksSA v110
+TweaksSA v111
 Unlimited Camera Ammo
 VCS&LCS Side Missions
 Void Weapon Wheel v1.4
