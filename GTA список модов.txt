@@ -556,7 +556,7 @@ The Weapon Is On The Player v2.0
 Throw Rotate Fix
 Time Payn Spray
 Tiring Sounds
-TweaksSA v111
+TweaksSAv111.2
 Unlimited Camera Ammo
 VCS&LCS Side Missions
 Void Weapon Wheel v1.4
@@ -570,7 +570,7 @@ Weapon dat Professional Killer
 Weapon Dealer
 Weapon Details v3.3
 Weapon pickup
-Weapon Pickup Maker Update (4/4/2025)
+Weapon Pickup Maker Update (08/12/2025)
 Weapon Zoom Unlimited Update v.25.10.27
 WeaponRecoilAuto
 WeaponTweaks
