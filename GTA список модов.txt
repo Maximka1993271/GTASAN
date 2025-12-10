@@ -590,6 +590,7 @@ Improved Streaming v1.0.1
 NextGen and Combat FX Plus
 Project2DFX v4.4
 Real Skybox v1.3.4
+RealVision Enhanced
 ReShade v6.6.2
 RGGSA2.0 ENB
 Shadows Settings Extender v2.1.2
