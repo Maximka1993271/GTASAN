@@ -556,6 +556,7 @@ The Weapon Is On The Player v2.0
 Throw Rotate Fix
 Time Payn Spray
 Tiring Sounds
+Train Customizer
 TweaksSAv111.2
 Unlimited Camera Ammo
 VCS&LCS Side Missions
