@@ -481,7 +481,7 @@ Planes Inertia
 Planning Department
 Player Move Head
 Police Dept Fix
-PoliceMod v1.2
+PoliceMod v1.0.1
 Properties Plus, Buy Properties mod v1.2.1
 Quick Map
 Quick Map Marker Update (7/11/2025)
