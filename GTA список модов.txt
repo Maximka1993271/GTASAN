@@ -53,7 +53,7 @@ Cold Steam
 Cop N Threat Radar
 Disable Radar On Foot
 EdgeFX
-Enterable Hidden Interiors Update v.25.11.28
+Enterable Hidden Interiors Update v.25.12.19
 Explosions
 Explosionsshake
 Extended Gang Wars
@@ -105,6 +105,7 @@ Save License Plate
 Script Fixes
 Spread Fix
 SprintEverywhere
+SRGB Rendering
 Starry Skies v1.3.0
 Story Mode 2.0 Bug Fixes
 StreamMemFix
@@ -461,7 +462,7 @@ Mod Suck Rolls For 50 Stories
 Modernized DriveBy
 Money Drop Fix
 More Radar Icons
-Motel Mod
+Motel Mod v1.1
 News papers v2.2
 Night Pimpin
 No Extra Air Resistance
@@ -520,6 +521,7 @@ Sawn Off Dual Wield Fix v1.1
 Searchlights
 Securicar Drop Money
 Security Van Heist
+Improved Sex Shop
 SFDP Heli Fix
 Shoot After Death
 Shoreline Waves
@@ -643,7 +645,7 @@ All Pedestrians
 Animation Fix
 Assaltar pedestres com uma arma
 Burned Peds
-Busy Pedestrians (Peds Events Project) Update 07.11.2025
+Busy Pedestrians (Peds Events Project) Update 20.12.2025
 Busy Pedestrians mod
 ChatWithPeds
 Communication Repairers
