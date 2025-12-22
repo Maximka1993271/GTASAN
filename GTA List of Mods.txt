@@ -53,7 +53,7 @@ Cold Steam
 Cop N Threat Radar
 Disable Radar On Foot
 EdgeFX
-Enterable Hidden Interiors Update v.25.12.20 
+Enterable Hidden Interiors Update v.25.12.21 
 Explosions
 Explosionsshake
 Extended Gang Wars
@@ -523,7 +523,7 @@ Sawn Off Dual Wield Fix v1.1
 Searchlights
 Securicar Drop Money
 Security Van Heist
-Improved Sex Shop
+Improved Sex Shop v1.1
 SFDP Heli Fix
 Shoot After Death
 Shoreline Waves
