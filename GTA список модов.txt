@@ -90,6 +90,7 @@ MovingSirenLightsSA v1.1
 Multiplemarkers
 NoMoreDeletedSaves
 Open Door Anim
+PoliceExtraSeats
 Pager
 Quebrar Motor
 Ragdoll Mod for GTA-SAMP
