@@ -232,6 +232,7 @@ Helmet Mod
 Improved Change Gear Anim
 Improved Garages
 Improved Handling
+ImprudentDrivers
 ImVehFt
 ImVehSys
 IndieVehicles
@@ -363,7 +364,7 @@ Boat Radar
 Body Stats Fix
 BrBa & BCS Cartel Event
 Burnout With Space
-Busted Crime Cinematics Mod for GTA SA v0.1
+Busted Crime Cinematics Mod for GTA SA v0.5
 Camera Settings v1.2
 Ceiling Bird Chirp
 Chainsaw Smoke
