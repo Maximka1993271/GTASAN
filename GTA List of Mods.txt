@@ -118,6 +118,7 @@ VCBulletTrails v1.2
 VCMarkersSA
 VCParticles v1.0.2
 VCStuffSA
+Vehicle Pickups
 Weapon Icons TXD
 WeaponRecoilRE
 Wheel Cam from VC v1.0
@@ -466,7 +467,7 @@ Mission Balancing Tool Update v.25.11.12
 Mod Suck Rolls For 50 Stories
 Modernized DriveBy
 Money Drop Fix
-More Radar Icons
+More Radar Icons Update (17/1/2025)
 Motel Mod v1.1
 News papers v2.2
 Night Pimpin
