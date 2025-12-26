@@ -225,7 +225,7 @@ Full Radio Control
 Functional firefighter ladder
 Gasoline Mod v2.8
 Gear Control
-GPS Redux v1.4.6
+GPS Redux v1.5.1
 GTA V to SA Burnout RRMS Edition
 Handbrake Mod
 HandbrakeCam
