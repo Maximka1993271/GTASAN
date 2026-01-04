@@ -173,7 +173,7 @@ Car Collision Light
 Car Crash Anim
 Car Crash Inertia
 Car Damager + Open Close Windows
-Car Dealer
+Car Dealer Update (4/1/2026)
 Car Dealership
 Car Door Chime-Beep
 Car Explodes In Huge Falls
@@ -580,7 +580,7 @@ Weapon dat Professional Killer
 Weapon Dealer
 Weapon Details v3.3
 Weapon pickup
-Weapon Pickup Maker Update (08/12/2025)
+Weapon Pickup Maker Update (4/1/2026)
 Weapon Zoom Unlimited Update v.25.10.27
 WeaponRecoilAuto
 WeaponTweaks
