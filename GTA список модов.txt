@@ -112,6 +112,7 @@ Starry Skies v1.3.0
 Story Mode 2.0 Bug Fixes
 StreamMemFix
 The Birds Update
+Transparent Menu v5
 VC Plane Trails And Banners
 VCBannersAndTrails v1.0.1
 VCBulletTrails v1.2
