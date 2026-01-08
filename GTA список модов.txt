@@ -174,7 +174,7 @@ Car Collision Light
 Car Crash Anim
 Car Crash Inertia
 Car Damager + Open Close Windows
-Car Dealer Update (4/1/2026)
+Car Dealer Update (8/1/2026)
 Car Dealership
 Car Door Chime-Beep
 Car Explodes In Huge Falls
@@ -654,7 +654,7 @@ All Pedestrians
 Animation Fix
 Assaltar pedestres com uma arma
 Burned Peds
-Busy Pedestrians (Peds Events Project) Update 20.12.2025
+Busy Pedestrians (Peds Events Project) Update 08.01.2026
 Busy Pedestrians mod
 ChatWithPeds
 Communication Repairers
