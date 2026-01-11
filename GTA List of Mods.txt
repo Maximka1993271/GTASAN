@@ -224,7 +224,7 @@ Fuel System v1.1
 Fuel+
 Full Radio Control
 Functional firefighter ladder
-Gasoline Mod v2.8
+Gasoline Mod v2.9
 Gear Control
 GPS Redux v1.5.1
 GTA V to SA Burnout RRMS Edition
@@ -562,7 +562,7 @@ SWAT Helicopter
 SWAT Helicopter with 5 stars Plus
 Swat Pos
 Teargas Fix
-The holster on the cops v1.2
+The holster on the cops v1.3
 The Weapon Is On The Player v2.0
 Throw Rotate Fix
 Time Payn Spray
