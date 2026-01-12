@@ -93,6 +93,7 @@ Open Door Anim
 PoliceExtraSeats
 Pager
 Quebrar Motor
+RadarZoomMod
 Ragdoll Mod for GTA-SAMP
 Rain Extinguish Fire
 Rainbow With All the Colors v1.0
@@ -148,7 +149,7 @@ Cars Plugins
 1 Star Motorbike Cop Fix
 007car
 Abs System
-Advanced Nitro System v2.2
+Advanced Nitro System v3.0
 Advanced Track Player
 Air Brake Sound
 Alarm Touching Cars
@@ -244,7 +245,7 @@ Lean On The Bike
 Lock And Park
 Lock Car Doors
 Luxury Cars Attract The Attention Of Pedestrians
-Manual Driveby Refixed Update v.25.12.18
+Manual Driveby Refixed Update v.26.01.12
 Manual DriveBy Remake
 Mid Air Car Control
 Minimalist Speedometer
@@ -583,7 +584,7 @@ Weapon Dealer
 Weapon Details v3.3
 Weapon pickup
 Weapon Pickup Maker Update (4/1/2026)
-Weapon Zoom Unlimited Update v.25.10.27
+Weapon Zoom Unlimited Update v.26.01.12
 WeaponRecoilAuto
 WeaponTweaks
 Weather Forecast
@@ -621,6 +622,7 @@ GTA V HUD by DK22Pac
 Hud Definitive Edition
 HUDcolors
 Mobile Font Fixed v1.0.1
+MoneyChangeHUD
 SA Mobile Hud v2.01.1
 VHud v0.944
 WD2 Interface
