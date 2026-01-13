@@ -675,6 +675,7 @@ Garbage Truck Driver
 Grove Vs Ballas Fight
 Hands Up Fix
 Hats for Peds
+Improved Ped Spawn Update v.26.01.12
 Interior and Peds
 LV Planning Department Fix
 Normal Map Plugin
