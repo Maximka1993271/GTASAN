@@ -384,7 +384,7 @@ Cops bulletproof
 Cops Faster and Climbing
 CoverMod
 Create Pickups Mod
-Damage mark on the screen
+Damage mark on the screen v1.1
 Dealer Weapons
 Death animations Ragdoll Style v2.0
 Difficult Move In Water
@@ -511,7 +511,7 @@ Realistic Beach
 Realistic Weapons Settings
 Reload Mod
 Reloading Display v1.0
-Reloading on the screen v1.1
+Reloading on the screen v1.2
 Resident Evil 5 Animation v2.7
 Restore Original Mouse Sensibility
 Restore Stealth Voices
@@ -675,7 +675,7 @@ Garbage Truck Driver
 Grove Vs Ballas Fight
 Hands Up Fix
 Hats for Peds
-Improved Ped Spawn Update v.26.01.12
+Improved Ped Spawn Update v.26.01.16
 Interior and Peds
 LV Planning Department Fix
 Normal Map Plugin
