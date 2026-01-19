@@ -322,7 +322,7 @@ Vehicle Color Randomizer
 Vehicle Door Unlocker
 Vehicle Flags Changer
 Vehicle Immunities
-VehIK v1.1
+VehIK v1.2b
 Void Radio Wheel v0.7
 Voodoo Physics Fix
 Wheel bump sound v1.0
