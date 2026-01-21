@@ -110,7 +110,7 @@ Script Fixes
 Spread Fix
 SprintEverywhere
 SRGB Rendering
-Starry Skies v1.3.0
+Starry Skies v1.3.2
 Story Mode 2.0 Bug Fixes
 StreamMemFix
 The Birds Update
