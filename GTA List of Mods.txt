@@ -44,6 +44,7 @@ Blip Size v1.3
 Blur effect for club
 Blur Effect For Stick
 BodyOutlinesSA v1.0
+Borderless Fullscreen Mod
 Bullethole
 Camera Point Fix
 Camera shaking at high speeds v1.1
@@ -601,7 +602,7 @@ FxsFuncs v1.2
 Graphics Tweaker v1.3.1
 IMFX v17.11.2017t
 Improved Streaming v1.0.1
-Nano Shaders 0.3
+Nano Shaders 0.4
 NextGen and Combat FX Plus
 Project2DFX v4.4
 Real Skybox v1.3.4
