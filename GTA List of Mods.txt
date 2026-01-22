@@ -9,7 +9,7 @@ VC  gta-vc.exe v1.0
 Essentials Pack
 
 Silent’s ASI Loader v1.5
-Ultimate ASI Loader v9.5.0
+Ultimate ASI Loader v9.7.0
 CLEO v4.4.4
 CLEO+ v1.2.0
 NewOpcodes.cleo v2.1
