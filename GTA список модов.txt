@@ -387,7 +387,7 @@ Cops bulletproof
 Cops Faster and Climbing
 CoverMod
 Create Pickups Mod
-Damage mark on the screen v1.1
+Damage Indicator on Screen v1.1
 Dealer Weapons
 Death animations Ragdoll Style v2.0
 Difficult Move In Water
@@ -481,6 +481,7 @@ No Extra Air Resistance
 NoRadio
 NPC Health Indicator
 One Wanted Star Melee Fix
+On-Screen Replenishment
 Original Drug Dealers
 Ovens Catch On Fire
 Paramedic Mod
@@ -513,6 +514,7 @@ Real Weapons Names
 Realistic Beach
 Realistic Weapons Settings
 Reload Mod
+Reload Progress on Screen v1.2
 Reloading Display v1.0
 Reloading on the screen v1.2
 Resident Evil 5 Animation v2.7
