@@ -747,8 +747,10 @@ SA VehicleSFX Updated 1.0 22/09/2025
 
 Timecyc
 
+24H Refixed Original Timecycle
 24h TimeCycle
 Improved California Weather Timecyc v3.0.1
+Modern Fusion Timecyc (24h)
 Real Linear Graphics v2.6
 Timecyc Cinematic v1.3
 Updated TimeCycle (24h TimeCycle)
