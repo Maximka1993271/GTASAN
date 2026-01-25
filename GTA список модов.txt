@@ -11,6 +11,7 @@ Essentials Pack
 Silent’s ASI Loader v1.5
 Ultimate ASI Loader v9.7.0
 CLEO v4.4.4
+CLEO v5.3.0
 CLEO+ v1.2.0
 NewOpcodes.cleo v2.1
 CrashInfo v1.2.1
