@@ -54,6 +54,7 @@ Cigarette and Antenna
 Cold Steam
 Cop N Threat Radar
 Disable Radar On Foot
+Doom in SA 0.1
 EdgeFX
 Enterable Hidden Interiors Update v.25.12.30
 Explosions
