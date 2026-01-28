@@ -225,6 +225,7 @@ Extra Colors On Paintjob Fix
 Fire On Driver
 Fix Bike Transfender Glitch
 Fix Car Fire On Water
+Fixed Driving FOV v1.0
 Fuel Leak
 Fuel System v1.1
 Fuel+
