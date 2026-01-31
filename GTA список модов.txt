@@ -397,6 +397,7 @@ Difficult Move In Water
 Disable jetpack heat effect
 Diving Mod
 Dodo With Ad Banner
+Double Reload Fix v.26.01.30
 DriveByOnOff
 Driver
 Drop Weapons Like In GTA IV v3.2
