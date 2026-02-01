@@ -154,7 +154,7 @@ Cars Plugins
 1 Star Motorbike Cop Fix
 007car
 Abs System
-Advanced Nitro System v3.0
+Advanced Nitro System v3.1
 Advanced Track Player
 Air Brake Sound
 Alarm Touching Cars
