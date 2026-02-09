@@ -95,7 +95,7 @@ Multiplemarkers
 NoMoreDeletedSaves
 Open Door Anim
 PoliceExtraSeats
-Proper Custom Radios
+Proper Custom Radios - Beta 1
 Pager
 Quebrar Motor
 RadarZoomMod
@@ -291,7 +291,7 @@ Remote Lock Car
 Rhino noEP
 Rules Mod
 Rural Car Repairs v3.0
-SA Styled Speedometer Update (27/1/2026)
+SA Styled Speedometer Update (8/2/2026)
 Save License Plate
 Siren And Vigilante
 SkidBlow
@@ -466,6 +466,7 @@ JetPack Adjuster
 Jetpack Reactio v1.2
 Job DeliveryGroccery v0.6
 Kill Cam
+Kill Feed
 Lamppost Insects
 Lampposts FX v1.2
 Leviathan
@@ -638,6 +639,7 @@ MoneyChangeHUD
 SA Mobile Hud v2.01.1
 VHud v0.944
 WD2 Interface
+WeaponHUD
 
 
 
