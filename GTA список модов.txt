@@ -95,7 +95,7 @@ Multiplemarkers
 NoMoreDeletedSaves
 Open Door Anim
 PoliceExtraSeats
-Proper Custom Radios - Beta 1
+Proper Custom Radios - Beta 2.7
 Pager
 Quebrar Motor
 RadarZoomMod
@@ -305,7 +305,7 @@ Stealing A Car Like In GTA 4
 Steering Wheel
 Stop Lights For Trailers
 Taxi Ride Mod
-Taxi77
+Taxi770
 Traffic Light
 Traffic Lights Patch
 Traffic Path Fix
