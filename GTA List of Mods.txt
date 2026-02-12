@@ -147,7 +147,7 @@ Lando Propos
 Parked Binary IPL Fixes
 Project Props 3.3.0 Community
 Realistic Interiors
-
+SA.CommunityMapFixes
 
 
 Cars Plugins
@@ -232,7 +232,7 @@ Fuel System v1.1
 Fuel+
 Full Radio Control
 Functional firefighter ladder
-Gasoline Mod v2.9
+Gasoline Mod v2.9.1
 Gear Control
 GPS Redux v1.5.1
 GTA V to SA Burnout RRMS Edition
@@ -305,7 +305,7 @@ Stealing A Car Like In GTA 4
 Steering Wheel
 Stop Lights For Trailers
 Taxi Ride Mod
-Taxi770
+Taxi77
 Traffic Light
 Traffic Lights Patch
 Traffic Path Fix
@@ -492,7 +492,7 @@ Original Drug Dealers
 Ovens Catch On Fire
 Paramedic Mod
 PerPixel Lighting Mod
-Phone Mod
+Phone Mod 2
 Pickups Mod
 Pills Bottle
 Plane Beep
