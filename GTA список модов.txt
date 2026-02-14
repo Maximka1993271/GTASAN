@@ -75,7 +75,8 @@ GInput
 Glowing Pickups v1.0.3
 Graffiti Anywhere
 Pager from GTA 3 v1.0
-HeliFix
+HeliFix v1.5
+HookMenu
 III.VC.SA.SaveLoader v2.7
 Improved Lamppost Lights
 ImprovedMove
@@ -366,6 +367,7 @@ Auto Remove Marker
 Autosave & Checkpoint v1.1
 Ballas Greet You
 Ballas Pull Up On You
+Ballas Trap Mod
 Basketball Fix
 Beach ball
 Being Taken To The Hospital
