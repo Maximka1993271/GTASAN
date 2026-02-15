@@ -56,7 +56,7 @@ Cop N Threat Radar
 Disable Radar On Foot
 Doom in SA 0.1
 EdgeFX
-Enterable Hidden Interiors Update v.25.12.30
+Enterable Hidden Interiors Update v.26.02.15
 Explosions
 Explosionsshake
 Extended Gang Wars
@@ -631,7 +631,7 @@ Interface
 
 Brema HUD Preset
 ClassicHud v2.2
-Customizable HUD Update (13/12/2025)
+Customizable HUD Update (15/02/2026)
 GTA IV HUD by AG v1.3 (+ SA style)
 GTA V HUD by DK22Pac
 Hud Definitive Edition
