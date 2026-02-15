@@ -96,7 +96,7 @@ Multiplemarkers
 NoMoreDeletedSaves
 Open Door Anim
 PoliceExtraSeats
-Proper Custom Radios - Beta 2.7
+Proper Custom Radios - Beta 3
 Pager
 Quebrar Motor
 RadarZoomMod
