@@ -400,7 +400,7 @@ Difficult Move In Water
 Disable jetpack heat effect
 Diving Mod
 Dodo With Ad Banner
-Double Reload Fix v.26.02.04
+Double Reload Fix Update v.26.02.16
 DriveByOnOff
 Driver
 Drop Weapons Like In GTA IV v3.2
@@ -513,7 +513,7 @@ Radio Effects
 Rain Audio Fix
 Rain Mods
 Rampage Fury Missions
-Random Events Project
+Random Events Project v1.1
 Random Train Drivers
 Rats at the trash can v1.1
 Real Multiple Protagonists 2.0
