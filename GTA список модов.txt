@@ -613,7 +613,7 @@ Enhance ParticleTXD v1.0
 FxsFuncs v1.2
 Graphics Tweaker v1.3.1
 IMFX v17.11.2017t
-Improved Streaming v1.0.1
+Improved Streaming v1.1
 Nano Shaders 0.4
 NextGen and Combat FX Plus
 Project2DFX v4.4
