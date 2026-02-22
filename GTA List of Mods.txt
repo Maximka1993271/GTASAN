@@ -363,7 +363,8 @@ Aimless Mode
 Air Traffic
 Air Traffic Pro
 Air Traffic Realism
-Airplane Tire Skid  v1.1
+Airplane Tire Skid v1.1
+AirRoute
 Ammunition Seller v2.1
 Anim Train
 Arrest Like In GTA 4
@@ -516,9 +517,11 @@ Radar Zoom
 Radio Effects
 Rain Audio Fix
 Rain Mods
+Rampage
 Rampage Fury Missions
 Random Events Project v1.1
 Random Train Drivers
+RandomEncounters
 Rats at the trash can v1.1
 Real Multiple Protagonists 2.0
 Real Time
@@ -588,6 +591,7 @@ Time Till Hungry 3
 Tiring Sounds
 Train Customizer
 TweaksSAv121
+UnderTheBridge
 Unlimited Camera Ammo
 VCS&LCS Side Missions
 Void Weapon Wheel v1.4
