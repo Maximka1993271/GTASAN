@@ -754,6 +754,7 @@ Open Door Signal in Vehicles
 Pier 69 Cesar phone voice Fix
 SA Restore Android Radios
 SAAS
+SFX Fix
 Uncompressed SFX Pack
 Vehicles Sound Revamped
 SA - Soundize 11-25
