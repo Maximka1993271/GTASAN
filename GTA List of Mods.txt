@@ -80,7 +80,7 @@ HookMenu
 III.VC.SA.SaveLoader v2.7
 Improved Lamppost Lights
 ImprovedMove
-InGameSubs v0.1.2.1
+InGameSubs v0.2.0
 Inventory System
 IV Anims v0.5
 JetPack Hover Mode Fix
@@ -416,6 +416,7 @@ Dynamic Home Ambush Mod
 Dyom Сleo Fix
 Ear Ringing Simple
 EchoWeapons
+Elite Swat Squad
 Engine Volume
 Enhanced Jetpack
 Fancy Trunk Store Weapons v0.07
