@@ -111,7 +111,7 @@ Rubbish
 SA H-Optimize
 SA Rampages
 Save License Plate
-ScriptFixSA Update (2026-02-17)
+ScriptFixSA Update (2026-02-22)
 Spread Fix
 SprintEverywhere
 SRGB Rendering
