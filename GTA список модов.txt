@@ -151,6 +151,17 @@ Realistic Interiors
 SA.CommunityMapFixes
 
 
+
+Moonloader Plugins
+
+Bike Spin
+HandbrakeHelper for VehIk
+Marker colored
+NFS DriftPoint
+NFS DynamicCam
+Performance Meter
+
+
 Cars Plugins
 
 1 Star Motorbike Cop Fix
@@ -172,7 +183,6 @@ Bike Customization
 Bike Flip Fix
 Bike Lean
 Bike Shop
-Bike Spin
 Bike Stand
 Burnout 360 Fix
 Call TowTruck
