@@ -80,7 +80,7 @@ HookMenu
 III.VC.SA.SaveLoader v2.7
 Improved Lamppost Lights
 ImprovedMove
-InGameSubs v0.2.0
+InGameSubs v0.2.2
 Inventory System
 IV Anims v0.5
 JetPack Hover Mode Fix
