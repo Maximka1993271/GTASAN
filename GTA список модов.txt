@@ -1,4 +1,4 @@
-
+NOCD
 
 III Gta3.exe v1.0
 SA  gta_sa.exe v1.0
@@ -15,7 +15,7 @@ CLEO v5.3.0
 CLEO+ v1.2.0
 NewOpcodes.cleo v2.1
 CrashInfo v1.2.1
-SCRLog v2020.3Ultimate ASI Loader
+SCRLog v2020.3
 Fastman92 Limit Adjuster v7.6
 Open Limit Adjuster v1.5.9
 Open Limit Adjuster Extended 0.4
