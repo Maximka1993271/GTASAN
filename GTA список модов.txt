@@ -18,6 +18,7 @@ CrashInfo v1.2.1
 SCRLog v2020.3Ultimate ASI Loader
 Fastman92 Limit Adjuster v7.6
 Open Limit Adjuster v1.5.9
+Open Limit Adjuster Extended 0.4
 FramerateVigilante
 Improved Fastloader
 MixSets v4.3.7
@@ -406,8 +407,8 @@ Clube Front Noise
 Colored Crosshair
 Combat improvement and Melee overhaul
 Commercial Mod
-Cops bulletproof
-Cops Faster and Climbing
+Cops bulletproof v1.2
+Cops Faster and Climbing v1.2
 CoverMod
 Create Pickups Mod
 Damage Indicator on Screen v1.1
