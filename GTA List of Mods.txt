@@ -56,7 +56,7 @@ Cop N Threat Radar
 Disable Radar On Foot
 Doom in SA 0.1
 EdgeFX
-Enterable Hidden Interiors Update v.26.02.15
+Enterable Hidden Interiors Update v.26.02.25
 Explosions
 Explosionsshake
 Extended Gang Wars
@@ -155,11 +155,13 @@ SA.CommunityMapFixes
 Moonloader Plugins
 
 Bike Spin
+Downforce Mod v.26.02.25
 HandbrakeHelper for VehIk
 Marker colored
 NFS DriftPoint
 NFS DynamicCam
 Performance Meter
+Turbo Lag Mod Update v.26.02.25
 
 Cars Plugins
 
@@ -242,7 +244,7 @@ Fuel System v1.1
 Fuel+
 Full Radio Control
 Functional firefighter ladder
-Garage Vehicle Chooser v.26.02.25
+Garage Vehicle Chooser Update v.26.02.25
 Gasoline Mod v2.9.1
 Gear Control
 GPS Redux v1.5.1
@@ -574,6 +576,7 @@ Skate Extra Sounds
 Skate Mod Remake
 SkatePopSound
 Sleep
+Smart Health Recovery
 Smarter Cop Decisions
 Sniper Realism
 Sniper Scope
@@ -617,6 +620,7 @@ Weapon Dealer
 Weapon Details v3.3
 Weapon pickup
 Weapon Pickup Maker Update (4/1/2026)
+Weapon Swap&Drop
 Weapon Zoom Unlimited Update v.26.01.12
 WeaponRecoilAuto
 WeaponTweaks
