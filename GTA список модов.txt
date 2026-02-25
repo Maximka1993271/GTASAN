@@ -66,6 +66,7 @@ Fires & flames
 Fires and lights
 First Person Mod v3.0 Fixed
 Fix Damage From Explosions Through Walls v1.0
+Fix Explosion
 Fixed dialogues with gangs
 Fixed Mouse Flight
 FluffyClouds
