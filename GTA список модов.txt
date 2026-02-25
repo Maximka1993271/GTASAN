@@ -243,7 +243,7 @@ Fuel System v1.1
 Fuel+
 Full Radio Control
 Functional firefighter ladder
-Garage Vehicle Chooser v.26.02.20
+Garage Vehicle Chooser v.26.02.25
 Gasoline Mod v2.9.1
 Gear Control
 GPS Redux v1.5.1
@@ -473,7 +473,7 @@ Hospital Health Pickups
 HS missiles for Hunter
 Improved Barber
 Improved Club
-Improved Gangs War v1.1
+Improved Gangs War v1.1.1
 Improved Jetpack Control
 IndieVehHandlings
 Inmune Headshot
@@ -521,6 +521,7 @@ Player Move Head
 Police Dept Fix
 PoliceMod v1.2
 Properties Plus, Buy Properties mod v1.2.1
+Property Price Tweaker v.26.02.25
 Quick Map
 Quick Map Marker Update (7/11/2025)
 Quick Weapon Draw
