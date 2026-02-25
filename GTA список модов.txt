@@ -155,7 +155,7 @@ SA.CommunityMapFixes
 Moonloader Plugins
 
 Bike Spin
-Downforce Mod v.26.02.25
+Downforce Mod Update v.26.02.25
 HandbrakeHelper for VehIk
 Marker colored
 NFS DriftPoint
