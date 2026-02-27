@@ -18,7 +18,7 @@ CrashInfo v1.2.1
 SCRLog v2020.3
 Fastman92 Limit Adjuster v7.6
 Open Limit Adjuster v1.5.9
-Open Limit Adjuster Extended 0.4
+Open Limit Adjuster Extended 0.6
 FramerateVigilante
 Improved Fastloader
 MixSets v4.3.7
