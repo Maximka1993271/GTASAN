@@ -619,7 +619,7 @@ Water Hurt
 Weapon Change Anim Fixed v1.1
 Weapon dat Professional Killer
 Weapon Dealer
-Weapon Details v3.3
+Weapon Details v4.0
 Weapon pickup
 Weapon Pickup Maker Update (4/1/2026)
 Weapon Swap&Drop
@@ -716,7 +716,7 @@ Garbage Truck Driver
 Grove Vs Ballas Fight
 Hands Up Fix
 Hats for Peds
-Improved Ped Spawn Update v.26.01.16
+Improved Ped Spawn Update v.26.02.28
 Interior and Peds
 LV Planning Department Fix
 Normal Map Plugin
