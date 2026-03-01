@@ -18,7 +18,7 @@ CrashInfo v1.2.1
 SCRLog v2020.3
 Fastman92 Limit Adjuster v7.6
 Open Limit Adjuster v1.5.9
-Open Limit Adjuster Extended 0.6
+Open Limit Adjuster Extended 0.7
 FramerateVigilante
 Improved Fastloader
 MixSets v4.3.7
@@ -82,7 +82,7 @@ HookMenu
 III.VC.SA.SaveLoader v2.7
 Improved Lamppost Lights
 ImprovedMove
-InGameSubs v0.2.2
+InGameSubs v0.2.5
 Inventory System
 IV Anims v0.5
 JetPack Hover Mode Fix
@@ -296,7 +296,7 @@ Pixar Cars
 Police ResponseTto Traffic Violations
 Police vehicles with megaphones v1.1
 Prizep Fix
-Proper Add Vehicles
+Proper Add Vehicles v0.4
 Race Maker v2
 Radio Off On Water
 Random Events With Drivers
