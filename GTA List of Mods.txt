@@ -90,7 +90,7 @@ LaserScopeDotVC v1.0.2
 Light on bullet impact
 MapFix
 Mod Shell
-Model Variations v10.3
+Model Variations v10.4
 Money Messages v1.1
 MovingMoon v1.1
 MovingSirenLightsSA v1.1
@@ -514,6 +514,7 @@ Ovens Catch On Fire
 Paramedic Mod
 PerPixel Lighting Mod
 Phone Mod 2
+PickupReposition
 Pickups Mod
 Pills Bottle
 Plane Beep
