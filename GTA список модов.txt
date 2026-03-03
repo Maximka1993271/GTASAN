@@ -513,6 +513,7 @@ On-Screen Replenishment
 Original Drug Dealers
 Ovens Catch On Fire
 Paramedic Mod
+Parkour Armor
 PerPixel Lighting Mod
 Phone Mod 2
 PickupReposition
