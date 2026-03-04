@@ -229,6 +229,7 @@ DohertyGarage v1.8
 DrIVe Mod v2.4
 Driving Focus Mod
 Dynamic motorway traffic
+Elite Squad
 Emergency Lights Mod
 Engine Off On Vehicle Exit
 Engine On-Off
@@ -575,6 +576,7 @@ Shoreline Waves
 Show ammo over
 Show Date
 Show Dirt
+Show Stats
 Siren On Without Driver
 Skate Extra Sounds
 Skate Mod Remake
