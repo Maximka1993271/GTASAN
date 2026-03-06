@@ -18,7 +18,7 @@ CrashInfo v1.2.1
 SCRLog v2020.3
 Fastman92 Limit Adjuster v7.6
 Open Limit Adjuster v1.5.9
-Open Limit Adjuster Extended 0.7
+Open Limit Adjuster Extended 0.9
 FramerateVigilante
 Improved Fastloader
 MixSets v4.3.7
@@ -490,7 +490,7 @@ JetPack Adjuster
 Jetpack Reactio v1.2
 Job DeliveryGroccery v0.6
 Kill Cam
-Kill Feed Update (16/2/2026)
+Kill Feed Update (6/3/2026)
 Lamppost Insects
 Lampposts FX v1.2
 Leviathan
@@ -625,7 +625,7 @@ Water Hurt
 Weapon Change Anim Fixed v1.1
 Weapon dat Professional Killer
 Weapon Dealer
-Weapon Details v4.0
+Weapon Details v4.2
 Weapon pickup
 Weapon Pickup Maker Update (4/1/2026)
 Weapon Swap&Drop
