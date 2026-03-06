@@ -54,7 +54,7 @@ Cheat Menu v3.
 Cigarette and Antenna
 Cold Steam
 Cop N Threat Radar
-CutsceneController
+CutsceneController v1.0.0
 Disable Radar On Foot
 Doom in SA 0.1
 EdgeFX
