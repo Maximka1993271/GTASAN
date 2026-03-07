@@ -18,7 +18,7 @@ CrashInfo v1.2.1
 SCRLog v2020.3
 Fastman92 Limit Adjuster v7.6
 Open Limit Adjuster v1.5.9
-Open Limit Adjuster Extended 0.9
+Open Limit Adjuster Extended 0.9.3
 FramerateVigilante
 Improved Fastloader
 MixSets v4.3.7
@@ -304,7 +304,7 @@ Random Events With Drivers
 RC Tiger Fix
 Real Life Vehicle Options
 Real Traffic Fix
-Rear Lights Mod v3.6
+Rear lights Mod v3.6
 Remote Lock Car
 Rhino noEP
 Rules Mod
