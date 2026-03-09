@@ -249,7 +249,7 @@ Fuel System v1.1
 Fuel+
 Full Radio Control
 Functional firefighter ladder
-Garage Vehicle Chooser Update v.26.02.25
+Garage Vehicle Chooser Update v.26.03.08
 Gasoline Mod v2.9.1
 Gear Control
 GPS Redux v1.5.1
@@ -305,7 +305,7 @@ Random Events With Drivers
 RC Tiger Fix
 Real Life Vehicle Options
 Real Traffic Fix
-Rear Lights Mod v3.6
+Rear Lights Mod v3.7
 Remote Lock Car
 Rhino noEP
 Rules Mod
@@ -397,6 +397,7 @@ BigMap
 Boat Radar
 Body Stats Fix
 BrBa & BCS Cartel Event
+Buff CJ Mouth Fix
 Burnout With Space
 Busted Crime Cinematics Mod for GTA SA v0.7
 Camera Settings v1.2
