@@ -18,7 +18,7 @@ CrashInfo v1.2.1
 SCRLog v2020.3
 Fastman92 Limit Adjuster v7.6
 Open Limit Adjuster v1.5.9
-Open Limit Adjuster Extended 0.9.4
+Open Limit Adjuster Extended v0.9.7
 FramerateVigilante
 Improved Fastloader
 MixSets v4.3.7
@@ -54,7 +54,7 @@ Cheat Menu v3.52
 Cigarette and Antenna
 Cold Steam
 Cop N Threat Radar
-CutsceneController v1.0.0
+CutsceneController v1.1.0
 Disable Radar On Foot
 Doom in SA 0.1
 EdgeFX
@@ -491,7 +491,7 @@ JetPack Adjuster
 Jetpack Reactio v1.2
 Job DeliveryGroccery v0.6
 Kill Cam
-Kill Feed Update (6/3/2026)
+Kill Feed Update (10/3/2026)
 Lamppost Insects
 Lampposts FX v1.2
 Leviathan
