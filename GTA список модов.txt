@@ -553,7 +553,7 @@ Realistic Weapons Settings
 Reload Mod
 Reload Progress on Screen v1.2
 Reloading Display v1.0
-Reloading on the screen v1.2
+Reloading on the screen v2.0
 Resident Evil 5 Animation v2.7
 Restore Original Mouse Sensibility
 Restore Stealth Voices
