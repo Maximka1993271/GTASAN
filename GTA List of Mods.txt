@@ -130,6 +130,7 @@ VCMarkersSA
 VCParticles v1.0.2
 VCStuffSA
 Vehicle Pickups
+VehWeaponTurret v0.1
 Weapon Icons TXD
 WeaponRecoilRE
 Wheel Cam from VC v1.0
