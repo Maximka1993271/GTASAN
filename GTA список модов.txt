@@ -173,7 +173,7 @@ Cars Plugins
 1 Star Motorbike Cop Fix
 007car
 Abs System
-Advanced Nitro System v3.1
+Advanced Nitro System v3.2
 Advanced Track Player
 Air Brake Sound
 Alarm Touching Cars
@@ -554,7 +554,7 @@ Realistic Weapons Settings
 Reload Mod
 Reload Progress on Screen v1.2
 Reloading Display v1.0
-Reloading on the screen v2.0
+Reloading on the screen v2.1
 Resident Evil 5 Animation v2.7
 Restore Original Mouse Sensibility
 Restore Stealth Voices
