@@ -355,6 +355,7 @@ Void Radio Wheel v0.7
 Voodoo Physics Fix
 Wheel bump sound v1.0
 Wheel Detach
+WheelSetSwitcher
 Winch Taking Cars
 Wind noise at high speeds
 WorkingHorn
