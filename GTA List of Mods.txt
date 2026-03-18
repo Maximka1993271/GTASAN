@@ -531,7 +531,7 @@ Planes Inertia
 Planning Department
 Player Move Head
 Police Dept Fix
-PoliceMod v1.2
+PoliceMod v1.3
 Properties Plus, Buy Properties mod v1.2.1
 Property Price Tweaker v.26.02.25
 Quick Map
