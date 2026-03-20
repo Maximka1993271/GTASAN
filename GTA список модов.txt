@@ -182,6 +182,7 @@ Arrange Cars
 Attach Vehicle
 Attach Vehicles to Packer
 Auto Car Lock
+Auto Persistance
 AutoDriver v2.5
 Back Fire Low Speed
 Backfire with light
