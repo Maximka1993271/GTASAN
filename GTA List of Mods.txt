@@ -91,7 +91,7 @@ LaserScopeDotVC v1.0.2
 Light on bullet impact
 MapFix
 Mod Shell
-Model Variations v10.4
+Model Variations v10.5
 Money Messages v1.1
 MovingMoon v1.1
 MovingSirenLightsSA v1.1
@@ -228,7 +228,7 @@ Death In Car
 Destructive Rhino Mod
 Detach Trailer
 Diesel
-DohertyGarage v1.8
+DohertyGarage v1.9
 DrIVe Mod v2.4
 Driving Focus Mod
 Dynamic motorway traffic
