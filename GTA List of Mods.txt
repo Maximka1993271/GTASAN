@@ -619,7 +619,7 @@ Time Till Hungry 3
 Tiring Sounds
 TrainCustomizer
 Tram77
-TweaksSAv126
+TweaksSAv131
 UnderTheBridge
 Unlimited Camera Ammo
 VCS&LCS Side Missions
@@ -729,6 +729,7 @@ Garbage Truck Driver
 Grove Vs Ballas Fight
 Hands Up Fix
 Hats for Peds
+Improved Ped Models
 Improved Ped Spawn Update v.26.03.04
 Interior and Peds
 LV Planning Department Fix
