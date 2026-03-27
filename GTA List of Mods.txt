@@ -183,6 +183,7 @@ Attach Vehicles to Packer
 Auto Car Lock
 Auto Persistance
 AutoDriver v2.5
+AutoPersistence v1.0
 Back Fire Low Speed
 Backfire with light
 Bike Customization
@@ -585,6 +586,7 @@ Show ammo over
 Show Date
 Show Dirt
 Show Stats
+SimpleNoclip v1.0
 Siren On Without Driver
 Skate Extra Sounds
 Skate Mod Remake
