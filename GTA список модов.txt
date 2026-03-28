@@ -192,6 +192,7 @@ Bike Flip Fix
 Bike Lean
 Bike Shop
 Bike Stand
+BrakeLightsFix
 Burnout 360 Fix
 Call TowTruck
 CamShake
