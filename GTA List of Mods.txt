@@ -635,7 +635,7 @@ Water Hurt
 Weapon Change Anim Fixed v1.1
 Weapon dat Professional Killer
 Weapon Dealer
-Weapon Details v4.2
+Weapon Details v4.3
 Weapon pickup
 Weapon Pickup Maker Update (4/1/2026)
 Weapon Swap&Drop
@@ -660,6 +660,7 @@ NextGen and Combat FX Plus
 Project2DFX v4.4
 Real Skybox v1.3.4
 RealVision Enhanced
+ReFX Reshade for GTA SA v0.0.3.3.7
 ReShade v6.7.3
 RGGSA2.0 ENB
 Shadows Settings Extender v2.1.2
