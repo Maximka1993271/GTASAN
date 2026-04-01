@@ -184,7 +184,7 @@ Attach Vehicles to Packer
 Auto Car Lock
 Auto Persistance
 AutoDriver v2.5
-AutoPersistence v1.0
+AutoPersistence v1.2
 Back Fire Low Speed
 Backfire with light
 Bike Customization
@@ -793,7 +793,7 @@ SAAS
 SFX Fix
 Uncompressed SFX Pack
 Vehicles Sound Revamped
-SA - Soundize 11-25
+SA - Soundize 04-26
 Music Pack for Busy Pedestrians 20.12.2025
 SA VehicleSFX Updated 1.0 22/09/2025
 
