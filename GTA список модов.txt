@@ -91,7 +91,7 @@ LaserScopeDotVC v1.0.2
 Light on bullet impact
 MapFix
 Mod Shell
-Model Variations v10.5
+Model Variations v10.6
 Money Messages v1.1
 MovingMoon v1.1
 MovingSirenLightsSA v1.1
@@ -150,7 +150,7 @@ IPL Files
 Improved Models
 Lando Propos
 Parked Binary IPL Fixes
-Project Props 4.0 Community
+Project Props 4.1 Community
 Realistic Interiors
 SA.CommunityMapFixes
 
@@ -334,6 +334,7 @@ Taxi77
 Traffic Light
 Traffic Lights Patch
 Traffic Path Fix
+Trailer Lights Fix
 Trailer Lights v1
 Trailers and Trucks v4
 Trailers Detach Fix v.26.02.18
@@ -536,7 +537,7 @@ Planes Inertia
 Planning Department
 Player Move Head
 Police Dept Fix
-PoliceMod v1.3
+PoliceMod v1.3.1
 Properties Plus, Buy Properties mod v1.2.1
 Property Price Tweaker v.26.02.25
 Quick Map
