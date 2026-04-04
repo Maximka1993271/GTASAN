@@ -347,7 +347,7 @@ Unflip Like GTA V v1.1
 Universal Vehicle Lights
 Unlock Car Door
 VCStuffSA.SA
-VehDeform v1.3c 
+VehDeform v1.3c 20.07.2025  
 VehFuncs v2.5.2
 Vehicle Collision Cam Shake
 Vehicle Collision Shake
@@ -650,6 +650,7 @@ xCAM
 
 Graphic Mods
 
+Appropriate Graphics
 Color Mod v2
 Enhance ParticleTXD v1.0
 FxsFuncs v1.2
@@ -715,7 +716,7 @@ All Pedestrians
 Animation Fix
 Assaltar pedestres com uma arma
 Burned Peds
-Busy Pedestrians (Peds Events Project) Update 20.12.2025
+Busy Pedestrians (Peds Events Project) Update 04.04.2026
 Busy Pedestrians mod
 ChatWithPeds
 Communication Repairers
