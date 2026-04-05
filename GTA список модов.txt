@@ -674,6 +674,7 @@ Underwater Overlay
 
 Interface
 
+Appropriate HUD
 Brema HUD Preset
 ClassicHud v2.2
 Customizable HUD Update (15/02/2026)
