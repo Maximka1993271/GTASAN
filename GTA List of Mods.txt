@@ -500,7 +500,7 @@ JetPack Adjuster
 Jetpack Reactio v1.2
 Job DeliveryGroccery v0.6
 Kill Cam
-Kill Feed Update (10/3/2026)
+Kill Feed Update (7/4/2026)
 Lamppost Insects
 Lampposts FX v1.2
 Leviathan
@@ -553,6 +553,7 @@ Random Events Project v1.1
 Random Train Drivers
 RandomEncounters
 Rats at the trash can v1.1
+Rattlesnake v1.0
 Real Multiple Protagonists 2.0
 Real Time
 Real Weapons Names
@@ -652,6 +653,7 @@ xCAM
 Graphic Mods
 
 Appropriate Graphics
+Appropriate PS2 Graphics v1.1
 Color Mod v2
 Enhance ParticleTXD v1.0
 FxsFuncs v1.2
