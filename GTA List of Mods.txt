@@ -161,6 +161,7 @@ Moonloader Plugins
 
 Bike Spin
 Downforce Mod Update v.26.02.25
+Game Info
 HandbrakeHelper for VehIk
 Marker colored
 NFS DriftPoint
