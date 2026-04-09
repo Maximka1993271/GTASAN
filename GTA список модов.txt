@@ -404,7 +404,7 @@ Beach ball
 Being Taken To The Hospital
 BetterHeliCoronas
 BigMap
-Birds v1.1
+Birds v1.2
 Boat Radar
 Body Stats Fix
 BrBa & BCS Cartel Event
