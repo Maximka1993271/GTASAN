@@ -166,6 +166,7 @@ HandbrakeHelper for VehIk
 Marker colored
 NFS DriftPoint
 NFS DynamicCam
+Ped Inspector
 Performance Meter
 Turbo Lag Mod Update v.26.02.25
 
