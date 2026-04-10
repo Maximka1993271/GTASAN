@@ -169,6 +169,7 @@ NFS DynamicCam
 Ped Inspector
 Performance Meter
 Turbo Lag Mod Update v.26.02.25
+Weapon Light Effects
 
 Cars Plugins
 
@@ -655,7 +656,7 @@ xCAM
 Graphic Mods
 
 Appropriate Graphics
-Appropriate PS2 Graphics v1.1
+Appropriate PS2 Graphics v1.2
 Color Mod v2
 Enhance ParticleTXD v1.0
 FxsFuncs v1.2
