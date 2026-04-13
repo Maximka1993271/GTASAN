@@ -54,7 +54,7 @@ Cheat Menu v3.52
 Cigarette and Antenna
 Cold Steam
 Cop N Threat Radar
-CutsceneController v1.1.0
+CutsceneController v1.2.0
 Disable Radar On Foot
 Doom in SA 0.1
 EdgeFX
@@ -315,6 +315,7 @@ RC Tiger Fix
 Real Life Vehicle Options
 Real Traffic Fix
 Rear lights Mod v3.7
+RearLights
 Remote Lock Car
 Rhino noEP
 Rules Mod
@@ -448,7 +449,7 @@ EchoWeapons
 Elite Swat Squad
 Engine Volume
 Enhanced Jetpack
-Enhanced Parachute
+Enhanced Parachute v1.1
 Fancy Trunk Store Weapons v0.07
 Faster animation of sellers
 Fireman Fireproof Fix
