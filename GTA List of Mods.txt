@@ -515,7 +515,7 @@ Lighted barriers
 Lighthouse & Pyramid Fix v1.0.3
 Long Trains
 Manhunt Sneak Kills
-Mission Balancing Tool Update v.25.11.12
+MissionBalancingTool Update v.26.04.16
 Mod Suck Rolls For 50 Stories
 Modernized DriveBy
 Money Drop Fix
@@ -746,7 +746,7 @@ Grove Vs Ballas Fight
 Hands Up Fix
 Hats for Peds
 Improved Ped Models
-Improved Ped Spawn Update v.26.03.29
+Improved Ped Spawn Update v.26.04.16
 Interior and Peds
 LV Planning Department Fix
 Normal Map Plugin
