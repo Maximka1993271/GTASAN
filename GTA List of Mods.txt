@@ -112,7 +112,7 @@ Real time
 ReverbSA
 Road Reflection Fix
 Roadsign Font HD
-Rubbish
+Rubbish v1.3
 SA H-Optimize
 SA Rampages
 Save License Plate
