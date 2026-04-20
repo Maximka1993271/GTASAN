@@ -133,6 +133,7 @@ VCParticles v1.0.2
 VCStuffSA
 Vehicle Pickups
 VehWeaponTurret v0.1
+Volumetric Clouds Extended
 Weapon Icons TXD
 WeaponRecoilRE
 Wheel Cam from VC v1.0
@@ -167,6 +168,7 @@ HandbrakeHelper for VehIk
 Marker colored
 NFS DriftPoint
 NFS DynamicCam
+NPC Random WatchLook
 Ped Inspector
 Performance Meter
 Turbo Lag Mod Update v.26.02.25
