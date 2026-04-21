@@ -171,6 +171,7 @@ NFS DynamicCam
 NPC Random WatchLook
 Ped Inspector
 Performance Meter
+Project Birds
 Turbo Lag Mod Update v.26.02.25
 Weapon Light Effects
 
@@ -289,6 +290,7 @@ More Locked Cars
 Moving Siren Lights
 Music from cars
 New Car Camera
+NFSU2 Speedometer v1.1
 NitroPlus
 No Aggressive Drivers
 No Radio Auto Change
