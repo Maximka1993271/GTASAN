@@ -751,7 +751,7 @@ Grove Vs Ballas Fight
 Hands Up Fix
 Hats for Peds
 Improved Ped Models
-Improved Ped Spawn Update v.26.04.16
+Improved Ped Spawn Update v.26.04.24
 Interior and Peds
 LV Planning Department Fix
 Normal Map Plugin
