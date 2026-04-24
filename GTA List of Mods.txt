@@ -455,7 +455,7 @@ EchoWeapons
 Elite Swat Squad
 Engine Volume
 Enhanced Jetpack
-Enhanced Parachute v2.2
+Enhanced Parachute v2.3
 Fancy Trunk Store Weapons v0.07
 Faster animation of sellers
 Fireman Fireproof Fix
