@@ -39,6 +39,7 @@ Windowed Mode v2.0
 
 Asi Plugins
 
+Animation Group Extender Fixed v2
 Asset Autocollector
 AutoID
 Beard Grow Mod
