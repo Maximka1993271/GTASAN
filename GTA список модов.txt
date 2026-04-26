@@ -25,6 +25,7 @@ MixSets v4.3.7
 SA MixSets v4.3.8 Alpha Relase V3
 Mod Loader v0.3.7
 Modloader Unlimited Priority
+ModLoader v0.3.9
 MoonLoader v.026.5-beta
 NoDEP
 PortableGTA
@@ -174,6 +175,7 @@ Ped Inspector
 Performance Meter
 Project Birds
 Turbo Lag Mod Update v.26.02.25
+Weapon Attachments
 Weapon Light Effects
 
 Cars Plugins
