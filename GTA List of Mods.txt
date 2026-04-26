@@ -23,9 +23,8 @@ FramerateVigilante
 Improved Fastloader
 MixSets v4.3.7
 SA MixSets v4.3.8 Alpha Relase V3
-Mod Loader v0.3.7
-Modloader Unlimited Priority
 ModLoader v0.3.9
+Modloader Unlimited Priority
 MoonLoader v.026.5-beta
 NoDEP
 PortableGTA
