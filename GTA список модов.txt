@@ -56,6 +56,7 @@ Cheat Menu v3.
 Cigarette and Antenna
 Cold Steam
 Cop N Threat Radar
+CS Crosshair Console
 CutsceneController v1.2.0
 Disable Radar On Foot
 Doom in SA 0.1
