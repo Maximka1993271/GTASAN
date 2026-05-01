@@ -61,7 +61,7 @@ CutsceneController v1.2.0
 Disable Radar On Foot
 Doom in SA 0.1
 EdgeFX
-Enterable Hidden Interiors Update v.26.04.02
+Enterable Hidden Interiors Update v.26.05.01
 Explosions
 Explosionsshake
 Extended Gang Wars
@@ -168,6 +168,7 @@ Downforce Mod Update v.26.02.25
 Game Info
 HandbrakeHelper for VehIk
 Marker colored
+Minimalist Speedometer
 NFS DriftPoint
 NFS DynamicCam
 NPC Random WatchLook
