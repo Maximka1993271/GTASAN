@@ -460,7 +460,7 @@ Elite Swat Squad
 Engine Volume
 Enhanced Jetpack
 Enhanced Parachute v2.3
-Fancy Trunk Store Weapons v0.07
+Fancy Trunk Store Weapons v0.8
 Faster animation of sellers
 Fireman Fireproof Fix
 Fix Handle By Orion SR
