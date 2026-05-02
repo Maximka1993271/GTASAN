@@ -176,7 +176,7 @@ Ped Inspector
 Performance Meter
 Project Birds
 Turbo Lag Mod Update v.26.02.25
-Weapon Attachments
+Weapon Attachments v1.1
 Weapon Light Effects
 
 Cars Plugins
