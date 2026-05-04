@@ -75,6 +75,7 @@ Fix Explosion
 Fixed dialogues with gangs
 Fixed Mouse Flight
 FluffyClouds
+Forza Horizon 5 Speedometer
 Friendly Triads And Los Aztecas Fix
 Full Stream Radar
 Functional Components
@@ -171,6 +172,7 @@ Marker colored
 Minimalist Speedometer
 NFS DriftPoint
 NFS DynamicCam
+No Water Distortion
 NPC Random WatchLook
 Ped Inspector
 Performance Meter
