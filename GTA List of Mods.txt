@@ -61,7 +61,7 @@ CutsceneController v1.2.0
 Disable Radar On Foot
 Doom in SA 0.1
 EdgeFX
-Enterable Hidden Interiors Update v.26.05.01
+Enterable Hidden Interiors Update v.26.05.03
 Explosions
 Explosionsshake
 Extended Gang Wars
