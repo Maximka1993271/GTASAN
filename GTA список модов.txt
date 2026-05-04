@@ -75,7 +75,7 @@ Fix Explosion
 Fixed dialogues with gangs
 Fixed Mouse Flight
 FluffyClouds
-Forza Horizon 5 Speedometer
+Forza Horizon 5 Speedometer v5.1
 Friendly Triads And Los Aztecas Fix
 Full Stream Radar
 Functional Components
