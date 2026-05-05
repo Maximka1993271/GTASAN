@@ -635,7 +635,7 @@ SWAT Helicopter with 5 stars Plus
 Swat Pos
 Teargas Fix
 The holster on the cops v1.3
-The Weapon Is On The Player v2.0
+The Weapon Is On The Player v2.1
 Throw Rotate Fix
 Time Payn Spray
 Time Till Hungry 3
