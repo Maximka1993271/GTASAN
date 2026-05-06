@@ -92,6 +92,7 @@ InGameSubs v0.2.5
 Inventory System
 IV Anims v0.5
 JetPack Hover Mode Fix
+Kill ConfirmationFX
 LaserScopeDotVC v1.0.2
 Light on bullet impact
 MapFix
@@ -698,6 +699,7 @@ Appropriate HUD
 Brema HUD Preset
 ClassicHud v2.2
 Customizable HUD Update (15/02/2026)
+Fancy Icon Border v0.1
 GTA IV HUD by AG v1.3 (+ SA style)
 GTA V HUD by DK22Pac
 Hud Definitive Edition
