@@ -55,10 +55,12 @@ Camera shaking at high speeds v1.1
 Cheat Menu v3.52
 Cigarette and Antenna
 Cold Steam
+Collectibles on Radar v1.0.4
 Cop N Threat Radar
 CS Crosshair Console
 CutsceneController v1.2.0
 Disable Radar On Foot
+DiscordRPC by Bloodriver the Conqueror v1.1
 Doom in SA 0.1
 EdgeFX
 Enterable Hidden Interiors Update v.26.05.03
