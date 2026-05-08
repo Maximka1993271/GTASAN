@@ -348,6 +348,7 @@ Stay On Bike
 Stealing A Car Like In GTA 4
 Steering Wheel
 Stop Lights For Trailers
+Stucked Cars Helper v26.05.08
 Taxi Ride Mod
 Taxi77
 Traffic Light
@@ -537,6 +538,7 @@ More Radar Icons Update (17/1/2025)
 Motel Mod v1.2
 News papers v2.2
 Night Pimpin
+No Cutscene Subtitles v26.05.08
 No Extra Air Resistance
 NoRadio
 NPC Health Indicator
@@ -638,7 +640,7 @@ SWAT Helicopter with 5 stars Plus
 Swat Pos
 Teargas Fix
 The holster on the cops v1.3
-The Weapon Is On The Player v2.1
+The Weapon Is On The Player v3.0
 Throw Rotate Fix
 Time Payn Spray
 Time Till Hungry 3
