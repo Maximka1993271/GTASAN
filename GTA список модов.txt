@@ -63,7 +63,7 @@ Disable Radar On Foot
 DiscordRPC by Bloodriver the Conqueror v1.1
 Doom in SA 0.1
 EdgeFX
-Enterable Hidden Interiors Update v.26.05.03
+Enterable Hidden Interiors Update v.26.05.11
 Explosions
 Explosionsshake
 Extended Gang Wars
@@ -822,7 +822,7 @@ SAAS
 SFX Fix
 Uncompressed SFX Pack
 Vehicles Sound Revamped
-SA - Soundize 04-26
+SA - Soundize 03-26
 Music Pack for Busy Pedestrians 20.12.2025
 SA VehicleSFX Updated 1.0 22/09/2025
 
