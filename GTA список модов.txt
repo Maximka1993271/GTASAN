@@ -63,7 +63,7 @@ Disable Radar On Foot
 DiscordRPC by Bloodriver the Conqueror v1.1
 Doom in SA 0.1
 EdgeFX
-Enterable Hidden Interiors Update v.26.05.11
+Enterable Hidden Interiors v3.8 Update v.26.05.11
 Explosions
 Explosionsshake
 Extended Gang Wars
@@ -843,5 +843,5 @@ Updated TimeCycle (24h TimeCycle)
 Textures
 
 Proper Fixes v2.0.1
-RoSA Project Evolved - February v1.5
+RoSA Project Evolved - March v1.5
 Revamped Vehicle Project
