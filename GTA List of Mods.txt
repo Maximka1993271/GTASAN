@@ -88,6 +88,7 @@ Pager from GTA 3 v1.0
 HeliFix v1.5
 HookMenu
 III.VC.SA.SaveLoader v2.7
+IMG Limit Adjuster for RoSA
 Improved Lamppost Lights
 ImprovedMove
 InGameSubs v0.2.5
