@@ -63,7 +63,7 @@ Disable Radar On Foot
 DiscordRPC by Bloodriver the Conqueror v1.1
 Doom in SA 0.1
 EdgeFX
-Enterable Hidden Interiors v3.8 Update v.26.05.11
+Enterable Hidden Interiors v3.8 Update v.26.05.17
 Explosions
 Explosionsshake
 Extended Gang Wars
