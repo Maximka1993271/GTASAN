@@ -106,6 +106,7 @@ MovingMoon v1.1
 MovingSirenLightsSA v1.1
 Multiplemarkers
 NoMoreDeletedSaves
+Normal Map Plugin v1.01
 Open Door Anim
 PoliceExtraSeats
 Proper Custom Radios - Beta 3
@@ -763,12 +764,11 @@ Gangster Walk Fix
 Garbage Truck Driver
 Grove Vs Ballas Fight
 Hands Up Fix
-Hats for Peds
+Hats for Peds v2.0
 Improved Ped Models
 Improved Ped Spawn Update v.26.04.24
 Interior and Peds
 LV Planning Department Fix
-Normal Map Plugin
 Original Peds Vary Extended (Fixed)
 Palisades Park Pedestrian Path Fix
 Panic Face
