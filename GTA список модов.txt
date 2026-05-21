@@ -337,7 +337,7 @@ Remote Lock Car
 Rhino noEP
 Rules Mod
 Rural Car Repairs v3.0
-SA Styled Speedometer Update (8/2/2026)
+SA Styled Speedometer Update (20/5/2026)
 Save License Plate
 Siren And Vigilante
 SkidBlow
@@ -517,6 +517,7 @@ Improved Jetpack Control
 IndieVehHandlings
 Inmune Headshot
 Insects Mod
+Inside the Aircraft v1.0
 Instakill
 Inventory System
 JetPack Adjuster
