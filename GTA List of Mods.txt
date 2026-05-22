@@ -63,6 +63,7 @@ Disable Radar On Foot
 DiscordRPC by Bloodriver the Conqueror v1.1
 Doom in SA 0.1
 EdgeFX
+EffectLoader Fix
 Enterable Hidden Interiors v3.8 Update v.26.05.17
 Explosions
 Explosionsshake
@@ -832,7 +833,7 @@ SA VehicleSFX Updated 1.0 22/09/2025
 
 Timecyc
 
-24H Refixed Original Timecycle
+24H Refixed Original Timecycle v5.21.26
 24h TimeCycle
 Improved California Weather Timecyc v3.0.1
 Modern Fusion Timecyc (24h)
