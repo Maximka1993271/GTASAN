@@ -162,7 +162,7 @@ IPL Files
 Improved Models
 Lando Propos
 Parked Binary IPL Fixes
-Project Props 4.1 Community
+Project Props 4.2 Community
 Realistic Interiors
 SA.CommunityMapFixes
 
