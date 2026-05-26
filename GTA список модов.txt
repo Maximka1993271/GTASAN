@@ -92,7 +92,7 @@ III.VC.SA.SaveLoader v2.7
 IMG Limit Adjuster for RoSA
 Improved Lamppost Lights
 ImprovedMove
-InGameSubs v0.2.5
+InGameSubs v0.2.6.1
 Inventory System
 IV Anims v0.5
 JetPack Hover Mode Fix
