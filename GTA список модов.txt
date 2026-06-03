@@ -64,7 +64,7 @@ DiscordRPC by Bloodriver the Conqueror v1.1
 Doom in SA 0.1
 EdgeFX
 EffectLoader Fix
-Enterable Hidden Interiors v3.8 Update v.26.05.17
+Enterable Hidden Interiors v3.8 Update v.26.06.02
 Explosions
 Explosionsshake
 Extended Gang Wars
@@ -294,7 +294,7 @@ Lean On The Bike
 Lock And Park
 Lock Car Doors
 Luxury Cars Attract The Attention Of Pedestrians
-Manual Driveby Refixed Update v.26.01.12
+Manual Driveby Refixed Update v.26.06.02
 Manual DriveBy Remake
 Mid Air Car Control
 Minimalist Speedometer
@@ -464,7 +464,7 @@ Dynamic FOV Fixed v1.2
 Dynamic Home Ambush Mod
 Dyom Сleo Fix
 Ear Ringing Simple
-Easy Throw v26.05.23
+Easy Throw Update v.26.06.02
 EchoWeapons
 Elite Swat Squad
 Engine Volume
@@ -837,6 +837,7 @@ Timecyc
 
 24H Refixed Original Timecycle v5.21.26
 24h TimeCycle
+GTA III and VC Timecyc to SA
 Improved California Weather Timecyc v3.0.1
 Modern Fusion Timecyc (24h)
 Real Linear Graphics v2.6
