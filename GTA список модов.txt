@@ -338,7 +338,7 @@ Remote Lock Car
 Rhino noEP
 Rules Mod
 Rural Car Repairs v3.0
-SA Styled Speedometer Update (20/5/2026)
+SA Styled Speedometer Update (5/6/26)
 Save License Plate
 Siren And Vigilante
 SkidBlow
@@ -439,6 +439,7 @@ Changeable health bar colors (depending on health %)
 Ciggy & Antenna
 CJ Look Interest
 CJ Startup Settings
+Cj's Basement
 Clube Front Noise
 Colored Crosshair
 Combat improvement and Melee overhaul
