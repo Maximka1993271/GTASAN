@@ -63,7 +63,7 @@ Disable Radar On Foot
 DiscordRPC by Bloodriver the Conqueror v1.1
 Doom in SA 0.1
 EdgeFX
-EffectLoader Fix
+EffectLoader
 Enterable Hidden Interiors v3.8 Update v.26.06.02
 Explosions
 Explosionsshake
@@ -694,7 +694,7 @@ NextGen and Combat FX Plus
 Project2DFX v4.4
 Proper Shaders Version 06-26 (01/06/26)
 Real Skybox v1.3.4
-RealVision Enhanced
+RealVision Enhanced v1.01
 ReFX Reshade for GTA SA v0.0.3.3.7
 ReShade v6.7.3
 RGGSA2.0 ENB
