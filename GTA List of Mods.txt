@@ -274,7 +274,7 @@ Fuel+
 Full Radio Control
 Functional firefighter ladder
 Garage Vehicle Chooser Update v.26.03.08
-Gasoline Mod v2.9.1
+Gasoline Mod v3.0
 Gear Control
 GPS Redux v1.5.1
 GTA V to SA Burnout RRMS Edition
@@ -444,7 +444,7 @@ Clube Front Noise
 Colored Crosshair
 Combat improvement and Melee overhaul
 Commercial Mod v1.1
-Cops bulletproof v1.2
+Cops bulletproof v1.3
 Cops Faster and Climbing v1.2
 CoverMod
 Create Pickups Mod 
@@ -637,7 +637,7 @@ Star For Red
 Stealth Kill Camera
 Store Expulsion
 Stories Sprinting Fix
-Story Accessories v1.0
+Story Accessories v1.1
 Stowaway Mission Weapons Fix
 Street Art
 Suicidal Photographers Fix
