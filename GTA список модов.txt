@@ -65,6 +65,7 @@ Doom in SA 0.1
 EdgeFX
 EffectLoader
 Enterable Hidden Interiors v3.8 Update v.26.06.02
+ExaustFX.SA
 Explosions
 Explosionsshake
 Extended Gang Wars
