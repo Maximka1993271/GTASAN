@@ -115,6 +115,7 @@ Proper Custom Radios - Beta 3
 Pager
 Quebrar Motor
 RadarZoomMod
+Ragdoll Bullet Physics v1.4
 Ragdoll Mod for GTA-SAMP
 Rain Extinguish Fire
 Rainbow With All the Colors v1.0
@@ -801,7 +802,7 @@ PedsDontDrown
 PedSkills
 Police Searching
 Postman
-Ragdoll Bullet Physics
+Ragdoll Bullet Physics v20/03/17
 Real Multiple Protagonists
 Real Peds
 Realistic Population
