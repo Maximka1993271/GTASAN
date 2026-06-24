@@ -87,6 +87,7 @@ GInput
 Glowing Pickups v1.0.3
 Graffiti Anywhere
 Pager from GTA 3 v1.0
+HalfLife Heatseeker to SA
 HeliFix v1.5
 HookMenu
 III.VC.SA.SaveLoader v2.7
@@ -660,7 +661,7 @@ TweaksSAv140
 UnderTheBridge
 Unlimited Camera Ammo
 VCS&LCS Side Missions
-Void Weapon Wheel v1.4
+Void Weapon Wheel v1.5
 Wagon Detach
 Walk Targeting Fix
 Wanted Music
