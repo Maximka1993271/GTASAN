@@ -797,6 +797,7 @@ Peds Extender
 Peds Get Scared With RPG
 Peds Hands Up Fix
 Peds jump at shot
+Peds Pickup and Upgrade Weapons
 Peds Resist Headshot
 Peds use Vend
 PedsDontDrown
