@@ -254,7 +254,7 @@ Destructive Rhino Mod
 Detach Trailer
 Diesel
 DohertyGarage v1.9
-DrIVe Mod v2.4
+DrIVe Mod v2.5
 Driving Focus Mod
 Dynamic motorway traffic
 Elite Squad
@@ -568,6 +568,7 @@ Planes Inertia
 Planning Department
 Player Move Head
 Police Dept Fix
+Police Maverick Stops Fire in Crowds
 PoliceMod v1.3.3
 Properties Plus, Buy Properties mod v1.2.1
 Property Price Tweaker Update v.26.05.23
@@ -859,6 +860,6 @@ Updated TimeCycle (24h TimeCycle)
 
 Textures
 
-Proper Fixes v2.0.1
+Proper Fixes v2.1
 RoSA Project Evolved - April v1.5
 Revamped Vehicle Project
