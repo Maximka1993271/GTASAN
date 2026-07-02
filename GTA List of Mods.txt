@@ -146,6 +146,7 @@ VCStuffSA
 Vehicle Pickups
 VehWeaponTurret v0.1
 Volumetric Clouds Extended
+VoxelDestructionSA
 Weapon Icons TXD
 WeaponRecoilRE
 Wheel Cam from VC v1.0
