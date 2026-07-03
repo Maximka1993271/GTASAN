@@ -81,6 +81,7 @@ Fixed Mouse Flight
 FluffyClouds
 Forza Horizon 5 Speedometer v5.1 Update 13-05-26
 Friendly Triads And Los Aztecas Fix
+Full Sprint Controller Disable
 Full Stream Radar
 Functional Components
 GInput
@@ -98,7 +99,7 @@ InGameSubs v0.2.6.1
 Inventory System
 IV Anims v0.5
 JetPack Hover Mode Fix
-Kill ConfirmationFX
+KillConfirmationFX
 LaserScopeDotVC v1.0.2
 Light on bullet impact
 MapFix
