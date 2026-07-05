@@ -278,7 +278,7 @@ Fuel System v1.1
 Fuel+
 Full Radio Control
 Functional firefighter ladder
-Garage Vehicle Chooser Update v.26.03.08
+Garage Vehicle Chooser Update v.26.07.04
 Gasoline Mod v3.0
 Gear Control
 GPS Redux v1.5.1
@@ -660,7 +660,7 @@ Time Till Hungry 3
 Tiring Sounds
 TrainCustomizer
 Tram77
-TweaksSAv145
+TweaksSAv150
 UnderTheBridge
 Unlimited Camera Ammo
 VCS&LCS Side Missions
