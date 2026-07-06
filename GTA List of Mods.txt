@@ -851,6 +851,7 @@ Improved California Weather Timecyc v3.0.1
 Modern Fusion Timecyc (24h)
 Real Linear Graphics v2.6
 Timecyc Cinematic v1.3
+Timecyc for Proper Shaders
 Updated TimeCycle (24h TimeCycle)
 
 
