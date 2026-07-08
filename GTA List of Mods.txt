@@ -176,7 +176,7 @@ SA.CommunityMapFixes
 
 Moonloader Plugins
 
-Advanced Tactical Compass
+Advanced Tactical Compass v1.0
 Bike Spin
 Downforce Mod Update v.26.02.25
 Game Info
@@ -191,6 +191,7 @@ Ped Inspector
 Performance Meter
 Project Birds
 Turbo Lag Mod Update v.26.02.25
+V-Dynamic Stamina HUD v1.0
 Weapon Attachments v1.1
 Weapon Light Effects
 
