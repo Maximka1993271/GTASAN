@@ -131,6 +131,7 @@ SA H-Optimize
 SA Rampages
 Save License Plate
 ScriptFixSA Update (2026-02-22)
+Simple Limit Adjuster IMG files
 Spread Fix
 SprintEverywhere
 SRGB Rendering
