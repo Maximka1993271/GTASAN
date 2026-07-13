@@ -111,7 +111,7 @@ MovingSirenLightsSA v1.1
 Multiplemarkers
 NoMoreDeletedSaves
 Normal Map Plugin v1.01
-OLA Extended v1.0.1
+OLA Extended v1.0.2
 Open Door Anim
 PoliceExtraSeats
 Proper Custom Radios - Beta 3
