@@ -80,6 +80,7 @@ Fixed dialogues with gangs
 Fixed Mouse Flight
 FluffyClouds
 Forza Horizon 5 Speedometer v5.1 Update 13-05-26
+FPV Drone
 Friendly Triads And Los Aztecas Fix
 Full Sprint Controller Disable
 Full Stream Radar
@@ -99,6 +100,7 @@ InGameSubs v0.2.6.1
 Inventory System
 IV Anims v0.5
 JetPack Hover Mode Fix
+Katamari Damacy
 KillConfirmationFX
 LaserScopeDotVC v1.0.2
 Light on bullet impact
@@ -546,6 +548,7 @@ Lighted barriers
 Lighthouse & Pyramid Fix v1.0.3
 Long Trains
 Manhunt Sneak Kills
+Melee Weapons in the Trash
 MissionBalancingTool Update v.26.04.16
 Mod Suck Rolls For 50 Stories
 Modernized DriveBy
