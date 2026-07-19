@@ -286,7 +286,7 @@ Fuel+
 Full Radio Control
 Functional firefighter ladder
 Garage Vehicle Chooser Update v.26.07.04
-Gasoline Mod v3.0
+Gasoline Mod v3.1 Update (19/7/2026)
 Gear Control
 GPS Redux v1.5.1
 GTA V to SA Burnout RRMS Edition
@@ -484,7 +484,7 @@ Engine Volume
 Enhanced Jetpack
 Enhanced Parachute v2.3
 Fancy Trunk Store Weapons v0.8
-Faster animation of sellers
+Faster animation of sellers v1.1 Update (19/7/2026)
 Fireman Fireproof Fix
 Fix Handle By Orion SR
 Fix Plane Speed After Explodes
@@ -554,7 +554,7 @@ MissionBalancingTool Update v.26.04.16
 Mod Suck Rolls For 50 Stories
 Modernized DriveBy
 Money Drop Fix
-More Radar Icons Update (17/1/2025)
+More Radar Icons Update v3.0 (19/7/2026)
 Motel Mod v1.2
 News papers v2.2
 Night Pimpin
