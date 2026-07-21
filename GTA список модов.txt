@@ -181,6 +181,7 @@ SA.CommunityMapFixes
 Moonloader Plugins
 
 Advanced Tactical Compass v1.0
+Aim Turn Feet
 Bike Spin
 Downforce Mod Update v.26.02.25
 Game Info
@@ -455,7 +456,7 @@ Cj's Basement
 Clube Front Noise
 Colored Crosshair
 Combat improvement and Melee overhaul
-Commercial Mod v1.1
+Commercial Mod v1.2
 Cops bulletproof v1.3
 Cops Faster and Climbing v1.2
 CoverMod
@@ -581,6 +582,7 @@ Player Move Head
 Police Dept Fix
 Police Maverick Stops Fire in Crowds
 PoliceMod v1.3.3
+PoliceSnipers
 Properties Plus, Buy Properties mod v1.2.1
 Property Price Tweaker Update v.26.05.23
 Quick Map
