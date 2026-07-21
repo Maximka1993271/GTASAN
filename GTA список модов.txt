@@ -436,6 +436,7 @@ Ballas Trap Mod
 Basketball Fix
 Beach ball
 Being Taken To The Hospital
+Better Flight Control v.26.07.21
 BetterHeliCoronas
 BigMap
 Birds v1.2
@@ -452,7 +453,7 @@ Changeable health bar colors (depending on health %)
 Ciggy & Antenna
 CJ Look Interest
 CJ Startup Settings
-Cj's Basement
+Cj's Basement Update v1.1 (21/7/2026)
 Clube Front Noise
 Colored Crosshair
 Combat improvement and Melee overhaul
@@ -541,7 +542,7 @@ JetPack Adjuster
 Jetpack Reactio v1.2
 Job DeliveryGroccery v0.6
 Kill Cam
-Kill Feed Update (7/4/2026)
+Kill Feed Update v1.5 (21/07/26)
 Lamppost Insects
 Lampposts FX v1.2
 Leviathan
@@ -654,7 +655,7 @@ Star For Red
 Stealth Kill Camera
 Store Expulsion
 Stories Sprinting Fix
-Story Accessories v1.1
+Story Accessories v1.2
 Stowaway Mission Weapons Fix
 Street Art
 Suicidal Photographers Fix
@@ -787,7 +788,7 @@ Gangster Walk Fix
 Garbage Truck Driver
 Grove Vs Ballas Fight
 Hands Up Fix
-Hats for Peds v2.0
+Hats for Peds v2.1
 Improved Ped Models
 Improved Ped Spawn Update v.26.04.24
 Interior and Peds
@@ -852,7 +853,7 @@ Vehicles Sound Revamped
 
 Sound Plugins 2
 
-Audio Player
+Audio Player Update v1.1 (21/07/26)
 Music Pack for Busy Pedestrians 20.12.2025
 SA - Soundize 04-26
 SA VehicleSFX Updated 1.0 22/09/2025
