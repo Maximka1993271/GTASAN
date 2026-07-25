@@ -45,6 +45,7 @@ Asset Autocollector
 AutoID
 Beard Grow Mod
 Black Roads Fix
+Blade Burst v1.0
 Blip Size v1.3
 Blur effect for club
 Blur Effect For Stick
@@ -115,7 +116,8 @@ Multiplemarkers
 NoMoreDeletedSaves
 Normal Map Plugin v1.01
 OLA Extended v1.0.4
-Open Door Anim
+Open Door Anim v1.2.2
+Persistent Exterior
 PoliceExtraSeats
 Proper Custom Radios - Beta 3
 Pager
