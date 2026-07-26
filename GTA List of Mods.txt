@@ -555,7 +555,7 @@ Lighthouse & Pyramid Fix v1.0.3
 Long Trains
 Manhunt Sneak Kills
 Melee Weapons in the Trash
-MissionBalancingTool Update v.26.04.16
+MissionBalancingTool Update v.26.07.25
 Mod Suck Rolls For 50 Stories
 Modernized DriveBy
 Money Drop Fix
