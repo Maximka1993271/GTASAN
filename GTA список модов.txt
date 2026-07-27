@@ -117,7 +117,7 @@ NoMoreDeletedSaves
 Normal Map Plugin v1.01
 OLA Extended v1.0.4
 Open Door Anim v1.2.2
-Persistent Exterior
+Persistent Exterior v3.8
 PoliceExtraSeats
 Proper Custom Radios - Beta 3
 Pager
@@ -472,7 +472,7 @@ Difficult Move In Water
 Disable jetpack heat effect
 Diving Mod
 Dodo With Ad Banner
-Double Reload Fix Update v.26.02.16
+Double Reload Fix Update v.26.07.26
 DriveByOnOff
 Driver
 Drop Weapons Like In GTA IV v3.2
@@ -676,7 +676,7 @@ Tiring Sounds
 Toggle Hydraulics
 TrainCustomizer
 Tram77
-TweaksSAv155.1
+TweaksSAv160
 UnderTheBridge
 Unlimited Camera Ammo
 VCS&LCS Side Missions
