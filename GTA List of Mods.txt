@@ -585,7 +585,7 @@ Planning Department
 Player Move Head
 Police Dept Fix
 Police Maverick Stops Fire in Crowds
-PoliceMod v1.3.3
+PoliceMod v1.4
 PoliceSnipers
 Properties Plus, Buy Properties mod v1.2.1
 Property Price Tweaker Update v.26.05.23
