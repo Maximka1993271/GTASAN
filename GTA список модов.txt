@@ -199,6 +199,7 @@ NPC Random WatchLook
 Ped Inspector
 Performance Meter
 Project Birds
+Script de Simulação para Volantes
 Turbo Lag Mod Update v.26.02.25
 V-Dynamic Stamina HUD v1.0
 Weapon Attachments v1.1
