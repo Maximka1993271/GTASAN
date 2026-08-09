@@ -724,6 +724,7 @@ RGGSA2.0 ENB
 Shadows Settings Extender v2.1.2
 SkyGfx Extended v1.7
 SkyGrad
+SleekGraphics v1.0
 Underwater Overlay
 
 
