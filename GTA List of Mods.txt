@@ -291,7 +291,7 @@ Fuel System v1.1
 Fuel+
 Full Radio Control
 Functional firefighter ladder
-Garage Vehicle Chooser Update v.26.07.04
+Garage Vehicle Chooser Update v.26.08.12
 Gasoline Mod v3.1 Update (19/7/2026)
 Gear Control
 GPS Redux v1.5.1
