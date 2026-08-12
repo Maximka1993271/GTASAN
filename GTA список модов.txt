@@ -471,6 +471,7 @@ Dealer Weapons
 Death animations Ragdoll Style v2.0
 Difficult Move In Water
 Disable jetpack heat effect
+Disable Missions If Wanted
 Diving Mod
 Dodo With Ad Banner
 Double Reload Fix Update v.26.07.26
@@ -737,11 +738,11 @@ Customizable HUD Update (15/02/2026)
 Fancy Icon Border v0.1
 GTA IV HUD by AG v1.3 (+ SA style)
 GTA V HUD by DK22Pac
-Hud Definitive Edition
 HUDcolors
 Mobile Font Fixed v1.0.1
 MoneyChangeHUD
 SA Mobile Hud v2.01.1
+TrilogyHudSA v1.2
 VHud v0.944
 WD2 Interface
 WeaponHUD
