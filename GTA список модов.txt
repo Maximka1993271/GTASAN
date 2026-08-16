@@ -20,7 +20,7 @@ SCRLog v2020.3
 Fastman92 Limit Adjuster v7.6
 Open Limit Adjuster v1.5.9
 Open Limit Adjuster Extended v0.9.7
-FramerateVigilante
+Framerate Vigilante 08/16/26
 Improved Fastloader
 MixSets v4.3.7
 SA MixSets v4.3.8 Alpha Relase V3
@@ -32,7 +32,7 @@ PortableGTA
 RepairGTA
 RunDLL32.exe Fix
 SA GInput v1.11
-SilentPatchSA - Build 34
+SilentPatchSA - Build 34.1
 Widescreen Fix
 Windowed Mode v2.1
 
@@ -549,7 +549,7 @@ JetPack Adjuster
 Jetpack Reactio v1.2
 Job DeliveryGroccery v0.6
 Kill Cam
-Kill Feed Update v1.5 (21/07/26)
+Kill Feed Update v1.6 (16/08/26)
 Lamppost Insects
 Lampposts FX v1.2
 Leviathan
@@ -593,6 +593,7 @@ PoliceMod v1.4.1
 PoliceSnipers
 Properties Plus, Buy Properties mod v1.2.1
 Property Price Tweaker Update v.26.05.23
+PurpleNinesFix
 Quick Map
 Quick Map Marker Update (7/11/2025)
 Quick Weapon Draw
@@ -862,7 +863,7 @@ Vehicles Sound Revamped
 
 Sound Plugins 2
 
-Audio Player Update v1.1 (21/07/26)
+Audio Player Update v1.2 (16/08/26)
 Music Pack for Busy Pedestrians 20.12.2025
 SA - Soundize 06-26
 SA VehicleSFX Updated 1.0 22/09/2025
