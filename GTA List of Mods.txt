@@ -43,6 +43,7 @@ Asi Plugins
 Animation Group Extender Fixed v2
 Asset Autocollector
 AutoID
+Ballistics v2
 Beard Grow Mod
 Black Roads Fix
 Blade Burst v1.0
@@ -663,6 +664,7 @@ Spray Can Stunlock Fix
 Star For Red
 Stealth Kill Camera
 Store Expulsion
+StoreRobbery
 Stories Sprinting Fix
 Story Accessories v1.2
 Stowaway Mission Weapons Fix
@@ -687,6 +689,7 @@ UnderTheBridge
 Unlimited Camera Ammo
 VCS&LCS Side Missions
 Void Weapon Wheel v1.5
+VStyle Swimming v1.0.1
 Wagon Detach
 Walk Targeting Fix
 Wanted Music
