@@ -212,6 +212,7 @@ Cars Plugins
 1 Star Motorbike Cop Fix
 007car
 Abs System
+Addon Races
 Advanced Nitro System v3.2
 Advanced Track Player
 Air Brake Sound
