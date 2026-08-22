@@ -665,7 +665,7 @@ Spray Can Stunlock Fix
 Star For Red
 Stealth Kill Camera
 Store Expulsion
-StoreRobbery
+StoreRobbery v2
 Stories Sprinting Fix
 Story Accessories v1.2
 Stowaway Mission Weapons Fix
