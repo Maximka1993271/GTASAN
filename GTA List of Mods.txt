@@ -550,6 +550,7 @@ Inventory System
 JetPack Adjuster
 Jetpack Reactio v1.2
 Job DeliveryGroccery v0.6
+kill aura
 Kill Cam
 Kill Feed Update v1.6 (16/08/26)
 Lamppost Insects
