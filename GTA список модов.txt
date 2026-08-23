@@ -552,7 +552,7 @@ Jetpack Reactio v1.2
 Job DeliveryGroccery v0.6
 kill aura
 Kill Cam
-Kill Feed Update v1.6 (16/08/26)
+Kill Feed Update v1.6.1 (23/08/26)
 Lamppost Insects
 Lampposts FX v1.2
 Leviathan
@@ -582,6 +582,7 @@ Paramedic Mod
 Parkour Armor
 PerPixel Lighting Mod
 Phone Mod 2
+Pickup Maker Update v3.0 (23/08/2026)
 PickupReposition
 Pickups Mod
 Pills Bottle
@@ -686,7 +687,7 @@ Tiring Sounds
 Toggle Hydraulics
 TrainCustomizer
 Tram77
-TweaksSAv160
+TweaksSAv165
 UnderTheBridge
 Unlimited Camera Ammo
 VCS&LCS Side Missions
@@ -702,7 +703,6 @@ Weapon dat Professional Killer
 Weapon Dealer
 Weapon Details v4.3
 Weapon pickup
-Weapon Pickup Maker Update (4/1/2026)
 Weapon Swap&Drop
 Weapon Zoom Unlimited Update v.26.08.03
 WeaponRecoilAuto
