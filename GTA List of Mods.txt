@@ -161,6 +161,7 @@ VoxelDestructionSA
 Wand VFX
 Weapon Icons TXD
 WeaponRecoilRE
+WeaponWheel
 Wheel Cam from VC v1.0
 
 
@@ -574,6 +575,7 @@ No Cutscene Subtitles v26.05.08
 No Extra Air Resistance
 NoRadio
 NPC Health Indicator
+On Foot Races
 One Wanted Star Melee Fix
 On-Screen Replenishment
 Original Drug Dealers
