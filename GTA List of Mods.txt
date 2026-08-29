@@ -588,6 +588,7 @@ Pickup Maker Update v3.1 (25/08/2026)
 PickupReposition
 Pickups Mod
 Pills Bottle
+PizzaBoySA v1.1
 Plane Beep
 Plane Explode Fix
 Planes Inertia
