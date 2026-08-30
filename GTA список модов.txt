@@ -188,7 +188,7 @@ SA.CommunityMapFixes
 Moonloader Plugins
 
 Advanced Tactical Compass v1.0
-Aim Turn Feet
+Aim Turn Feet v1.0
 Bike Spin
 Downforce Mod Update v.26.02.25
 Game Info
