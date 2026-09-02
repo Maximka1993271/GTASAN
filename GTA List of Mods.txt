@@ -588,7 +588,7 @@ Pickup Maker Update v3.1 (25/08/2026)
 PickupReposition
 Pickups Mod
 Pills Bottle
-PizzaBoySA v1.2
+PizzaBoySA v1.2.1
 Plane Beep
 Plane Explode Fix
 Planes Inertia
@@ -670,7 +670,7 @@ Spray Can Stunlock Fix
 Star For Red
 Stealth Kill Camera
 Store Expulsion
-StoreRobbery v2.1
+StoreRobbery v2.1.1
 Stories Sprinting Fix
 Story Accessories v1.2
 Stowaway Mission Weapons Fix
