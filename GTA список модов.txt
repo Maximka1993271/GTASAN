@@ -321,7 +321,7 @@ Luxury Cars Attract The Attention Of Pedestrians
 Manual Driveby Refixed Update v.26.08.03
 Mid Air Car Control
 Minimalist Speedometer
-ModelExtras v2.0
+ModelExtras v3.0-beta
 More Locked Cars
 Moving Siren Lights
 Music from cars
