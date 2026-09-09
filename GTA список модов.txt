@@ -582,6 +582,7 @@ One Wanted Star Melee Fix
 On-Screen Replenishment
 Original Drug Dealers
 Ovens Catch On Fire
+Overlay Teleport Map v1.0
 Paramedic Mod
 Parkour Armor
 PerPixel Lighting Mod
@@ -838,6 +839,7 @@ Peds Pickup and Upgrade Weapons
 Peds Resist Headshot
 Peds use Vend
 PedsDontDrown
+PedsEnEx
 PedSkills
 Police Searching
 Postman
