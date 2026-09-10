@@ -203,6 +203,7 @@ NPC Random WatchLook
 Ped Inspector
 Performance Meter
 Project Birds
+Realistic Firefighter System
 Script de Simulação para Volantes
 Turbo Lag Mod Update v.26.02.25
 V-Dynamic Stamina HUD v1.0
@@ -575,6 +576,7 @@ News papers v2.2
 Night Pimpin
 No Cutscene Subtitles v26.05.08
 No Extra Air Resistance
+NoAmmoReaction
 NoRadio
 NPC Health Indicator
 On Foot Races
