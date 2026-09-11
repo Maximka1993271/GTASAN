@@ -574,6 +574,7 @@ More Radar Icons Update v3.0 (19/7/2026)
 Motel Mod v1.2
 News papers v2.2
 Night Pimpin
+No Ammo Reaction v1.1
 No Cutscene Subtitles v26.05.08
 No Extra Air Resistance
 NoAmmoReaction
