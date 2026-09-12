@@ -761,7 +761,7 @@ Mobile Font Fixed v1.0.1
 MoneyChangeHUD
 SA Mobile Hud v2.01.1
 TrilogyHudSA v1.2
-VHud v0.944
+VHud v0.960 Update (v12.09.26)
 WD2 Interface
 WeaponHUD
 
