@@ -130,6 +130,7 @@ Ragdoll Mod for GTA-SAMP
 Rain Extinguish Fire
 Rainbow With All the Colors v1.0
 Real time
+ReloadSA
 ReverbSA
 Road Reflection Fix
 Roadsign Font HD
