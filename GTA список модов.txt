@@ -138,7 +138,7 @@ Rubbish v1.3
 SA H-Optimize
 SA Rampages
 Save License Plate
-ScriptFixSA Update (2026-02-22)
+ScriptFixSA Update (2026-09-13)
 Simple Limit Adjuster IMG files
 Spread Fix
 SprintEverywhere
