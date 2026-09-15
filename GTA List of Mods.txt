@@ -479,7 +479,7 @@ Dealer Weapons
 Death animations Ragdoll Style v2.0
 Difficult Move In Water
 Disable jetpack heat effect
-Disable Missions If Wanted
+Disable Missions If Wanted v1.1
 Diving Mod
 Dodo With Ad Banner
 Double Reload Fix Update v.26.07.26
@@ -844,7 +844,7 @@ Peds Pickup and Upgrade Weapons
 Peds Resist Headshot
 Peds use Vend
 PedsDontDrown
-PedsEnEx
+PedsEnEx v1.0
 PedSkills
 Police Searching
 Postman
