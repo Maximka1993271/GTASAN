@@ -62,6 +62,7 @@ Collectibles on Radar v1.0.4
 Cop N Threat Radar
 CS Crosshair Console
 CutsceneController v1.2.0
+DetachableSilencer
 Disable Radar On Foot
 DiscordRPC by Bloodriver the Conqueror v1.1
 Doom in SA 0.1
@@ -97,6 +98,7 @@ HeliFix v1.5
 HookMenu
 III.VC.SA.SaveLoader v2.7
 IMG Limit Adjuster for RoSA
+Improved Emergency Lights
 Improved Lamppost Lights
 ImprovedMove
 InGameSubs v0.2.6.1
@@ -763,7 +765,7 @@ Mobile Font Fixed v1.0.1
 MoneyChangeHUD
 SA Mobile Hud v2.01.1
 TrilogyHudSA v1.2
-VHud v0.970 Update (v16.09.26)
+VHud v0.980 Update (v20.09.26)
 WD2 Interface
 WeaponHUD
 
