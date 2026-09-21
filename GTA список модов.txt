@@ -598,7 +598,7 @@ Pickup Maker Update v3.1 (25/08/2026)
 PickupReposition
 Pickups Mod
 Pills Bottle
-PizzaBoySA v1.3
+PizzaBoySA v1.3.1
 Plane Beep
 Plane Explode Fix
 Planes Inertia
@@ -680,7 +680,7 @@ Spray Can Stunlock Fix
 Star For Red
 Stealth Kill Camera
 Store Expulsion
-StoreRobbery v2.1.1
+StoreRobbery v3
 Stories Sprinting Fix
 Story Accessories v1.2
 Stowaway Mission Weapons Fix
@@ -700,7 +700,7 @@ Tiring Sounds
 Toggle Hydraulics
 TrainCustomizer
 Tram77
-TweaksSAv165
+TweaksSAv170
 UnderTheBridge
 Unlimited Camera Ammo
 VCS&LCS Side Missions
@@ -765,7 +765,7 @@ Mobile Font Fixed v1.0.1
 MoneyChangeHUD
 SA Mobile Hud v2.01.1
 TrilogyHudSA v1.2
-VHud v0.980 Update (v20.09.26)
+VHud v0.981 Update (v20.09.26)
 WD2 Interface
 WeaponHUD
 
