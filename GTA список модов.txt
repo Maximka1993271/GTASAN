@@ -62,7 +62,8 @@ Collectibles on Radar v1.0.4
 Cop N Threat Radar
 CS Crosshair Console
 CutsceneController v1.2.0
-DetachableSilencer v2.5
+DetachableScope v1.0
+DetachableSilencer v2.7
 Disable Radar On Foot
 DiscordRPC by Bloodriver the Conqueror v1.1
 Doom in SA 0.1
