@@ -94,6 +94,7 @@ GInput
 Glowing Pickups v1.0.3
 Graffiti Anywhere
 Pager from GTA 3 v1.0
+GunWeight v1.0
 HalfLife Heatseeker to SA
 HeliFix v1.5
 HookMenu
@@ -701,7 +702,7 @@ Tiring Sounds
 Toggle Hydraulics
 TrainCustomizer
 Tram77
-TweaksSAv170
+TweaksSAv171
 UnderTheBridge
 Unlimited Camera Ammo
 VCS&LCS Side Missions
