@@ -54,6 +54,7 @@ BodyOutlinesSA v1.0
 Borderless Fullscreen Mod
 Bullethole
 Camera Point Fix
+Camera Response
 Camera shaking at high speeds v1.1
 Cheat Menu v3.
 Cigarette and Antenna
