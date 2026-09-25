@@ -282,7 +282,7 @@ Destructive Rhino Mod
 Detach Trailer
 Diesel
 DohertyGarage v1.9
-DrIVe Mod v2.5
+DrIVe Mod v3.0
 Driving Focus Mod
 Dynamic motorway traffic
 Elite Squad
@@ -685,7 +685,7 @@ Stealth Kill Camera
 Store Expulsion
 StoreRobbery v3
 Stories Sprinting Fix
-Story Accessories v1.2
+Story Accessories v1.3
 Stowaway Mission Weapons Fix
 Street Art
 Suicidal Photographers Fix
