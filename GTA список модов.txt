@@ -34,7 +34,7 @@ RunDLL32.exe Fix
 SA GInput v1.11
 SilentPatchSA - Build 34.1
 Widescreen Fix
-Windowed Mode v2.1
+Windowed Mode v2.2
 
 
 
