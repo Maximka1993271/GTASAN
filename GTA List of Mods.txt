@@ -142,6 +142,7 @@ Roadsign Font HD
 Rubbish v1.3
 SA H-Optimize
 SA Rampages
+SanFramezen
 Save License Plate
 ScriptFixSA Update (2026-09-13)
 Simple Limit Adjuster IMG files
