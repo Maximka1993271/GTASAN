@@ -201,6 +201,7 @@ Bike Spin
 Camping Mod
 Downforce Mod Update v.26.02.25
 Game Info
+GTA SA Interactive NPC AI
 HandbrakeHelper
 Marker colored
 Minimalist Speedometer
@@ -824,7 +825,7 @@ Grove Vs Ballas Fight
 Hands Up Fix
 Hats for Peds v2.1
 Improved Ped Models
-Improved Ped Spawn Update v.26.08.25
+Improved Ped Spawn Update v.26.09.30
 Interior and Peds
 LV Planning Department Fix
 Original Peds Vary Extended (Fixed)
