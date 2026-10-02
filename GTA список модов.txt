@@ -45,6 +45,7 @@ Asset Autocollector
 AutoID
 Ballistics v2
 Beard Grow Mod
+Bike Flip v1.0
 Black Roads Fix
 Blade Burst v1.0
 Blip Size v1.3
@@ -155,7 +156,9 @@ Story Mode 2.0 Bug Fixes
 StreamMemFix
 Super Johnsons Bros
 The Birds Update
+Third Person RPG+ v1.0
 Transparent Menu v5
+Ultimate Dual Wielding v1.0
 VC Plane Trails And Banners
 VCBannersAndTrails v1.0.1
 VCBulletTrails v1.2
@@ -164,6 +167,7 @@ VCParticles v1.0.2
 VCStuffSA
 Vehicle Pickups
 VehWeaponTurret v0.1
+Void Ultimate Aim System v1.0
 Volumetric Clouds Extended
 VoxelDestructionSA
 Wand VFX
