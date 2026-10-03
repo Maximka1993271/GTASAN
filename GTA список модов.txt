@@ -76,6 +76,7 @@ ExaustFX.SA
 Explosions
 Explosionsshake
 Extended Gang Wars
+Eyefinder 92
 Fastload v1.4
 Fastloader 1.3
 Fires & flames
@@ -260,7 +261,7 @@ Car Collision Light
 Car Crash Anim
 Car Crash Inertia
 Car Damager + Open Close Windows
-Car Dealer Update (15/4/2026)
+Car Dealer Update v2.0 (03/10/26)
 Car Dealership
 Car Door Chime-Beep
 Car Explodes In Huge Falls
@@ -674,6 +675,7 @@ Show Date
 Show Dirt
 Show Stats
 Show Vehicle Model Name
+Simple Spawner v1.0
 SimpleNoclip v1.0
 Siren On Without Driver
 Skate Extra Sounds
@@ -858,7 +860,7 @@ Peds Pickup and Upgrade Weapons
 Peds Resist Headshot
 Peds use Vend
 PedsDontDrown
-PedsEnEx v2.0
+PedsEnEx v3.5
 PedSkills
 Police Searching
 Postman
