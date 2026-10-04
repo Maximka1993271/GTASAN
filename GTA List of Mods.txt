@@ -860,7 +860,7 @@ Peds Pickup and Upgrade Weapons
 Peds Resist Headshot
 Peds use Vend
 PedsDontDrown
-PedsEnEx v3.5
+PedsEnEx v4.0
 PedSkills
 Police Searching
 Postman
