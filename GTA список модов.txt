@@ -69,6 +69,7 @@ DetachableSilencer v2.7
 Disable Radar On Foot
 DiscordRPC by Bloodriver the Conqueror v1.1
 Doom in SA 0.1
+Dynamic Glass Shattering
 EdgeFX
 EffectLoader
 Enterable Hidden Interiors v3.8 Update v.26.06.02
