@@ -124,6 +124,7 @@ Multiplemarkers
 NanoWindowMode v0.4
 NoMoreDeletedSaves
 Normal Map Plugin v1.01
+NPC drop on ground
 OLA Extended v1.0.4
 Open Door Anim v1.2.2
 Persistent Exterior v3.8
