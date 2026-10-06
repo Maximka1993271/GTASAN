@@ -40,6 +40,8 @@ Windowed Mode v2.2
 
 Asi Plugins
 
+24h TimeCycle
+Advanced Fireflies
 Animation Group Extender Fixed v2
 Asset Autocollector
 AutoID
@@ -168,6 +170,7 @@ VCBulletTrails v1.2
 VCMarkersSA
 VCParticles v1.0.2
 VCStuffSA
+Vehicle Door Collision
 Vehicle Pickups
 VehWeaponTurret v0.1
 Void Ultimate Aim System v1.0
