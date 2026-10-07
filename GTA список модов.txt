@@ -566,6 +566,7 @@ Improved Barber
 Improved Club
 Improved Gangs War v1.1.1
 Improved Jetpack Control
+Improved Savegame
 IndieVehHandlings
 Inmune Headshot
 Insects Mod
@@ -752,6 +753,7 @@ Color Mod v2
 Enhance ParticleTXD v1.0
 FxsFuncs v1.2
 Graphics Tweaker v1.3.1
+GTA IV Wannabe Graphics v1.1
 IMFX v17.11.2017t
 Improved Streaming v1.1 Updated (17/07/26)
 Nano Shaders 0.4
