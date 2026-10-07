@@ -76,6 +76,7 @@ EdgeFX
 EffectLoader
 Enterable Hidden Interiors v3.8 Update v.26.06.02
 ExaustFX.SA
+ExDisplay Patches
 Explosions
 Explosionsshake
 Extended Gang Wars
