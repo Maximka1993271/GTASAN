@@ -76,7 +76,7 @@ EdgeFX
 EffectLoader
 Enterable Hidden Interiors v3.8 Update v.26.06.02
 ExaustFX.SA
-ExDisplay Patches v1.0.1
+ExDisplay Patches v1.0.2
 Explosions
 Explosionsshake
 Extended Gang Wars
@@ -382,6 +382,7 @@ Rear Lights Mod v3.8
 RearLights
 Remote Lock Car
 Rhino noEP
+RhinoMBT
 Rules Mod
 Rural Car Repairs v3.0
 SA Styled Speedometer Update (5/6/26)
