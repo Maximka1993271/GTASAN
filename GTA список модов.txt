@@ -41,7 +41,7 @@ Windowed Mode v2.2
 Asi Plugins
 
 24h TimeCycle
-Advanced Fireflies
+Advanced Fireflies v2.0.0
 Animation Group Extender Fixed v2
 Asset Autocollector
 AutoID
@@ -76,7 +76,7 @@ EdgeFX
 EffectLoader
 Enterable Hidden Interiors v3.8 Update v.26.06.02
 ExaustFX.SA
-ExDisplay Patches
+ExDisplay Patches v1.0.1
 Explosions
 Explosionsshake
 Extended Gang Wars
