@@ -763,6 +763,7 @@ Nano Shaders 0.4
 NextGen and Combat FX Plus
 Project2DFX v4.4
 Proper Shaders Version v10-26 (01/10/26)
+Proper Streaming v1.0
 Real Skybox v1.3.4
 RealVision Enhanced v1.01
 ReFX Reshade for GTA SA v0.0.3.3.7
