@@ -66,6 +66,7 @@ Collectibles on Radar v1.0.4
 Cop N Threat Radar
 CS Crosshair Console
 CutsceneController v1.2.0
+Damage Indicator v1.0
 DetachableScope v1.0
 DetachableSilencer v2.7
 Disable Radar On Foot
@@ -427,6 +428,7 @@ Vehicle Color Randomizer
 Vehicle Door Unlocker
 Vehicle Flags Changer
 Vehicle Immunities
+Vehicle Spawn Fix v.26.10.17
 VehIK v1.2b
 Void Radio Wheel v0.7
 Voodoo Physics Fix
