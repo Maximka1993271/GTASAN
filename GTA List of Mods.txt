@@ -151,6 +151,7 @@ Rubbish v1.3
 SA H-Optimize
 SA Point blank Executions v2.0
 SA Rampages
+SABounce
 SanFramezen
 Save License Plate
 ScriptFixSA Update (2026-09-13)
