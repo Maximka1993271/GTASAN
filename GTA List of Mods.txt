@@ -301,7 +301,7 @@ Death In Car
 Destructive Rhino Mod
 Detach Trailer
 Diesel
-DohertyGarage v1.9
+Doherty Garage v1.9
 DrIVe Mod v3.0
 Driving Focus Mod
 Dynamic motorway traffic
@@ -320,6 +320,7 @@ Fix Car Fire On Water
 Fixed Driving FOV v1.0
 Forza Horizon 4 Speedometer
 Fuel Leak
+Fuel Mod Final v.1.0.0
 Fuel System v1.1
 Fuel+
 Full Radio Control
