@@ -72,7 +72,7 @@ DetachableSilencer v2.7
 Disable Radar On Foot
 DiscordRPC by Bloodriver the Conqueror v1.1
 Doom in SA 0.1
-Dynamic Glass Shattering
+Dynamic Glass Shattering v2
 EdgeFX
 EffectLoader
 Enterable Hidden Interiors v3.8 Update v.26.10.17
@@ -161,6 +161,7 @@ SprintEverywhere
 SRGB Rendering
 Starry Skies v1.3.2
 Story Mode 2.0 Bug Fixes
+Straight Hand Aim v1.0
 StreamMemFix
 Super Johnsons Bros
 TeslaSpaceXThrusters
@@ -176,6 +177,7 @@ VCParticles v1.0.2
 VCStuffSA
 Vehicle Door Collision
 Vehicle Pickups
+VehicleTxdVariants
 VehWeaponTurret v0.1
 Void Ultimate Aim System v1.0
 Volumetric Clouds Extended
