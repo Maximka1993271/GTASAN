@@ -393,7 +393,7 @@ Rhino noEP
 RhinoMBT
 Rules Mod
 Rural Car Repairs v3.0
-SA Styled Speedometer Update (5/6/26)
+SA Styled Speedometer Update (26/10/26) v3.2
 Save License Plate
 Siren And Vigilante
 SkidBlow
@@ -790,7 +790,7 @@ Interface
 Appropriate HUD
 Brema HUD Preset
 ClassicHud v2.2
-Customizable HUD Update (15/02/2026)
+Customizable HUD v2.0 Update (26/10/2026)
 Fancy Icon Border v0.1
 GTA IV HUD by AG v1.3 (+ SA style)
 GTA V HUD by DK22Pac
@@ -854,6 +854,7 @@ Hats for Peds v2.1
 Improved Ped Models
 Improved Ped Spawn Update v.26.09.30
 Interior and Peds
+NPC Die when Trapped Under Cars v1.0
 LV Planning Department Fix
 Original Peds Vary Extended (Fixed)
 Palisades Park Pedestrian Path Fix
