@@ -323,7 +323,7 @@ Fix Car Fire On Water
 Fixed Driving FOV v1.0
 Forza Horizon 4 Speedometer
 Fuel Leak
-Fuel Mod Final v.1.0.0
+Fuel Mod Final v.1.2.0
 Fuel System v1.1
 Fuel+
 Full Radio Control
@@ -585,7 +585,7 @@ Inside the Aircraft v1.0
 Instakill
 Inventory System
 JetPack Adjuster
-Jetpack Reactio v1.2
+Jetpack Reaction v2
 Job DeliveryGroccery v0.6
 kill aura
 Kill Cam
