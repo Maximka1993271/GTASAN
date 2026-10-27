@@ -812,6 +812,7 @@ Illuminated Vinewood Sign
 Improved Night Windows
 Lighthouse & Pyramid Fix
 Lit Gant Bridge
+Lit LS Downtown
 Lit LS Forum
 Lit Ocean Docks Bridge
 LS Downtown Night Windows
