@@ -219,7 +219,7 @@ Bike Spin
 Camping Mod
 Downforce Mod Update v.26.02.25
 Game Info
-GTA SA Interactive NPC AI
+GTA SA Interactive NPC AI V4.0.0
 HandbrakeHelper
 Marker colored
 Minimalist Speedometer
