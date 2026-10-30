@@ -150,6 +150,7 @@ ReverbSA
 Road Reflection Fix
 Roadsign Font HD
 Rubbish v1.3
+SA Audio Limit Adjuster
 SA H-Optimize
 SA Point blank Executions v2.0
 SA Rampages
@@ -157,6 +158,7 @@ SABounce
 SanFramezen
 Save License Plate
 ScriptFixSA Update (2026-09-13)
+Simple Depth Buffer v1.1
 Simple Limit Adjuster IMG files
 Spread Fix
 SprintEverywhere
@@ -219,7 +221,7 @@ Bike Spin
 Camping Mod
 Downforce Mod Update v.26.02.25
 Game Info
-GTA SA Interactive NPC AI V4.0.0
+GTA SA Interactive NPC AI v4.1.2
 HandbrakeHelper
 Marker colored
 Minimalist Speedometer
@@ -324,7 +326,7 @@ Fix Car Fire On Water
 Fixed Driving FOV v1.0
 Forza Horizon 4 Speedometer
 Fuel Leak
-Fuel Mod Final v.1.2.0
+Fuel Mod Final v.1.3.0
 Fuel System v1.1
 Fuel+
 Full Radio Control
