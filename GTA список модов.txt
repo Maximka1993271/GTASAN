@@ -348,7 +348,7 @@ ImVehFt
 ImVehSys
 IndieVehicles
 Invisible Car Fix
-Izzy's Lively Vehicles v1.4
+Izzy's Lively Vehicles v1.5
 Lean On The Bike
 Lock And Park
 Lock Car Doors
