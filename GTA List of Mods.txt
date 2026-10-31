@@ -688,7 +688,7 @@ Sawn Off Dual Wield Fix v1.1
 Searchlights
 Securicar Drop Money
 Security Van Heist
-Improved Sex Shop v2.1
+Improved Sex Shop v2.2
 SFDP Heli Fix
 Shoot After Death
 Shoreline Waves
