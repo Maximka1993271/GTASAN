@@ -711,7 +711,7 @@ Sniper Scope
 SniperZoomControl
 Sparky
 Spider Man Mod
-Split Screen for 2 Player Mode
+Split Screen for 2 Player Mode v1.2
 Spray Can Stunlock Fix
 Star For Red
 Stealth Kill Camera
