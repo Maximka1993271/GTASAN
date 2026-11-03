@@ -34,7 +34,7 @@ RunDLL32.exe Fix
 SA GInput v1.11
 SilentPatchSA - Build 34.1
 Widescreen Fix
-Windowed Mode v2.2
+Windowed Mode v3.0.1
 
 
 
@@ -776,7 +776,7 @@ Nano Shaders 0.4
 NextGen and Combat FX Plus
 Project2DFX v4.4
 Proper Shaders v09-26 (10/09/26)
-Proper Streaming v1.0
+Proper Streaming v1.0.1
 Real Skybox v1.3.4
 RealVision Enhanced v1.01
 ReFX Reshade for GTA SA v0.0.3.3.7
