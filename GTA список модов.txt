@@ -397,7 +397,7 @@ Rhino noEP
 RhinoMBT
 Rules Mod
 Rural Car Repairs v3.0
-SA Styled Speedometer Update (26/10/26) v3.2
+SA Styled Speedometer v3.2.1 Update (27/10/26)
 Save License Plate
 Siren And Vigilante
 SkidBlow
