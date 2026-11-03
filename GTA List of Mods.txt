@@ -348,7 +348,7 @@ ImVehFt
 ImVehSys
 IndieVehicles
 Invisible Car Fix
-Izzy's Lively Vehicles v1.5
+Izzy's Lively Vehicles v1.6
 Lean On The Bike
 Lock And Park
 Lock Car Doors
@@ -582,6 +582,9 @@ Improved Club
 Improved Gangs War v1.1.1
 Improved Jetpack Control
 Improved Savegame
+Improved Sex Shop v2.2
+Improved Shoreline Waves
+Improved Target Triangle v(26.11.03)
 IndieVehHandlings
 Inmune Headshot
 Insects Mod
@@ -688,7 +691,6 @@ Sawn Off Dual Wield Fix v1.1
 Searchlights
 Securicar Drop Money
 Security Van Heist
-Improved Sex Shop v2.2
 SFDP Heli Fix
 Shoot After Death
 Shoreline Waves
@@ -745,7 +747,7 @@ VStyle Swimming v1.0.1
 Wagon Detach
 Walk Targeting Fix
 Wanted Music
-Wanted Radar Warning
+Wanted Radar Warning v2.0
 Water Hurt
 Weapon Change Anim Fixed v1.3
 Weapon dat Professional Killer
