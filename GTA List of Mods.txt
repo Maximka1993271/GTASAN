@@ -155,6 +155,7 @@ SA H-Optimize
 SA Point blank Executions v2.0
 SA Rampages
 SABounce
+SAMP PortableGTA Fixed
 SanFramezen
 Save License Plate
 ScriptFixSA Update (2026-09-13)
