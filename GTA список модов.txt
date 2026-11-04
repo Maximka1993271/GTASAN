@@ -808,7 +808,7 @@ SA Mobile Hud v2.01.1
 TrilogyHudSA v1.2
 VHud v0.981 Update (v20.09.26)
 WD2 Interface
-WeaponHUD
+WeaponHUD v2.0
 
 
 
