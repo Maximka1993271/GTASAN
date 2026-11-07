@@ -65,6 +65,7 @@ Cold Steam
 Collectibles on Radar v1.0.4
 Cop N Threat Radar
 CS Crosshair Console
+CS Crosshair Console
 CutsceneController v1.2.0
 Damage Indicator v1.0
 DetachableScope v1.1
