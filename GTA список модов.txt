@@ -41,7 +41,7 @@ Windowed Mode v3.0.1
 Asi Plugins
 
 24h TimeCycle
-Advanced Fireflies v2.0.0
+Advanced Fireflies v2.1.0
 Animation Group Extender Fixed v2
 Asset Autocollector
 AutoID
