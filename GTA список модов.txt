@@ -108,6 +108,7 @@ HalfLife Heatseeker to SA
 HeliFix v1.5
 HookMenu
 III.VC.SA.SaveLoader v2.7
+ImFast Extended
 IMG Limit Adjuster for RoSA
 Improved Emergency Lights Update 22-09-26
 Improved Lamppost Lights
@@ -520,6 +521,7 @@ Disable Missions If Wanted v1.2
 Diving Mod
 Dodo With Ad Banner
 Double Reload Fix Update v.26.07.26
+Draw Distance Tweaker v.(26.11.08)
 DriveByOnOff
 Driver
 DriverThreatReaction
@@ -740,7 +742,7 @@ Tiring Sounds
 Toggle Hydraulics
 TrainCustomizer
 Tram77
-TweaksSAv171
+TweaksSAv178
 UnderTheBridge
 Unlimited Camera Ammo
 VCS&LCS Side Missions
