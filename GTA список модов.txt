@@ -534,6 +534,7 @@ Dyom Сleo Fix
 Ear Ringing Simple
 Easy Throw Update v.26.06.02
 EchoWeapons
+Effects Distance
 Elite Swat Squad
 Engine Volume
 Enhanced Jetpack
