@@ -159,6 +159,7 @@ SA Rampages
 SABounce
 SAMP PortableGTA Fixed
 SanFramezen
+SanVive Perspective Radar
 Save License Plate
 ScriptFixSA Update (2026-09-13)
 Simple Depth Buffer v1.1
@@ -168,7 +169,7 @@ SprintEverywhere
 SRGB Rendering
 Starry Skies v1.3.2
 Story Mode 2.0 Bug Fixes
-Straight Hand Aim v1.0
+Straight Hand Aim v0.3
 StreamMemFix
 Super Johnsons Bros
 TeslaSpaceXThrusters
@@ -185,6 +186,7 @@ VCStuffSA
 Vehicle Door Collision
 Vehicle Pickups
 VehicleTxdVariants
+Vehs Handling Refined
 VehWeaponTurret v0.1
 Void Ultimate Aim System v1.0
 Volumetric Clouds Extended
