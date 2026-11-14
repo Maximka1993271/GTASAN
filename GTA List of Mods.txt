@@ -45,6 +45,7 @@ Advanced Fireflies v2.1.0
 Animation Group Extender Fixed v2
 Asset Autocollector
 AutoID
+AutoQTE v1.0
 Ballistics v2
 Beard Grow Mod
 Bike Flip v1.0
@@ -162,6 +163,7 @@ SAMP PortableGTA Fixed
 SanFramezen
 SanVive Perspective Radar
 Save License Plate
+Save License Plate
 ScriptFixSA Update (2026-09-13)
 Simple Depth Buffer v1.1
 Simple Limit Adjuster IMG files
@@ -178,6 +180,7 @@ The Birds Update
 Third Person RPG+ v1.0
 Transparent Menu v5
 Ultimate Dual Wielding v1.0
+Ultimate First Person v1.2.0
 VC Plane Trails And Banners
 VCBannersAndTrails v1.0.1
 VCBulletTrails v1.2
@@ -598,7 +601,7 @@ Inmune Headshot
 Insects Mod
 Inside the Aircraft v1.0
 Instakill
-Inventory System
+Inventory System v2.0.4
 JetPack Adjuster
 Jetpack Reaction v2
 Job DeliveryGroccery v0.6
