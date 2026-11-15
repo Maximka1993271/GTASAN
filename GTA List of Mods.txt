@@ -242,6 +242,7 @@ Ped Inspector
 Performance Meter
 Project Birds
 Realistic Firefighter System v1.55
+Realistic Weapon System v1.8.8
 RealisticHealth v2.0.0
 Script de Simulação para Volantes
 Trunk Weapon System v2.0.0
