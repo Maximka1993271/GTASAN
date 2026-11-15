@@ -115,7 +115,7 @@ Improved Emergency Lights Update 22-09-26
 Improved Lamppost Lights
 ImprovedMove
 InGameSubs v0.2.6.1
-Inventory System
+Inventory System Expanded 2.0.6 (for v1.6)
 IV Anims v0.5
 JetPack Hover Mode Fix
 Katamari Damacy
@@ -140,7 +140,7 @@ Open Door Anim v1.2.2
 Persistent Exterior v3.8
 PoliceExtraSeats
 Proper Custom Radios - Beta 3
-Proper Ragdoll v2
+Proper Ragdoll v15
 Pager
 Quebrar Motor
 RadarZoomMod
@@ -394,6 +394,7 @@ Police vehicles with megaphones v1.1
 Prizep Fix
 Proper Add Vehicles v0.4
 Proper Density Mod
+Proper Vehicle Damage v0.2
 Race Maker v2
 Radio Off On Water
 Random Events With Drivers
@@ -615,6 +616,7 @@ Leviathan
 Light Destroyer
 Lighted barriers
 Lighthouse & Pyramid Fix v1.0.3
+Living Streets v3.9
 Long Trains
 Manhunt Sneak Kills
 Melee Weapons in the Trash
@@ -807,6 +809,7 @@ Interface
 
 Appropriate HUD
 Brema HUD Preset
+Bully-ish HudUi v1.0
 ClassicHud v2.2
 Customizable HUD v2.0 Update (26/10/2026)
 Fancy Icon Border v0.1
