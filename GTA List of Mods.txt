@@ -368,7 +368,7 @@ Luxury Cars Attract The Attention Of Pedestrians
 Manual Driveby Refixed Update v.26.08.03
 Mid Air Car Control
 Minimalist Speedometer
-ModelExtras v3.0
+ModelExtras v3.1
 More Locked Cars
 Moving Siren Lights
 Music from cars
@@ -396,7 +396,7 @@ Police vehicles with megaphones v1.1
 Prizep Fix
 Proper Add Vehicles v0.4
 Proper Density Mod
-Proper Vehicle Damage v0.2
+Proper Vehicle Damage v0.3
 Race Maker v2
 Radio Off On Water
 Random Events With Drivers
@@ -754,7 +754,7 @@ Tiring Sounds
 Toggle Hydraulics
 TrainCustomizer
 Tram77
-TweaksSAv178
+TweaksSAv180
 UnderTheBridge
 Unlimited Camera Ammo
 VCS&LCS Side Missions
