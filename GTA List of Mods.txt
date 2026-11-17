@@ -77,7 +77,7 @@ Doom in SA 0.1
 Dynamic Glass Shattering v2
 EdgeFX
 EffectLoader
-Enterable Hidden Interiors v3.8 Update v.26.10.17
+Enterable Hidden Interiors v3.8 Update v.26.11.17
 ExaustFX.SA
 ExDisplay Patches v1.0.2
 Explosions
@@ -140,7 +140,7 @@ Open Door Anim v1.2.2
 Persistent Exterior v3.8
 PoliceExtraSeats
 Proper Custom Radios - Beta 3
-Proper Ragdoll v15
+Proper Ragdoll v17
 Pager
 Quebrar Motor
 RadarZoomMod
@@ -148,6 +148,7 @@ Ragdoll Bullet Physics v1.4
 Ragdoll Mod for GTA-SAMP
 Rain Extinguish Fire
 Rainbow With All the Colors v1.0
+Rampage Creator v1.1
 Real time
 ReloadSA
 ReverbSA
@@ -164,7 +165,7 @@ SanAnSkateas Board Deck v1.2
 SanFramezen
 SanVive Perspective Radar
 Save License Plate
-Save License Plate
+Screen Blood
 ScriptFixSA Update (2026-09-13)
 Simple Depth Buffer v1.1
 Simple Limit Adjuster IMG files
