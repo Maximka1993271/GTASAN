@@ -66,7 +66,7 @@ Cold Steam
 Collectibles on Radar v1.0.4
 Cop N Threat Radar
 CS Crosshair Console
-CS Crosshair Console
+Cutscene Director v1.1
 CutsceneController v1.2.0
 Damage Indicator v1.0
 DetachableScope v1.1
@@ -451,7 +451,7 @@ Vehicle Color Randomizer
 Vehicle Door Unlocker
 Vehicle Flags Changer
 Vehicle Immunities
-Vehicle Spawn Fix v.26.10.17
+Vehicle Spawn Fix Update v.(26.11.18)
 VehIK v1.2b
 Void Radio Wheel v0.7
 Voodoo Physics Fix
