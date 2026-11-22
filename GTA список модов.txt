@@ -140,7 +140,7 @@ Open Door Anim v1.2.2
 Persistent Exterior v3.8
 PoliceExtraSeats
 Proper Custom Radios - Beta 3
-Proper Ragdoll v17
+Proper Ragdoll v20
 Pager
 Quebrar Motor
 RadarZoomMod
@@ -148,7 +148,7 @@ Ragdoll Bullet Physics v1.4
 Ragdoll Mod for GTA-SAMP
 Rain Extinguish Fire
 Rainbow With All the Colors v1.0
-Rampage Creator v1.1
+Rampage Creator v1.2
 Real time
 ReloadSA
 ReverbSA
@@ -338,7 +338,7 @@ Fix Car Fire On Water
 Fixed Driving FOV v1.0
 Forza Horizon 4 Speedometer
 Fuel Leak
-Fuel Mod Final v.1.5.0
+Fuel Mod Final v1.6.0
 Fuel System v1.1
 Fuel+
 Full Radio Control
@@ -734,7 +734,7 @@ Spray Can Stunlock Fix
 Star For Red
 Stealth Kill Camera
 Store Expulsion
-StoreRobbery v3
+StoreRobbery v4
 Stories Sprinting Fix
 Story Accessories v1.3
 Stowaway Mission Weapons Fix
