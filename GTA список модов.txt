@@ -126,7 +126,7 @@ LaserScopeDotVC v1.0.2
 Light on bullet impact
 MapFix
 Mod Shell
-Model Variations v11.2
+Model Variations v11.3
 Money Messages v1.1
 MovingMoon v1.2
 MovingSirenLightsSA v1.1
