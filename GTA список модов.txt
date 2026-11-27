@@ -105,7 +105,7 @@ Glowing Pickups v1.0.3
 Graffiti Anywhere
 Pager from GTA 3 v1.0
 Gun Spread Fix v0.5.0
-Gunsmith Mod v0.3
+Gunsmith Mod v0.4
 GunWeight v1.0
 HalfLife Heatseeker to SA
 HeliFix v1.5
@@ -171,6 +171,7 @@ Screen Blood
 ScriptFixSA Update (2026-09-13)
 Simple Depth Buffer v1.1
 Simple Limit Adjuster IMG files
+Sixwheel Fix
 Spread Fix
 SprintEverywhere
 SRGB Rendering
@@ -262,6 +263,7 @@ Cars Plugins
 1 Star Motorbike Cop Fix
 007car
 Abs System
+Abs System - Anti-lock braking systems v0.5.6
 Addon Races
 Advanced Nitro System v3.2
 Advanced Track Player
@@ -429,6 +431,7 @@ Stop Lights For Trailers
 Stucked Cars Helper v26.05.21
 Taxi Ride Mod
 Taxi77
+TaxiRide v2.0
 Traffic Light
 Traffic Lights Patch
 Traffic Path Fix
@@ -454,7 +457,7 @@ Vehicle Color Randomizer
 Vehicle Door Unlocker
 Vehicle Flags Changer
 Vehicle Immunities
-Vehicle Spawn Fix Update v.(26.11.18)
+Vehicle Spawn Fix Update v.(26.11.26)
 VehIK v1.2b
 Void Radio Wheel v0.7
 Voodoo Physics Fix
@@ -700,6 +703,7 @@ Rubbish GTA 4
 Run
 Rusty Brown's Ring Donuts
 RZL-Trainer v5.0.1
+SA Crash Camera
 SA Homies Mod
 SA Sonic Adventure 2
 SA switch weapon v1.2
@@ -800,7 +804,7 @@ Proper Shaders v09-26 (10/09/26)
 Proper Streaming v1.1
 Real Skybox v1.3.4
 RealVision Enhanced v1.01
-ReFX Reshade for GTA SA v0.0.3.3.7
+ReFX Reshade for GTA SA v0.0.4
 ReShade v6.8.0
 RGGSA2.0 ENB
 Shadows Settings Extender v2.1.2
