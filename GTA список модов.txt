@@ -62,6 +62,7 @@ Camera Response
 Camera shaking at high speeds v1.1
 Cheat Menu v3.
 Cigarette and Antenna
+ClassicClouds
 Cold Steam
 Collectibles on Radar v1.0.4
 Cop N Threat Radar
